@@ -6,14 +6,13 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class Station : IStation
+    public class Station
     {
         [Key]
-        int StationNum { get; set; }
-        //koordinate??
-        string Addr { get; set; }
-        string Name { get; set; }
-        //linije?
+        public int StationNum { get; set; }
+        public Location Location{ get; set; }
+        public string Name { get; set; }
+        public List<Line> Lines { get; set; }
 
     }
 }

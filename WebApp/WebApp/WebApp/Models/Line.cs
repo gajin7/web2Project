@@ -7,12 +7,14 @@ using static WebApp.Models.Enums;
 
 namespace WebApp.Models
 {
-    public class Line : ILine
+    public class Line
     {
         [Key]
-        public int LineNum { get; set; }
-        public IEnumerable<IStation> Stations { get; set; }
+        public string Name { get; set; }
+        public List<Station> Stations { get; set; }
+        public List<Schedule> Schedules { get; set; }
         public LineTypes LineType { get; set; }
+        public List<Location> Locations { get; set; }
         
     }
 }

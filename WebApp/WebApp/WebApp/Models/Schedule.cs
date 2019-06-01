@@ -5,9 +5,13 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class Schedule : ISchedule
+    public class Schedule 
     {
-        ILine Line { get; set; }
+        public int Id { get; set; }
+        public DayOfWeek Day { get; set; }
+        public string LineName { get; set;}
+        public List<KeyValuePair<DateTime,DateTime>> Depatures_Arrivals { get; set; } 
+
 
     }
 }
