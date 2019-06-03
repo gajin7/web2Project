@@ -8,6 +8,7 @@ namespace WebApp.Models
 {
     public class Discounts
     {
+        public int Id { get; set; }
         public UserType Type { get; set; }
         public double Discount { get; set; }
 
