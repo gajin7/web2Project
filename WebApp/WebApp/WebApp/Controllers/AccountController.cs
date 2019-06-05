@@ -328,9 +328,14 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            DateTime tempDate;
+            DateTime.TryParse(model.Date, out tempDate);
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var Appuser = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+
+            var user = new User() { _appUser = Appuser, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number};
+
+            IdentityResult result = await UserManager.CreateAsync(Appuser, model.Password);
 
             if (!result.Succeeded)
             {

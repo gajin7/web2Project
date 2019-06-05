@@ -28,6 +28,16 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe((data) => {
       console.log(data);
     });
+    if(this.authService.isLoggedIn)
+    {
+      this.router.navigate(['home']);
+    }
+    else
+    {
+      this.message = "Error, please try again";
+    }
+    
+    
   }
 
   logout() {

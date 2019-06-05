@@ -30,6 +30,8 @@ namespace WebApp.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
     }
 
     public class RegisterBindingModel
@@ -48,6 +50,36 @@ namespace WebApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Date")]
+        public string Date { get; set; }
+
+        [Required]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+
+        [Required]
+        [Display(Name = "Number")]
+        public string Number { get; set; }
+
+       
+        [Display(Name = "Type")]
+        public string Type { get; set; }
+
+
     }
 
     public class RegisterExternalBindingModel

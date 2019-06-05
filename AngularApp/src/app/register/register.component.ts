@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  mssg :string = '';
+
+  registerForm = this.fb.group({
+    FirstName: ['', Validators.required],
+    LastName: ['', Validators.required],
+    Email: ['', Validators.required],
+    Password: ['', Validators.required],
+    ConfirmPassword: ['', Validators.required],
+    Date: ['',Validators.required],
+    City: ['', Validators.required],
+    Street: ['', Validators.required],
+    Number: ['', Validators.required],
+    TypeOfPerson: ['', Validators.required],
+    Picture: ['', Validators.required],
+  });
+
+  constructor( private fb: FormBuilder,public authService: AuthService,public router: Router) { }
 
   ngOnInit() {
+  }
+
+  register() {
+    this.authService.regiter(this.registerForm.value).subscribe((data) => {
+      console.log(data);
+
+      this.mssg = data;
+    });
   }
 
 }

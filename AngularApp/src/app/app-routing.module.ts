@@ -6,13 +6,14 @@ import { AdminComponent } from './admin/admin.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
-import { CrisisCenterComponent } from './crisis-center/crisis-center/crisis-center.component';
-import { CrisisCenterHomeComponent } from './crisis-center/crisis-center-home/crisis-center-home.component';
-import { CrisisDetailComponent } from './crisis-center/crisis-detail/crisis-detail.component';
-import { CrisisListComponent } from './crisis-center/crisis-list/crisis-list.component';
-import { CrisisDetailResolverService } from './crisis-center/crisis-detail-resolver.service';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
+  { 
+    path: '', 
+    component: HomeComponent, 
+  },
   {
     path: 'admin',
     component: AdminComponent,
@@ -22,33 +23,13 @@ const appRoutes: Routes = [
     path: 'login', 
     component: LoginComponent, 
   },
-  {
-    path: 'crisis-center',
-    component: CrisisCenterComponent,
-      children: [
-        {
-          path: '',
-          component: CrisisListComponent,
-          children: [
-            {
-              path: ':id',
-              component: CrisisDetailComponent,
-              resolve: {
-                crisis: CrisisDetailResolverService
-              }
-            },
-            {
-              path: '',
-              component: CrisisCenterHomeComponent
-            }
-          ]
-        }
-      ]
+  { 
+    path: 'register', 
+    component: RegisterComponent, 
   },
-  {
-    path: '',
-    redirectTo: '/crisis-center',
-    pathMatch: 'full'
+  { 
+    path: 'home', 
+    component: HomeComponent, 
   },
   {
     path: '**',

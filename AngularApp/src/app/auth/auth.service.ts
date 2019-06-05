@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, pipe, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from './user';
+import { RegisterUser } from '../registerUser';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,13 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(user: User): Observable<any> {
+
+   
+
     return this.http.post<any>(this.loginUrl, `username=`+ user.username +`&password=`+ user.password + `&grant_type=password`, { 'headers': { 'Content-type': 'x-www-form-urlencoded' } }).pipe(
       map(res => {
+        this.isLoggedIn = true;
+
         console.log(res.access_token);
 
         let jwt = res.access_token;
@@ -44,6 +50,15 @@ export class AuthService {
   logout(): void {
     this.isLoggedIn = false;
     localStorage.removeItem('jwt');
+    localStorage.removeItem("role");
+  }
+
+
+  regiter(user : RegisterUser) : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/Account/Register', `FirstName=`+ user.FirstName +`&Email=`+ user.Email +`&LastName=`+ user.LastName +`&Password=`+ user.Password +`&ConfirmPassword=`+ user.ConfirmPassword +`&Date=`+ user.Date +`&City=`+ user.City +`&Street=`+ user.Street +`&Number=`+ user.Number +`&Type=`+ user.TypeOfPesron, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handleError<any>('register'))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

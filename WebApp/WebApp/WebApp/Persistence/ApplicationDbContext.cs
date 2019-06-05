@@ -20,6 +20,7 @@ namespace WebApp.Persistence
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<User> DetailedUsers { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
