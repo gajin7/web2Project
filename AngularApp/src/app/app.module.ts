@@ -12,6 +12,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { BuyingTicketComponent } from './buying-ticket/buying-ticket.component';
 
 
 
@@ -23,7 +24,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    BuyingTicketComponent
 
   ],
   imports: [
