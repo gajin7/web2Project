@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 
 
@@ -21,7 +22,8 @@ import { HomeComponent } from './home/home.component';
     AdminComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ScheduleComponent
 
   ],
   imports: [

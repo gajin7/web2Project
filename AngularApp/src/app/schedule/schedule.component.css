@@ -1,0 +1,18 @@
+.navbar.navbar-expand-lg.navbar-dark.bg-primary {
+    position: relative;
+}
+
+.collapse.navbar-collapse {
+    right: 0%;
+    position: absolute;
+}
+
+.needs-validation {
+    width: 500px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.btn.btn-primary {
+    margin-left: 200px;
+}
