@@ -8,6 +8,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { BuyingTicketComponent } from './buying-ticket/buying-ticket.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 const appRoutes: Routes = [
   { 
@@ -32,9 +34,19 @@ const appRoutes: Routes = [
     component: HomeComponent, 
   },
   {
+    path: 'buying-ticket',
+    component: BuyingTicketComponent
+  },
+  {
+    path: 'schedule',
+    component: ScheduleComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
-  }
+  },
+ 
+  
 ];
 
 @NgModule({

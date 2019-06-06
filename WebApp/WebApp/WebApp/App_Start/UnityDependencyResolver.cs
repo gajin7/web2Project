@@ -71,6 +71,8 @@ namespace WebApp.App_Start
             container.RegisterType<DbContext, ApplicationDbContext>(new PerResolveLifetimeManager());
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
             container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<ITicketRepository, TicketRepository>();
+            container.RegisterType<IPricesRepository, PricesRepository>();
         }
 
         public void Dispose()

@@ -6,7 +6,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using WebApp.Models;
-using System.Data.Entity;
 
 namespace WebApp.Persistence
 {
@@ -21,6 +20,7 @@ namespace WebApp.Persistence
         public DbSet<Station> Stations { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> DetailedUsers { get; set; }
+        public DbSet<Prices> Prices { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

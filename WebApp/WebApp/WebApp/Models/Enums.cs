@@ -22,9 +22,10 @@ namespace WebApp.Models
 
         public enum TicketType
         {
-            timeTicket = 0,
-            monthlyTicekt,
-            yearTicket
+            TimeTicket = 0,
+            DailyTicket,
+            MonthlyTicekt,
+            AnnualTicket  
         }
 
         public enum UserType

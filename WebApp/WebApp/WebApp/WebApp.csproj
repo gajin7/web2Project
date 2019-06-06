@@ -251,8 +251,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\BuyingTicketController.cs" />
+    <Compile Include="EmailHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,11 +277,20 @@
     <Compile Include="Migrations\201906051338366_UserAdded.Designer.cs">
       <DependentUpon>201906051338366_UserAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906051843269_ticketClassGuid.cs" />
+    <Compile Include="Migrations\201906051843269_ticketClassGuid.Designer.cs">
+      <DependentUpon>201906051843269_ticketClassGuid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061559029_ticket prices added.cs" />
+    <Compile Include="Migrations\201906061559029_ticket prices added.Designer.cs">
+      <DependentUpon>201906061559029_ticket prices added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Discounts.cs" />
+    <Compile Include="Models\Prices.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Line.cs" />
@@ -294,6 +304,7 @@
     <Compile Include="Persistence\Repository\IDiscountRepository.cs" />
     <Compile Include="Persistence\Repository\ILineRepository.cs" />
     <Compile Include="Persistence\Repository\ILocationRepository.cs" />
+    <Compile Include="Persistence\Repository\IPricesRepository.cs" />
     <Compile Include="Persistence\Repository\IProductRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\IScheduleRepository.cs" />
@@ -302,6 +313,7 @@
     <Compile Include="Persistence\Repository\IUserRepository.cs" />
     <Compile Include="Persistence\Repository\LineRepository.cs" />
     <Compile Include="Persistence\Repository\LocationRepository.cs" />
+    <Compile Include="Persistence\Repository\PricesRepository.cs" />
     <Compile Include="Persistence\Repository\ProductRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
     <Compile Include="Persistence\Repository\ScheduleRepository.cs" />
@@ -423,6 +435,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906051338366_UserAdded.resx">
       <DependentUpon>201906051338366_UserAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906051843269_ticketClassGuid.resx">
+      <DependentUpon>201906051843269_ticketClassGuid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061559029_ticket prices added.resx">
+      <DependentUpon>201906061559029_ticket prices added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

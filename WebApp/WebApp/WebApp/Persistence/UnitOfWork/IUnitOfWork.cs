@@ -11,6 +11,7 @@ namespace WebApp.Persistence.UnitOfWork
     {
         int Complete();
 
-        IProductRepository Products { get; set; }
+        ITicketRepository Tickets { get; set; }
+        IPricesRepository Prices { get; set; }
     }
 }
