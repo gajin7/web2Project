@@ -60,8 +60,10 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var temp = req["type"];
+            string temp = req["type"].Trim();
+            int v = temp.Length;
             var temp1 = TicketType.DailyTicket.ToString();
+            int v1 = temp1.Length;
 
             var prices = _unitOfWork.Prices.GetAll();
             //   var price = prices.Where(item => item.ticketType.ToString() == req["type"]).Select(n => n.price); ?????
