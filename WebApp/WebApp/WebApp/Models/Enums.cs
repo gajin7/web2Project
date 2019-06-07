@@ -24,7 +24,7 @@ namespace WebApp.Models
         {
             TimeTicket = 0,
             DailyTicket,
-            MonthlyTicekt,
+            MonthlyTicket,
             AnnualTicket  
         }
 

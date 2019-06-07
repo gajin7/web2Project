@@ -9,8 +9,9 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
         public DayOfWeek Day { get; set; }
-        public string LineName { get; set;}
-        public List<KeyValuePair<DateTime,DateTime>> Depatures_Arrivals { get; set; } 
+        public Line Line { get; set;}
+        public List<DateTime> Depatures { get; set; } 
+        public TimeSpan Duration { get; set; }
 
 
     }

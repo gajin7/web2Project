@@ -19,6 +19,9 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public IPricesRepository Prices { get; set; }
 
+        [Dependency]
+        public ILineRepository Lines { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;
