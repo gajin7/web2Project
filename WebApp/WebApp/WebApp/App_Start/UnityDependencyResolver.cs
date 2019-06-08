@@ -74,6 +74,7 @@ namespace WebApp.App_Start
             container.RegisterType<ITicketRepository, TicketRepository>();
             container.RegisterType<IPricesRepository, PricesRepository>();
             container.RegisterType<ILineRepository, LineRepository>();
+            container.RegisterType<IDiscountRepository, DiscountRepository>();
         }
 
         public void Dispose()

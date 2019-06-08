@@ -83,6 +83,19 @@ namespace WebApp.Controllers
 
         }
 
+        [System.Web.Http.Route("api/Ticket/GetPriceList")]
+        public IHttpActionResult GetPriceList()
+        {
+            var prices = _unitOfWork.Prices.GetAll();
+        
+            var discounts = _unitOfWork.Discounts.GetAll();
+
+            return Json(new { Prices = prices, Discounts = discounts });
+
+
+           
+        }
+
         public Int32 GetUniqueId()
         {
             var now = DateTime.Now;
@@ -91,6 +104,7 @@ namespace WebApp.Controllers
 
             return uniqueId;
         }
+
 
 
     }

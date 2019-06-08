@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace WebApp.Controllers
 {
-    public class AdminController1 : ApiController
+    public class AdminController : ApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()

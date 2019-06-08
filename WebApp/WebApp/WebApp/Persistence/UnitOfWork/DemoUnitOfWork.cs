@@ -22,6 +22,9 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public ILineRepository Lines { get; set; }
 
+        [Dependency]
+        public IDiscountRepository Discounts { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

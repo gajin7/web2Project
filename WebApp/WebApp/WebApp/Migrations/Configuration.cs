@@ -114,6 +114,28 @@
                 var line = new Line() { Name = "1", LineType = Enums.LineTypes.Urban };
                 context.Lines.Add(line);
             }
+            if (!context.Lines.Any(u => u.Name == "2"))
+            {
+                var line = new Line() { Name = "2", LineType = Enums.LineTypes.Suburban };
+                context.Lines.Add(line);
+            }
+
+            if(!context.Discounts.Any(u => u.Type == Enums.UserType.regular))
+            {
+                var discount = new Discounts() { Type = Enums.UserType.regular, Discount = 0 };
+                context.Discounts.Add(discount);
+            }
+            if (!context.Discounts.Any(u => u.Type == Enums.UserType.retiree))
+            {
+                var discount = new Discounts() { Type = Enums.UserType.retiree, Discount = 0.2 };
+                context.Discounts.Add(discount);
+            }
+            if (!context.Discounts.Any(u => u.Type == Enums.UserType.student))
+            {
+                var discount = new Discounts() { Type = Enums.UserType.student, Discount = 0.5};
+                context.Discounts.Add(discount);
+            }
+
         }
     }
 }

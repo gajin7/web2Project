@@ -14,5 +14,6 @@ namespace WebApp.Persistence.UnitOfWork
         ITicketRepository Tickets { get; set; }
         IPricesRepository Prices { get; set; }
         ILineRepository Lines { get; set; }
+        IDiscountRepository Discounts { get; set; }
     }
 }
