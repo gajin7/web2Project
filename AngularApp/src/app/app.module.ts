@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BuyingTicketComponent } from './buying-ticket/buying-ticket.component';
 import { PriceListComponent } from './price-list/price-list.component';
+import { TicketPriceComponent } from './ticket-price/ticket-price.component';
 
 
 
@@ -27,7 +28,8 @@ import { PriceListComponent } from './price-list/price-list.component';
     HomeComponent,
     ScheduleComponent,
     BuyingTicketComponent,
-    PriceListComponent
+    PriceListComponent,
+    TicketPriceComponent
 
   ],
   imports: [
