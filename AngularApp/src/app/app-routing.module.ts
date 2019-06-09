@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { BuyingTicketComponent } from './buying-ticket/buying-ticket.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { TicketPriceComponent } from './ticket-price/ticket-price.component';
 
 const appRoutes: Routes = [
   { 
@@ -40,6 +41,10 @@ const appRoutes: Routes = [
   {
     path: 'schedule',
     component: ScheduleComponent
+  },
+  {
+    path: 'ticket-price',
+    component: TicketPriceComponent
   },
   {
     path: '**',

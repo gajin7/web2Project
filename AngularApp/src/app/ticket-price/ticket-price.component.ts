@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Prices } from './Prices';
+import { Discounts } from './Discounts';
 
 @Component({
   selector: 'app-ticket-price',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ticket-price.component.css']
 })
 export class TicketPriceComponent implements OnInit {
+   
+   prices : Prices[];
+   discounts : Discounts[];
 
   constructor() { }
 

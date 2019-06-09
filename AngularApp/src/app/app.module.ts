@@ -13,7 +13,6 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BuyingTicketComponent } from './buying-ticket/buying-ticket.component';
-import { PriceListComponent } from './price-list/price-list.component';
 import { TicketPriceComponent } from './ticket-price/ticket-price.component';
 
 
@@ -28,7 +27,6 @@ import { TicketPriceComponent } from './ticket-price/ticket-price.component';
     HomeComponent,
     ScheduleComponent,
     BuyingTicketComponent,
-    PriceListComponent,
     TicketPriceComponent
 
   ],

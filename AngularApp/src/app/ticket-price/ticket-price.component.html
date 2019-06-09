@@ -20,13 +20,6 @@
 </nav>
 
 <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
-
-
-
-
-
-
-
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -38,28 +31,30 @@
             </tr>
         </thead>
         <tbody>
-
             <tr>
                 <th rowspan="3">Urban</th>
-                <td>Student</td>
-                <td>1</td>
-                <td>Student</td>
-                <td>1</td>
-                <td>Student</td>
-                <td>1</td>
-                <td>Student</td>
-                <td>1</td>
-            </tr>
+                 <td>Regular</td>
+                 <td>2</td>
+                 <td>Regular</td>
+                 <td>2</td>
+                 <td>Regular</td>
+                 <td>2</td>
+                 <td>Regular</td>
+                 <td>2</td>
+             </tr>
+
             <tr>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
+               
+                <td>Student</td>
+                <td>1</td>
+                <td>Student</td>
+                <td>1</td>
+                <td>Student</td>
+                <td>1</td>
+                <td>Student</td>
+                <td>1</td>
             </tr>
+          
             <tr>
                 <td>Retaire</td>
                 <td>3</td>
@@ -77,9 +72,19 @@
                 </th>
             </tr>
 
-
             <tr>
-                <th rowspan="3">Suburban</th>
+                    <th rowspan="3">Suburban</th>
+                    <td>Regular</td>
+                    <td>2</td>
+                    <td>Regular</td>
+                    <td>2</td>
+                    <td>Regular</td>
+                    <td>2</td>
+                    <td>Regular</td>
+                    <td>2</td>
+                </tr>
+            <tr>
+                
                 <td>Student</td>
                 <td>1</td>
                 <td>Student</td>
@@ -89,16 +94,7 @@
                 <td>Student</td>
                 <td>1</td>
             </tr>
-            <tr>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-            </tr>
+           
             <tr>
                 <td>Retaire</td>
                 <td>3</td>
@@ -113,10 +109,13 @@
         </tbody>
     </table>
 
-    <button class="btn btn-primary" type="submit" href="#">Back to home</button>
+    <a href="/home">
+        <button class="btn btn-primary" >Back to home</button>
+    </a>
+   
 
 
-    <button class="btn btn-primary" type="submit" href="/buying-ticket">Go to buy ticket</button>
+    <button class="btn btn-primary"  href="/buying-ticket">Go to buy ticket</button>
 
 
 </form>
