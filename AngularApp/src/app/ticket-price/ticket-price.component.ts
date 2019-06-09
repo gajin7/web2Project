@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Prices } from './Prices';
 import { Discounts } from './Discounts';
+import { TicketPriceService } from './ticket-price.service';
 
 @Component({
   selector: 'app-ticket-price',
@@ -9,12 +10,19 @@ import { Discounts } from './Discounts';
 })
 export class TicketPriceComponent implements OnInit {
    
-   prices : Prices[];
-   discounts : Discounts[];
+   prices : string[];
+  
 
-  constructor() { }
+  constructor(public service: TicketPriceService) { }
 
   ngOnInit() {
+    this.service.GetPricelist().subscribe((data) => {
+      this.prices = data});
+
+      console.log("test");
+      
   }
+
+  
 
 }

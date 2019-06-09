@@ -10,10 +10,10 @@ export class TicketPriceService {
 
   constructor(private http: HttpClient) { }
 
-  BuyTimeTicket(mail: string) : Observable<any>
+  GetPricelist() : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Ticket/ByTimeTicket', `email=`+mail, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
-      catchError(this.handleError<any>('BuyTimeTicket'))
+   return this.http.get<any>('http://localhost:52295/api/Ticket/GetPriceList', { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handleError<any>('Pricelist'))
     );
   }
 
