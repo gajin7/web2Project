@@ -8,11 +8,17 @@
 }
 
 .needs-validation {
-    width: 500px;
-    margin-left: 10px;
+    width: 40%;
+    margin-left: 30%;
     margin-top: 10px;
+    text-align: center;
 }
 
 .btn.btn-primary {
-    margin-left: 200px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.email {
+    margin-top: 30px;
 }
