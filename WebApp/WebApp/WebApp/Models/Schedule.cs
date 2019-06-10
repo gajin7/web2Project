@@ -13,9 +13,9 @@ namespace WebApp.Models
         public int Id { get; set; }
         public Day Day { get; set; }
         
+        public int LineId { get; set; }
         public Line Line { get; set;}
-
-        public List<Depature> Depatures { get; set; } 
+        public virtual List<Depature> Depatures { get; set; } 
         public TimeSpan Duration { get; set; }
 
 

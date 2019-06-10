@@ -1,4 +1,4 @@
-﻿namespace WebApp.Migrations
+namespace WebApp.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -141,7 +141,7 @@
 
             if (!context.Schedules.Any(u => u.Line.Name == "1" && u.Day == Day.WorkDay))
             {
-                var schedule = new Schedule() { Day = Day.WorkDay, Line = context.Lines.Where((a) => a.Name == "1").FirstOrDefault(), Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "07:05" }, new Depature() { DepatureTime = "08:22" }, new Depature() { DepatureTime = "09:11" }, new Depature() { DepatureTime = "10:21" }, new Depature() { DepatureTime = "11:01" } } };
+                var schedule = new Schedule() { Day = Day.WorkDay, LineId = context.Lines.Where(u => u.Id == 1).Select(u => u.Id).FirstOrDefault(), Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "07:05" }, new Depature() { DepatureTime = "08:22" }, new Depature() { DepatureTime = "09:11" }, new Depature() { DepatureTime = "10:21" }, new Depature() { DepatureTime = "11:01" } } };
                 context.Schedules.Add(schedule);
             }
 

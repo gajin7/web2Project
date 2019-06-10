@@ -259,85 +259,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905222056072_InitialMigration.cs" />
-    <Compile Include="Migrations\201905222056072_InitialMigration.Designer.cs">
-      <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201906101516282_Create.cs" />
+    <Compile Include="Migrations\201906101516282_Create.Designer.cs">
+      <DependentUpon>201906101516282_Create.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905270923046_AddProduct1.cs" />
-    <Compile Include="Migrations\201905270923046_AddProduct1.Designer.cs">
-      <DependentUpon>201905270923046_AddProduct1.cs</DependentUpon>
+    <Compile Include="Migrations\201906101521114_Create1.cs" />
+    <Compile Include="Migrations\201906101521114_Create1.Designer.cs">
+      <DependentUpon>201906101521114_Create1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906030734013_AddDiscount.cs" />
-    <Compile Include="Migrations\201906030734013_AddDiscount.Designer.cs">
-      <DependentUpon>201906030734013_AddDiscount.cs</DependentUpon>
+    <Compile Include="Migrations\201906101524052_Create2.cs" />
+    <Compile Include="Migrations\201906101524052_Create2.Designer.cs">
+      <DependentUpon>201906101524052_Create2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906040859462_register.cs" />
-    <Compile Include="Migrations\201906040859462_register.Designer.cs">
-      <DependentUpon>201906040859462_register.cs</DependentUpon>
+    <Compile Include="Migrations\201906101524427_Create3.cs" />
+    <Compile Include="Migrations\201906101524427_Create3.Designer.cs">
+      <DependentUpon>201906101524427_Create3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906051338366_UserAdded.cs" />
-    <Compile Include="Migrations\201906051338366_UserAdded.Designer.cs">
-      <DependentUpon>201906051338366_UserAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906051843269_ticketClassGuid.cs" />
-    <Compile Include="Migrations\201906051843269_ticketClassGuid.Designer.cs">
-      <DependentUpon>201906051843269_ticketClassGuid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061559029_ticket prices added.cs" />
-    <Compile Include="Migrations\201906061559029_ticket prices added.Designer.cs">
-      <DependentUpon>201906061559029_ticket prices added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906070728131_prices_lineType_added.cs" />
-    <Compile Include="Migrations\201906070728131_prices_lineType_added.Designer.cs">
-      <DependentUpon>201906070728131_prices_lineType_added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906070747242_ScheduleUPDATE.cs" />
-    <Compile Include="Migrations\201906070747242_ScheduleUPDATE.Designer.cs">
-      <DependentUpon>201906070747242_ScheduleUPDATE.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906070751452_ScheduleUPDATE1.cs" />
-    <Compile Include="Migrations\201906070751452_ScheduleUPDATE1.Designer.cs">
-      <DependentUpon>201906070751452_ScheduleUPDATE1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906070757477_ScheduleUPDATE2.cs" />
-    <Compile Include="Migrations\201906070757477_ScheduleUPDATE2.Designer.cs">
-      <DependentUpon>201906070757477_ScheduleUPDATE2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100852467_updateSchedule.cs" />
-    <Compile Include="Migrations\201906100852467_updateSchedule.Designer.cs">
-      <DependentUpon>201906100852467_updateSchedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100853109_updateSchedule1.cs" />
-    <Compile Include="Migrations\201906100853109_updateSchedule1.Designer.cs">
-      <DependentUpon>201906100853109_updateSchedule1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100856540_updateSchedule2.cs" />
-    <Compile Include="Migrations\201906100856540_updateSchedule2.Designer.cs">
-      <DependentUpon>201906100856540_updateSchedule2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100858073_updateSchedule3.cs" />
-    <Compile Include="Migrations\201906100858073_updateSchedule3.Designer.cs">
-      <DependentUpon>201906100858073_updateSchedule3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100912143_updateSchedule4.cs" />
-    <Compile Include="Migrations\201906100912143_updateSchedule4.Designer.cs">
-      <DependentUpon>201906100912143_updateSchedule4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100913412_updateSchedule5.cs" />
-    <Compile Include="Migrations\201906100913412_updateSchedule5.Designer.cs">
-      <DependentUpon>201906100913412_updateSchedule5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100913597_updateSchedule6.cs" />
-    <Compile Include="Migrations\201906100913597_updateSchedule6.Designer.cs">
-      <DependentUpon>201906100913597_updateSchedule6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100925404_updateSchedule7.cs" />
-    <Compile Include="Migrations\201906100925404_updateSchedule7.Designer.cs">
-      <DependentUpon>201906100925404_updateSchedule7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100927455_updateSchedule8.cs" />
-    <Compile Include="Migrations\201906100927455_updateSchedule8.Designer.cs">
-      <DependentUpon>201906100927455_updateSchedule8.cs</DependentUpon>
+    <Compile Include="Migrations\201906101525339_Create4.cs" />
+    <Compile Include="Migrations\201906101525339_Create4.Designer.cs">
+      <DependentUpon>201906101525339_Create4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -476,65 +416,20 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905222056072_InitialMigration.resx">
-      <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101516282_Create.resx">
+      <DependentUpon>201906101516282_Create.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905270923046_AddProduct1.resx">
-      <DependentUpon>201905270923046_AddProduct1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101521114_Create1.resx">
+      <DependentUpon>201906101521114_Create1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906030734013_AddDiscount.resx">
-      <DependentUpon>201906030734013_AddDiscount.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101524052_Create2.resx">
+      <DependentUpon>201906101524052_Create2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906040859462_register.resx">
-      <DependentUpon>201906040859462_register.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101524427_Create3.resx">
+      <DependentUpon>201906101524427_Create3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906051338366_UserAdded.resx">
-      <DependentUpon>201906051338366_UserAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906051843269_ticketClassGuid.resx">
-      <DependentUpon>201906051843269_ticketClassGuid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061559029_ticket prices added.resx">
-      <DependentUpon>201906061559029_ticket prices added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906070728131_prices_lineType_added.resx">
-      <DependentUpon>201906070728131_prices_lineType_added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906070747242_ScheduleUPDATE.resx">
-      <DependentUpon>201906070747242_ScheduleUPDATE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906070751452_ScheduleUPDATE1.resx">
-      <DependentUpon>201906070751452_ScheduleUPDATE1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906070757477_ScheduleUPDATE2.resx">
-      <DependentUpon>201906070757477_ScheduleUPDATE2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100852467_updateSchedule.resx">
-      <DependentUpon>201906100852467_updateSchedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100853109_updateSchedule1.resx">
-      <DependentUpon>201906100853109_updateSchedule1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100856540_updateSchedule2.resx">
-      <DependentUpon>201906100856540_updateSchedule2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100858073_updateSchedule3.resx">
-      <DependentUpon>201906100858073_updateSchedule3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100912143_updateSchedule4.resx">
-      <DependentUpon>201906100912143_updateSchedule4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100913412_updateSchedule5.resx">
-      <DependentUpon>201906100913412_updateSchedule5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100913597_updateSchedule6.resx">
-      <DependentUpon>201906100913597_updateSchedule6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100925404_updateSchedule7.resx">
-      <DependentUpon>201906100925404_updateSchedule7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100927455_updateSchedule8.resx">
-      <DependentUpon>201906100927455_updateSchedule8.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101525339_Create4.resx">
+      <DependentUpon>201906101525339_Create4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

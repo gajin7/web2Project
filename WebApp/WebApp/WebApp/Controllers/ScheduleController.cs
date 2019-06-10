@@ -40,10 +40,28 @@ namespace WebApp.Controllers
             var temp1 = req["line"].Trim();
             var s = _unitOfWork.Schedules.GetAll();
 
-            var sch = _unitOfWork.Schedules.GetAll().Where(u => u.Day.ToString().Equals(req["day"].Trim()) && u.Line.Name == req["line"].Trim());
+            var sch = _unitOfWork.Schedules.GetAll().Where(u => u.Day.ToString().Equals(req["day"].Trim()) && u.Line.Name == req["line"].Trim()).Select(u => u.Depatures);
                 
 
             return Json(sch);
+
+        }
+
+
+        [HttpGet]
+        [System.Web.Http.Route("api/Schedule/GetLines")]
+        public IHttpActionResult GetLines()
+        {
+            var req = HttpContext.Current.Request;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var lines = _unitOfWork.Lines.GetAll().Where(u => u.LineType.ToString().Equals(req["type"])).Select(u => u.Name);
+         
+
+            return Json(lines);
 
         }
 

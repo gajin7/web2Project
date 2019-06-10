@@ -10,12 +10,11 @@ namespace WebApp.Models
 {
     public class Line
     {
-        [Key]
+        public int Id { get; set; }
         public string Name { get; set; }
-        public List<Station> Stations { get; set; }
-        public List<Schedule> Schedules { get; set; }
+        public virtual List<Station> Stations { get; set; }
         public LineTypes LineType { get; set; }
-        public List<Location> Locations { get; set; }
+        public virtual List<Location> Locations { get; set; }
         
     }
 }
