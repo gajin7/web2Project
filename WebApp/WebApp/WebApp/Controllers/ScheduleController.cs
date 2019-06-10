@@ -36,9 +36,11 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            var temp = req["day"].Trim();
+            var temp1 = req["line"].Trim();
             var s = _unitOfWork.Schedules.GetAll();
 
-            var sch = _unitOfWork.Schedules.GetAll().Where(u => u.Day.ToString().Equals(req["day"].Trim()) && u.Line.Name == req["line"]);
+            var sch = _unitOfWork.Schedules.GetAll().Where(u => u.Day.ToString().Equals(req["day"].Trim()) && u.Line.Name == req["line"].Trim());
                 
 
             return Json(sch);

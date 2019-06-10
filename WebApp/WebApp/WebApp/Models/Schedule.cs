@@ -12,6 +12,7 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
         public Day Day { get; set; }
+        
         public Line Line { get; set;}
 
         public List<Depature> Depatures { get; set; } 

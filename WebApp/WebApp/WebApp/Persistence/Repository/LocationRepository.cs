@@ -10,7 +10,7 @@ namespace WebApp.Persistence.Repository
     public class LocationRepository : Repository<Location, int>, ILocationRepository
     {
         public LocationRepository(DbContext context) : base(context)
-    {
+         {
+         }
     }
-}
 }
