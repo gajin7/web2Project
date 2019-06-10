@@ -20,49 +20,65 @@
 </nav>
 
 <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+    <div class="form-row">
+
+        <div class="col-md-6 mb-3">
+            <div class="form-group">
+
+                <label for="validationCustom05">Select line type</label>
+                <select class="custom-select" formControlName="TypeOfPerson" required>
+
+        <option value=""> Urban</option>
+        <option value="1">Suburban</option>
+          </select>
+            </div>
+        </div>
 
 
 
-    <div class="form-group">
-        <label for="validationCustom05">Select line type</label>
-        <select class="custom-select" formControlName="TypeOfPerson" required>
+        <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <label for="validationCustom05">Select line</label>
+                <select class="custom-select" formControlName="TypeOfPerson" required>
 
-                <option value=""> Urban</option>
-                <option value="1">Suburban</option>
-            
-              </select>
-        <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
-    </div>
-
-    <div class="form-group">
-        <label for="validationCustom05">Select day</label>
-        <select class="custom-select" formControlName="TypeOfPerson" required>
-
-        <option value=""> Work Day</option>
-        <option value="1">Saturday</option>
-        <option value="2">Sunday</option>
-      </select>
-        <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
-    </div>
-
-    <div class="form-group">
-        <label for="validationCustom05">Select line</label>
-        <select class="custom-select" formControlName="TypeOfPerson" required>
-
-        <option value="">Linije cemo imati kad ih ubacimo u bazu</option>    
+        <option value="">Linije cemo imati kad ih ubacimo u bazu</option>
 
       </select>
-        <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
+            </div>
+
+        </div>
+
     </div>
 
 
 
+    <button class="btn btn-primary" type="submit">Submit</button>
 
 
-    <button class="btn btn-primary" type="submit">Submit form</button>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
 
-    <label> Ovde cemo ispisivati satnice koju cemo imati u bazi za odabranu liniju.</label>
+                <th scope="col">Work Days</th>
+                <th scope="col">Saturday</th>
+                <th scope="col">Sunday</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
 
 
 
+
+
+
+        </tbody>
+    </table>
 </form>
