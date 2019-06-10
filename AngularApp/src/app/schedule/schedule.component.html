@@ -39,9 +39,9 @@
         <div class="col-md-6 mb-3">
             <div class="form-group">
                 <label for="validationCustom05">Select line</label>
-                <select class="custom-select" formControlName="TypeOfPerson" required>
+                <select  [(ngModel)]="simpleValue" class="custom-select" formControlName="TypeOfPerson" required>
 
-        <option value="">Linije cemo imati kad ih ubacimo u bazu</option>
+                    <option *ngFor="let obj of lines" [value]="obj.value">{{obj}}</option>
 
       </select>
             </div>
