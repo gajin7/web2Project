@@ -27,15 +27,23 @@ export class LoginComponent {
   login() {
     this.authService.login(this.loginForm.value).subscribe((data) => {
       console.log(data);
-    });
+   
     if(this.authService.isLoggedIn)
     {
-      this.router.navigate(['home']);
+      if(localStorage.role == "Admin")
+      {
+        this.router.navigate(['admin']);
+      }
+      else if(localStorage.role == "AppUser")
+      {
+      this.router.navigate(['app-user-home']);
+      }
     }
     else
     {
       this.message = "Error, please try again";
     }
+  });
     
     
   }

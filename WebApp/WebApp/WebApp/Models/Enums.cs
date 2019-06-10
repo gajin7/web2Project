@@ -16,7 +16,7 @@ namespace WebApp.Models
         public enum Day
         {
             WorkDay = 0,
-            Suterday,
+            Saturday,
             Sunday
         }
 

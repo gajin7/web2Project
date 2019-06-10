@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Gradski saobracajni prevoz</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="#">Log in</a>
+            <a class="nav-item nav-link active" href="#">Register</a>
+
+        </div>
+    </div>
+</nav>
+
+<div class="card-deck ">
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/app-user-buy-ticket" routerLinkActive="active">
+            <img src="assets/images/booking.png" class="card-img-top" alt="..." href="/buying-ticket">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Kupi kartu</h5>
+            <p class="card-text">Ovde mozete da preuzmete kartu za vasu destinaciju.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/app-user-buy-ticket" routerLinkActive="active">
+            <img src="assets/images/line.png" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Linije</h5>
+            <p class="card-text">Ovde mozete da pogledate koje sve linije postoje na raspolaganju.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/app-user-buy-ticket" routerLinkActive="active">
+            <img src="assets/images/bus_location.png" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Trenutna lokacija autobusa</h5>
+            <p class="card-text">Ovde mozete da pogledate gde se trenutno nalaze autobusi za odredjenu liniju.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/ticket-price" routerLinkActive="active">
+            <img src="assets/images/pricelist.png" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Cenovnik</h5>
+            <p class="card-text">Ovde mozete da pogledate cenu karti i popuste.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/schedule" routerLinkActive="active">
+            <img src="assets/images/timetable.png" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Red voznje</h5>
+            <p class="card-text">Ovde mozete da pogledate red voznje za sve linije.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/app-user-buy-ticket" routerLinkActive="active">
+            <img src="assets/images/booking.png" class="card-img-top" alt="..." href="/buying-ticket">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Moje karte</h5>
+            <p class="card-text">Ovde mozete da vidite svoje karte.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/app-user-buy-ticket" routerLinkActive="active">
+            <img src="assets/images/booking.png" class="card-img-top" alt="..." href="/buying-ticket">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Moj nalog</h5>
+            <p class="card-text">Ovde mozete da vidite i promenite svoje podatke.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+</div>

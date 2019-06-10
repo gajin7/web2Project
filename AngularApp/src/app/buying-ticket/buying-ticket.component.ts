@@ -15,19 +15,24 @@ export class BuyingTicketComponent implements OnInit {
    
   });
 
+
+
   constructor(public service: BuyingTicketService, private route: Router,private fb: FormBuilder) { }
 
-  ticketType : string = '';
+  lineType: string = 'Urban';
   message : string = '';
   price : string = '';
-
+  types : string[];
   
+
+
   selected (event: any) {
     //update the ui
-    this.ticketType = event.target.value;
-    this.service.GetTicketPrice(this.ticketType).subscribe((data) => {
-    this.price = "Your ticket price is: " + data + " RSD";});
+    this.lineType = event.target.value;
+    this.service.GetTicketPrice("TimeTicket",this.lineType).subscribe((data) => {
+      this.price = "Your ticket price is: " + data + " RSD";});
   }
+  
   
   ngOnInit() {
   }

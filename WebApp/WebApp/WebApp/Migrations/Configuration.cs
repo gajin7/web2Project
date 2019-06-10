@@ -133,15 +133,61 @@ namespace WebApp.Migrations
                 var line = new Line() { Name = "1", LineType = Enums.LineTypes.Urban };
                 context.Lines.Add(line);
             }
+            if (!context.Lines.Any(u => u.Name == "3"))
+            {
+                var line = new Line() { Name = "4", LineType = Enums.LineTypes.Urban };
+                context.Lines.Add(line);
+            }
+            if (!context.Lines.Any(u => u.Name == "5"))
+            {
+                var line = new Line() { Name = "5", LineType = Enums.LineTypes.Urban };
+                context.Lines.Add(line);
+            }
             if (!context.Lines.Any(u => u.Name == "2"))
             {
                 var line = new Line() { Name = "2", LineType = Enums.LineTypes.Suburban };
                 context.Lines.Add(line);
             }
+            if (!context.Lines.Any(u => u.Name == "6"))
+            {
+                var line = new Line() { Name = "6", LineType = Enums.LineTypes.Suburban };
+                context.Lines.Add(line);
+            }
+            if (!context.Lines.Any(u => u.Name == "7"))
+            {
+                var line = new Line() { Name = "7", LineType = Enums.LineTypes.Suburban };
+                context.Lines.Add(line);
+            }
 
             if (!context.Schedules.Any(u => u.Line.Name == "1" && u.Day == Day.WorkDay))
             {
-                var schedule = new Schedule() { Day = Day.WorkDay, LineId = context.Lines.Where(u => u.Id == 1).Select(u => u.Id).FirstOrDefault(), Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "07:05" }, new Depature() { DepatureTime = "08:22" }, new Depature() { DepatureTime = "09:11" }, new Depature() { DepatureTime = "10:21" }, new Depature() { DepatureTime = "11:01" } } };
+                var schedule = new Schedule() { Day = Day.WorkDay, LineId = 1, Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "07:05" }, new Depature() { DepatureTime = "08:22" }, new Depature() { DepatureTime = "09:11" }, new Depature() { DepatureTime = "10:21" }, new Depature() { DepatureTime = "11:01" } } };
+                context.Schedules.Add(schedule);
+            }
+            if (!context.Schedules.Any(u => u.Line.Name == "1" && u.Day == Day.Saturday))
+            {
+                var schedule = new Schedule() { Day = Day.Saturday, LineId = 1, Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "07:00" }, new Depature() { DepatureTime = "08:00" }, new Depature() { DepatureTime = "09:00" }, new Depature() { DepatureTime = "10:00" }, new Depature() { DepatureTime = "11:00" } } };
+                context.Schedules.Add(schedule);
+            }
+            if (!context.Schedules.Any(u => u.Line.Name == "1" && u.Day == Day.Sunday))
+            {
+                var schedule = new Schedule() { Day = Day.Sunday, LineId = 1, Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "07:01" }, new Depature() { DepatureTime = "09:01" }, new Depature() { DepatureTime = "11:01" }, new Depature() { DepatureTime = "13:01" }, new Depature() { DepatureTime = "15:01" } } };
+                context.Schedules.Add(schedule);
+            }
+
+            if (!context.Schedules.Any(u => u.Line.Name == "4" && u.Day == Day.WorkDay))
+            {
+                var schedule = new Schedule() { Day = Day.WorkDay, LineId = 4, Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "17:05" }, new Depature() { DepatureTime = "18:22" }, new Depature() { DepatureTime = "19:11" }, new Depature() { DepatureTime = "20:21" }, new Depature() { DepatureTime = "21:01" } } };
+                context.Schedules.Add(schedule);
+            }
+            if (!context.Schedules.Any(u => u.Line.Name == "4" && u.Day == Day.Saturday))
+            {
+                var schedule = new Schedule() { Day = Day.Saturday, LineId = 4, Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "17:00" }, new Depature() { DepatureTime = "18:00" }, new Depature() { DepatureTime = "19:00" }, new Depature() { DepatureTime = "20:00" }, new Depature() { DepatureTime = "21:00" } } };
+                context.Schedules.Add(schedule);
+            }
+            if (!context.Schedules.Any(u => u.Line.Name == "4" && u.Day == Day.Sunday))
+            {
+                var schedule = new Schedule() { Day = Day.Sunday, LineId = 4, Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "17:01" }, new Depature() { DepatureTime = "19:01" }, new Depature() { DepatureTime = "21:01" }, new Depature() { DepatureTime = "23:01" }, new Depature() { DepatureTime = "01:01" } } };
                 context.Schedules.Add(schedule);
             }
 

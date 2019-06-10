@@ -19,17 +19,18 @@
     </div>
 </nav>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+<form [formGroup]="LineForm"  (ngSubmit)="GetSchedules()" class="needs-validation" novalidate>
     <div class="form-row">
 
         <div class="col-md-6 mb-3">
             <div class="form-group">
 
                 <label for="validationCustom05">Select line type</label>
-                <select class="custom-select" (change)="selected($event)" formControlName="TypeOfLine" required>
+                <select class="custom-select" (change)="selected($event)" required>
 
-        <option value=""> Urban</option>
-        <option value="1">Suburban</option>
+        <option selected="selected"></option>
+        <option value="Urban"> Urban</option>
+        <option value="Suburban">Suburban</option>
           </select>
             </div>
         </div>
@@ -39,9 +40,8 @@
         <div class="col-md-6 mb-3">
             <div class="form-group">
                 <label for="validationCustom05">Select line</label>
-                <select  [(ngModel)]="simpleValue" class="custom-select" formControlName="TypeOfPerson" required>
-
-                    <option *ngFor="let obj of lines" [value]="obj.value">{{obj}}</option>
+                <select    class="custom-select" formControlName="LineName" required >
+                    <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
 
       </select>
             </div>
@@ -69,9 +69,9 @@
 
 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{workDay}}</td>
+                <td>{{saturday}}</td>
+                <td>{{sunday}}</td>
             </tr>
 
 

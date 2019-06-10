@@ -60,25 +60,12 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            string temp = req["type"].Trim();
-            int v = temp.Length;
-            var temp1 = TicketType.DailyTicket.ToString();
-            int v1 = temp1.Length;
 
-            var prices = _unitOfWork.Prices.GetAll();
-            //   var price = prices.Where(item => item.ticketType.ToString() == req["type"]).Select(n => n.price); ?????
             double price = -1;
-            foreach (var item in prices)
-            {
-                if (item.ticketType.ToString().Equals(temp))
-                {
-                    price = item.price;
-                    break;
-                }
-                    
-
-            }
-        
+            var prices = _unitOfWork.Prices.GetAll();
+            price = prices.Where(item => item.ticketType.ToString() == req["type"].Trim() && item.LineType.ToString() == req["linetype"].Trim()).Select(n => n.price).FirstOrDefault(); 
+         
+ 
             return Ok(price);
 
         }

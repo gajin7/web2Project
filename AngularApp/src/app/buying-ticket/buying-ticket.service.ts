@@ -21,9 +21,9 @@ export class BuyingTicketService {
     );
   }
 
-  GetTicketPrice(type :string) : Observable<any>
+  GetTicketPrice(type :string, lineType:string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Ticket/GetTicketPrice', `type= ` + type, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Ticket/GetTicketPrice', `type= ` + type + `&linetype=`+lineType, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handleError<any>('GetTicketPrice'))
     );
   }

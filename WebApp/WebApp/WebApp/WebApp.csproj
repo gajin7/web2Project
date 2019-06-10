@@ -173,6 +173,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.Identity.Core">
@@ -278,6 +279,42 @@
     <Compile Include="Migrations\201906101525339_Create4.cs" />
     <Compile Include="Migrations\201906101525339_Create4.Designer.cs">
       <DependentUpon>201906101525339_Create4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101629531_changeSchedule.cs" />
+    <Compile Include="Migrations\201906101629531_changeSchedule.Designer.cs">
+      <DependentUpon>201906101629531_changeSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101631439_changeSchedule1.cs" />
+    <Compile Include="Migrations\201906101631439_changeSchedule1.Designer.cs">
+      <DependentUpon>201906101631439_changeSchedule1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101724489_AddInitialValues.cs" />
+    <Compile Include="Migrations\201906101724489_AddInitialValues.Designer.cs">
+      <DependentUpon>201906101724489_AddInitialValues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101755181_AddInitialValues1.cs" />
+    <Compile Include="Migrations\201906101755181_AddInitialValues1.Designer.cs">
+      <DependentUpon>201906101755181_AddInitialValues1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101755548_AddInitialValues2.cs" />
+    <Compile Include="Migrations\201906101755548_AddInitialValues2.Designer.cs">
+      <DependentUpon>201906101755548_AddInitialValues2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101756337_AddInitialValues3.cs" />
+    <Compile Include="Migrations\201906101756337_AddInitialValues3.Designer.cs">
+      <DependentUpon>201906101756337_AddInitialValues3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101759141_AddInitialValues4.cs" />
+    <Compile Include="Migrations\201906101759141_AddInitialValues4.Designer.cs">
+      <DependentUpon>201906101759141_AddInitialValues4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101803054_AddInitialValues5.cs" />
+    <Compile Include="Migrations\201906101803054_AddInitialValues5.Designer.cs">
+      <DependentUpon>201906101803054_AddInitialValues5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906101803565_AddInitialValues6.cs" />
+    <Compile Include="Migrations\201906101803565_AddInitialValues6.Designer.cs">
+      <DependentUpon>201906101803565_AddInitialValues6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -430,6 +467,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906101525339_Create4.resx">
       <DependentUpon>201906101525339_Create4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101629531_changeSchedule.resx">
+      <DependentUpon>201906101629531_changeSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101631439_changeSchedule1.resx">
+      <DependentUpon>201906101631439_changeSchedule1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101724489_AddInitialValues.resx">
+      <DependentUpon>201906101724489_AddInitialValues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101755181_AddInitialValues1.resx">
+      <DependentUpon>201906101755181_AddInitialValues1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101755548_AddInitialValues2.resx">
+      <DependentUpon>201906101755548_AddInitialValues2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101756337_AddInitialValues3.resx">
+      <DependentUpon>201906101756337_AddInitialValues3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101759141_AddInitialValues4.resx">
+      <DependentUpon>201906101759141_AddInitialValues4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101803054_AddInitialValues5.resx">
+      <DependentUpon>201906101803054_AddInitialValues5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101803565_AddInitialValues6.resx">
+      <DependentUpon>201906101803565_AddInitialValues6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

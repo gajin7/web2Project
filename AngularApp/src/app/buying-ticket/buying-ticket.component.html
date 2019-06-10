@@ -22,12 +22,8 @@
 <form [formGroup]="ticketForm" class="needs-validation" (ngSubmit)="buyTimeTicket()" novalidate>
     <div class="form-group">
         <label for="validationCustom05">Select ticket type</label>
-        <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
-        <option value="TimeTicket"> Time ticket</option>
-        <option value="DailyTicket">Daily ticket</option>
-        <option value="MonthlyTicket">Monthly ticket</option>
-        <option value="AnnualTicket">Annual ticket</option>
-      </select>
+      <br/>
+      <label>You can only buy time ticket. Please login or register for more.</label>
         <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
     </div>
 
@@ -36,6 +32,7 @@
         <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
         <option value="Urban">Urban</option>
         <option value="Suburban">Suburban</option>
+        <option value="" selected="selected"></option>
 
       </select>
         <!--  <div class="invalid-feedback">You must select type of pearson</div>-->

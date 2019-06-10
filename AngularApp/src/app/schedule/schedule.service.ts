@@ -17,6 +17,13 @@ export class ScheduleService {
     );
   }
 
+  GetSchedule(day: string,line : string) : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/Schedule/GetSchedule', `day=`+day + `&line=`+line, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handleError<any>('GetSchedule'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

@@ -1,0 +1,24 @@
+.navbar.navbar-expand-lg.navbar-dark.bg-primary {
+    position: relative;
+}
+
+.collapse.navbar-collapse {
+    right: 0%;
+    position: absolute;
+}
+
+.needs-validation {
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.btn.btn-primary {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.email {
+    margin-top: 30px;
+}

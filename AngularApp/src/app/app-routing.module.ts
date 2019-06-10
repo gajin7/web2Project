@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { BuyingTicketComponent } from './buying-ticket/buying-ticket.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { TicketPriceComponent } from './ticket-price/ticket-price.component';
+import { AppUserBuyTicketComponent } from './app-user-buy-ticket/app-user-buy-ticket.component';
+import { AppUserHomeComponent } from './app-user-home/app-user-home.component';
 
 const appRoutes: Routes = [
   { 
@@ -45,6 +47,14 @@ const appRoutes: Routes = [
   {
     path: 'ticket-price',
     component: TicketPriceComponent
+  },
+  {
+    path: 'app-user-buy-ticket',
+    component: AppUserBuyTicketComponent
+  },
+  {
+    path: 'app-user-home',
+    component: AppUserHomeComponent
   },
   {
     path: '**',
