@@ -25,6 +25,9 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public IDiscountRepository Discounts { get; set; }
 
+        [Dependency]
+        public IScheduleRepository Schedules { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

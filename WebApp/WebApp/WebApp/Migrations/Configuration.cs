@@ -7,6 +7,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using WebApp.Models;
+    using static WebApp.Models.Enums;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApp.Persistence.ApplicationDbContext>
     {
@@ -60,7 +61,7 @@
             }
 
             if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
-            { 
+            {
                 var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "AppUser");
@@ -69,7 +70,7 @@
 
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.TimeTicket))
             {
-                var price = new Prices() { price = 179, ticketType = Enums.TicketType.TimeTicket, LineType= Enums.LineTypes.Urban };
+                var price = new Prices() { price = 179, ticketType = Enums.TicketType.TimeTicket, LineType = Enums.LineTypes.Urban };
                 context.Prices.Add(price);
             }
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.TimeTicket))
@@ -109,18 +110,9 @@
             }
 
 
-            if (!context.Lines.Any(u => u.Name == "1"))
-            {
-                var line = new Line() { Name = "1", LineType = Enums.LineTypes.Urban };
-                context.Lines.Add(line);
-            }
-            if (!context.Lines.Any(u => u.Name == "2"))
-            {
-                var line = new Line() { Name = "2", LineType = Enums.LineTypes.Suburban };
-                context.Lines.Add(line);
-            }
 
-            if(!context.Discounts.Any(u => u.Type == Enums.UserType.regular))
+
+            if (!context.Discounts.Any(u => u.Type == Enums.UserType.regular))
             {
                 var discount = new Discounts() { Type = Enums.UserType.regular, Discount = 0 };
                 context.Discounts.Add(discount);
@@ -132,9 +124,28 @@
             }
             if (!context.Discounts.Any(u => u.Type == Enums.UserType.student))
             {
-                var discount = new Discounts() { Type = Enums.UserType.student, Discount = 0.5};
+                var discount = new Discounts() { Type = Enums.UserType.student, Discount = 0.5 };
                 context.Discounts.Add(discount);
             }
+
+            if (!context.Lines.Any(u => u.Name == "1"))
+            {
+                var line = new Line() { Name = "1", LineType = Enums.LineTypes.Urban };
+                context.Lines.Add(line);
+            }
+            if (!context.Lines.Any(u => u.Name == "2"))
+            {
+                var line = new Line() { Name = "2", LineType = Enums.LineTypes.Suburban };
+                context.Lines.Add(line);
+            }
+
+            if (!context.Schedules.Any(u => u.Line.Name == "1" && u.Day == Day.WorkDay))
+            {
+                var schedule = new Schedule() { Day = Day.WorkDay, Line = context.Lines.Where((a) => a.Name == "1").FirstOrDefault(), Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "07:05" }, new Depature() { DepatureTime = "08:22" }, new Depature() { DepatureTime = "09:11" }, new Depature() { DepatureTime = "10:21" }, new Depature() { DepatureTime = "11:01" } } };
+                context.Schedules.Add(schedule);
+            }
+
+
 
         }
     }

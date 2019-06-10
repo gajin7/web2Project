@@ -111,13 +111,13 @@
 
     
 
-    <a href="/home">
-        <button class="btn btn-primary" >Back to home</button>
-    </a>
+ 
+    <button class="btn btn-primary" (click)="goHome()" >Back to home</button>
+  
    
 
 
-    <button class="btn btn-primary"  href="/buying-ticket">Go to buy ticket</button>
+    <button class="btn btn-primary"  (click)="buyTicket()">Go to buy ticket</button>
     <br/>
     <label>Students discount: {{prices[24]}}%</label>
     <br/>

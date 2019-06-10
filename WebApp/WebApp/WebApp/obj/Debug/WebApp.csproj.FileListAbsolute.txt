@@ -616,3 +616,12 @@ C:\Users\Luka\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp
 C:\Users\Luka\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csproj.CoreCompileInputs.cache
 C:\Users\Luka\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\Luka\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.pdb
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule1.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule2.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule3.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule4.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule5.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule6.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule7.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.updateSchedule8.resources
