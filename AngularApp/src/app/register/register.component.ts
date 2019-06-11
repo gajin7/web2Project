@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
    
 
     if (this.selectedImage != undefined){
-      this.authService.sendImage(this.selectedImage).subscribe();
+      this.authService.sendImage(this.selectedImage, this.registerForm.value.Email).subscribe();
    }
 
   });

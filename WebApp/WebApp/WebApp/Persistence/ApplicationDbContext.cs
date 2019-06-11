@@ -22,6 +22,7 @@ namespace WebApp.Persistence
         public DbSet<User> DetailedUsers { get; set; }
         public DbSet<Prices> Prices { get; set; }
         public DbSet<Depature> Depatures { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

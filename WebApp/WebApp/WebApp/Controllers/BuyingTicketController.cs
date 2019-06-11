@@ -34,7 +34,6 @@ namespace WebApp.Controllers
         {
             var req = HttpContext.Current.Request;
             var temp = req["lineType"];
-            var t = _unitOfWork.Prices.GetAll();
             var price = _unitOfWork.Prices.GetAll().Where(u => u.ticketType == TicketType.TimeTicket && u.LineType.ToString() == req["lineType"].Trim()).Select(u => u.price).FirstOrDefault();
             Ticket ticket = new Ticket() { Checked = false, Price = price, RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket};
             if (!ModelState.IsValid)
@@ -48,7 +47,8 @@ namespace WebApp.Controllers
            
             EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "Type: " + ticket.Type + System.Environment.NewLine + "Price" + ticket.Price + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
 
-           
+          
+
            return Ok(ticket.Id);
 
         }

@@ -31,6 +31,9 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public IUserRepository Users { get; set; }
 
+        [Dependency]
+        public IPictureRepository Pictures { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -359,10 +363,9 @@ namespace WebApp.Controllers
                     break;
             }
 
-            var Appuser = new ApplicationUser() { Id = model.Email.Split('@')[0], UserName = model.Email, Email = model.Email, PasswordHash = ApplicationUser.HashPassword(model.Password) };
+            var Appuser = new ApplicationUser() { Id = Guid.NewGuid().ToString(), UserName = model.Email, Email = model.Email, PasswordHash = ApplicationUser.HashPassword(model.Password) };
 
-            var user = new User() { AppUserId = Appuser.Id, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type };
-
+          
             IdentityResult result = await UserManager.CreateAsync(Appuser, model.Password);
 
             UserManager.AddToRole(Appuser.Id, "AppUser");
@@ -373,22 +376,19 @@ namespace WebApp.Controllers
                 return GetErrorResult(result);
             }
 
+            var user = new User() { AppUserId = Appuser.Id, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type };
             _unitOfWork.Users.Add(user);
             _unitOfWork.Complete();
 
-            return Ok();
-        }
-        [AllowAnonymous]
-        [Route("PostImage")]
-        public async Task<IHttpActionResult> PostImage()
-        {
-            var req = HttpContext.Current.Request;
-
-            var postedFile = req.Files["file"];
+         
 
             return Ok();
         }
 
+
+
+        
+  
 
 
         // POST api/Account/RegisterExternal

@@ -20,5 +20,6 @@ namespace WebApp.Models
 
         public Enums.UserType UserType { get; set; }
 
+
     }
 }

@@ -19,5 +19,6 @@ namespace WebApp.Persistence.UnitOfWork
         IScheduleRepository Schedules { get; set; }
 
         IUserRepository Users { get; set; }
+        IPictureRepository Pictures { get; set; }
     }
 }

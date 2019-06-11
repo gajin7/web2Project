@@ -58,13 +58,13 @@ export class AuthService {
     );
   }
 
-  sendImage(selectedFiles: File[])
+  sendImage(selectedFiles: File[], Email: string)
   {
     const sendImage = new FormData();
     for (let selectedFile of selectedFiles){
       sendImage.append(selectedFile.name, selectedFile)
     }    
-    return this.http.post("http://localhost:52295/api/Account/PostImage", sendImage);
+    return this.http.post("http://localhost:52295/api/AccountHelp/PostImage?Email="+Email ,sendImage);
   }  
   
 
