@@ -11,9 +11,9 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" href="#">Log in</a>
-            <a class="nav-item nav-link active" href="#">Register</a>
+            <a class="nav-item nav-link active" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" routerLink="/login" routerLinkActive="active">Log in</a>
+            <a class="nav-item nav-link active" routerLink="/register" routerLinkActive="active">Register</a>
 
         </div>
     </div>
@@ -33,18 +33,18 @@
         <tbody>
             <tr>
                 <th rowspan="3">Urban</th>
-                 <td>Regular</td>
-                 <td>{{prices[0]}} RSD</td>
-                 <td>Regular</td>
-                 <td>{{prices[3]}} RSD</td>
-                 <td>Regular</td>
-                 <td>{{prices[6]}} RSD</td>
-                 <td>Regular</td>
-                 <td>{{prices[9]}} RSD</td>
-             </tr>
+                <td>Regular</td>
+                <td>{{prices[0]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[3]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[6]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[9]}} RSD</td>
+            </tr>
 
             <tr>
-               
+
                 <td>Student</td>
                 <td>{{prices[1]}} RSD</td>
                 <td>Student</td>
@@ -54,7 +54,7 @@
                 <td>Student</td>
                 <td>{{prices[10]}} RSD</td>
             </tr>
-          
+
             <tr>
                 <td>Retaire</td>
                 <td>{{prices[2]}} RSD</td>
@@ -73,18 +73,18 @@
             </tr>
 
             <tr>
-                    <th rowspan="3">Suburban</th>
-                    <td>Regular</td>
-                    <td>{{prices[12]}} RSD</td>
-                    <td>Regular</td>
-                    <td>{{prices[15]}} RSD</td>
-                    <td>Regular</td>
-                    <td>{{prices[18]}} RSD</td>
-                    <td>Regular</td>
-                    <td>{{prices[21]}} RSD</td>
-                </tr>
+                <th rowspan="3">Suburban</th>
+                <td>Regular</td>
+                <td>{{prices[12]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[15]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[18]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[21]}} RSD</td>
+            </tr>
             <tr>
-                
+
                 <td>Student</td>
                 <td>{{prices[13]}} RSD</td>
                 <td>Student</td>
@@ -94,7 +94,7 @@
                 <td>Student</td>
                 <td>{{prices[12]}} RSD</td>
             </tr>
-           
+
             <tr>
                 <td>Retaire</td>
                 <td>{{prices[14]}} RSD</td>
@@ -109,15 +109,15 @@
         </tbody>
     </table>
 
-    
-
- 
-    <button class="btn btn-primary" (click)="goHome()" >Back to home</button>
-  
-   
 
 
-    <button class="btn btn-primary"  (click)="buyTicket()">Go to buy ticket</button>
+
+    <button class="btn btn-primary" (click)="goHome()">Back to home</button>
+
+
+
+
+    <button class="btn btn-primary" (click)="buyTicket()">Go to buy ticket</button>
     <br/>
     <label>Students discount: {{prices[24]}}%</label>
     <br/>

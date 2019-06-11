@@ -11,15 +11,15 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" href="#">Log in</a>
-            <a class="nav-item nav-link active" href="#">Register</a>
+            <a class="nav-item nav-link active" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" routerLink="/login" routerLinkActive="active">Log in</a>
+            <a class="nav-item nav-link active" routerLink="/register" routerLinkActive="active">Register</a>
 
         </div>
     </div>
 </nav>
 
-<form [formGroup]="LineForm"  (ngSubmit)="GetSchedules()" class="needs-validation" novalidate>
+<form [formGroup]="LineForm" (ngSubmit)="GetSchedules()" class="needs-validation" novalidate>
     <div class="form-row">
 
         <div class="col-md-6 mb-3">
@@ -40,7 +40,7 @@
         <div class="col-md-6 mb-3">
             <div class="form-group">
                 <label for="validationCustom05">Select line</label>
-                <select    class="custom-select" formControlName="LineName" required >
+                <select class="custom-select" formControlName="LineName" required>
                     <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
 
       </select>
