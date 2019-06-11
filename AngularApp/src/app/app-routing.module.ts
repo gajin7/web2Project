@@ -15,6 +15,7 @@ import { AppUserBuyTicketComponent } from './app-user-buy-ticket/app-user-buy-ti
 import { AppUserHomeComponent } from './app-user-home/app-user-home.component';
 import { CheckInTicketComponent } from './check-in-ticket/check-in-ticket.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { MyTicketsComponent } from './my-tickets/my-tickets.component';
 
 const appRoutes: Routes = [
   { 
@@ -65,6 +66,10 @@ const appRoutes: Routes = [
   {
     path: 'edit-profile',
     component: EditProfileComponent
+  },
+  {
+    path: 'my-tickets',
+    component: MyTicketsComponent
   },
   {
     path: '**',

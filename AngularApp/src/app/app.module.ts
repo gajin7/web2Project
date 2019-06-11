@@ -19,6 +19,7 @@ import { AppUserHomeComponent } from './app-user-home/app-user-home.component';
 import { CheckInTicketComponent } from './check-in-ticket/check-in-ticket.component';
 import { ControlTicketComponent } from './control-ticket/control-ticket.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { MyTicketsComponent } from './my-tickets/my-tickets.component';
 
 
 
@@ -37,7 +38,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     AppUserHomeComponent,
     CheckInTicketComponent,
     ControlTicketComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    MyTicketsComponent
 
   ],
   imports: [
