@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckInTicketComponent implements OnInit {
 
+  vremeKarte: string = "60";
   constructor() { }
 
   ngOnInit() {

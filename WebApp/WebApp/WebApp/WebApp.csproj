@@ -344,6 +344,14 @@
     <Compile Include="Migrations\201906111026573_UserUpdate1.Designer.cs">
       <DependentUpon>201906111026573_UserUpdate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906111052380_UserUpdate2.cs" />
+    <Compile Include="Migrations\201906111052380_UserUpdate2.Designer.cs">
+      <DependentUpon>201906111052380_UserUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906111056365_UserUpdate3.cs" />
+    <Compile Include="Migrations\201906111056365_UserUpdate3.Designer.cs">
+      <DependentUpon>201906111056365_UserUpdate3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -543,6 +551,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906111026573_UserUpdate1.resx">
       <DependentUpon>201906111026573_UserUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111052380_UserUpdate2.resx">
+      <DependentUpon>201906111052380_UserUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111056365_UserUpdate3.resx">
+      <DependentUpon>201906111056365_UserUpdate3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

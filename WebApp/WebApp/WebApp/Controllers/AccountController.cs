@@ -361,7 +361,7 @@ namespace WebApp.Controllers
 
             var Appuser = new ApplicationUser() { Id = model.Email.Split('@')[0], UserName = model.Email, Email = model.Email, PasswordHash = ApplicationUser.HashPassword(model.Password) };
 
-            var user = new User() { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type };
+            var user = new User() { AppUserId = Appuser.Id, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type };
 
             IdentityResult result = await UserManager.CreateAsync(Appuser, model.Password);
 
