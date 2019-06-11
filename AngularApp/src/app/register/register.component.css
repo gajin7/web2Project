@@ -9,6 +9,15 @@ adrese.
 Lozinka se unosi u dva polja da bi se otežalo pravljenje grešaka prilikom odabira nove lozinke. +
 */
 
+.navbar.navbar-expand-lg.navbar-dark.bg-primary {
+    position: relative;
+}
+
+.collapse.navbar-collapse {
+    right: 0%;
+    position: absolute;
+}
+
 .needs-validation {
     width: 500px;
     margin-left: 10px;
