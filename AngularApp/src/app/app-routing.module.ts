@@ -58,13 +58,14 @@ const appRoutes: Routes = [
     component: AppUserHomeComponent
   },
   {
-    path: '**',
-    component: PageNotFoundComponent
-  },
-  {
     path: 'check-in-ticket',
     component: CheckInTicketComponent
   },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  },
+ 
   
 ];
 
