@@ -4,6 +4,21 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="C:\Users\Gajin\Downloads\datepicker"></script>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Gradski saobracajni prevoz</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" routerLink="/check-in-ticket" routerLinkActive="active">check in</a>
+            <a class="nav-item nav-link active" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" routerLink="/login" routerLinkActive="active">Log in</a>
+            <a class="nav-item nav-link active" routerLink="/register" routerLinkActive="active">Register</a>
+
+        </div>
+    </div>
+</nav>
 
 <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
     <div class="all">
@@ -68,17 +83,12 @@
         </div>
 
 
-        <div class="date">
-            <label for="validationCustom02">Date</label>
-            <input type="text" formControlName="Date" class="form-control" id="validationCustom02" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Paswords didn't match (or password didn't entered).
+        <div class="form-group">
+            <label for="birthDate" class="control-label">Date of Birth</label>
+            <div class="">
+                <input type="date" id="birthDate" class="form-control">
             </div>
         </div>
-                  
 
 
     </div>
@@ -110,7 +120,11 @@
 
     <div class="form-group">
         <label for="validationCustom05">Select the person type</label>
+<<<<<<< HEAD
         <select  class="custom-select" formControlName="TypeOfPerson"  required>
+=======
+        <select (change)="selected($event)" class="custom-select" required>
+>>>>>>> 25a5d195f28a862d8aca84dae0e3f9d4a63ad5e4
 
       <option value=""> </option>
       <option value="Regular">Regular</option>
@@ -126,11 +140,11 @@
         <input type="file" formControlName="Picture" (change)="onFileSelected($event)" class="form-control-file" id="exampleFormControlFile1">
     </div>
 
-    
+
 
     <button class="btn btn-primary" type="submit">Submit form</button>
 </form>
-    <label>{{mssg}}</label>
+<label>{{mssg}}</label>
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
