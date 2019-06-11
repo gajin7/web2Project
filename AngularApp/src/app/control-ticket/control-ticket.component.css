@@ -29,12 +29,40 @@
     margin-bottom: 20px;
 }
 
+.message {
+    text-align: center;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+}
+
+.message2 {
+    text-align: center;
+    position: absolute;
+    left: 40%;
+    top: 45%;
+}
+
+.message3 {
+    text-align: center;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+}
+
+.message4 {
+    text-align: center;
+    position: absolute;
+    left: 40%;
+    top: 55%;
+}
+
 .id {
     margin-top: 5px;
 }
 
-h2,
-p,
-form {
-    text-align: center;
+.btn {
+    position: absolute;
+    top: 30%;
+    left: 47%;
 }
