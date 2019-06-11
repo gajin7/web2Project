@@ -13,6 +13,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { TicketPriceComponent } from './ticket-price/ticket-price.component';
 import { AppUserBuyTicketComponent } from './app-user-buy-ticket/app-user-buy-ticket.component';
 import { AppUserHomeComponent } from './app-user-home/app-user-home.component';
+import { CheckInTicketComponent } from './check-in-ticket/check-in-ticket.component';
 
 const appRoutes: Routes = [
   { 
@@ -60,7 +61,10 @@ const appRoutes: Routes = [
     path: '**',
     component: PageNotFoundComponent
   },
- 
+  {
+    path: 'check-in-ticket',
+    component: CheckInTicketComponent
+  },
   
 ];
 

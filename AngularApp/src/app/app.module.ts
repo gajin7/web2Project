@@ -16,6 +16,7 @@ import { BuyingTicketComponent } from './buying-ticket/buying-ticket.component';
 import { TicketPriceComponent } from './ticket-price/ticket-price.component';
 import { AppUserBuyTicketComponent } from './app-user-buy-ticket/app-user-buy-ticket.component';
 import { AppUserHomeComponent } from './app-user-home/app-user-home.component';
+import { CheckInTicketComponent } from './check-in-ticket/check-in-ticket.component';
 
 
 
@@ -31,7 +32,8 @@ import { AppUserHomeComponent } from './app-user-home/app-user-home.component';
     BuyingTicketComponent,
     TicketPriceComponent,
     AppUserBuyTicketComponent,
-    AppUserHomeComponent
+    AppUserHomeComponent,
+    CheckInTicketComponent
 
   ],
   imports: [
