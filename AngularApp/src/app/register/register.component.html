@@ -68,17 +68,13 @@
         </div>
 
 
-        <div class="date">
-            <label for="validationCustom02">Date</label>
-            <input type="text" formControlName="Date" class="form-control" id="validationCustom02" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Paswords didn't match (or password didn't entered).
+        <div class="form-group">
+            <label for="birthDate" class="control-label">Date of Birth</label>
+            <div class="">
+                <input type="date" id="birthDate" class="form-control">
             </div>
         </div>
-                  
+
 
 
     </div>
@@ -110,7 +106,7 @@
 
     <div class="form-group">
         <label for="validationCustom05">Select the person type</label>
-        <select  class="custom-select" formControlName="TypeOfPerson"  required>
+        <select class="custom-select" formControlName="TypeOfPerson" required>
 
       <option value=""> </option>
       <option value="Regular">Regular</option>
@@ -126,11 +122,11 @@
         <input type="file" formControlName="Picture" (change)="onFileSelected($event)" class="form-control-file" id="exampleFormControlFile1">
     </div>
 
-    
+
 
     <button class="btn btn-primary" type="submit">Submit form</button>
 </form>
-    <label>{{mssg}}</label>
+<label>{{mssg}}</label>
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
