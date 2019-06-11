@@ -49,7 +49,13 @@ export class RegisterComponent implements OnInit {
       console.log(data);
 
       this.mssg = data;
-    });
+   
+
+    if (this.selectedImage != undefined){
+      this.authService.sendImage(this.selectedImage).subscribe();
+   }
+
+  });
   }
 
 }

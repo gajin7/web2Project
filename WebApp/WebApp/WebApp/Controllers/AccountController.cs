@@ -365,7 +365,6 @@ namespace WebApp.Controllers
 
             IdentityResult result = await UserManager.CreateAsync(Appuser, model.Password);
 
-          //  UserManager.Create(Appuser);
             UserManager.AddToRole(Appuser.Id, "AppUser");
             
            
@@ -379,6 +378,18 @@ namespace WebApp.Controllers
 
             return Ok();
         }
+        [AllowAnonymous]
+        [Route("PostImage")]
+        public async Task<IHttpActionResult> PostImage()
+        {
+            var req = HttpContext.Current.Request;
+
+            var postedFile = req.Files["file"];
+
+            return Ok();
+        }
+
+
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

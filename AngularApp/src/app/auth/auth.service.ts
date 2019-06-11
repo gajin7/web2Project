@@ -58,6 +58,16 @@ export class AuthService {
     );
   }
 
+  sendImage(selectedFiles: File[])
+  {
+    const sendImage = new FormData();
+    for (let selectedFile of selectedFiles){
+      sendImage.append(selectedFile.name, selectedFile)
+    }    
+    return this.http.post("http://localhost:52295/api/Account/PostImage", sendImage);
+  }  
+  
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);
