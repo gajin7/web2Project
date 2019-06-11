@@ -31,6 +31,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  selected (event: any) {
+    //update the ui
+    this.registerForm.value.TypeOfPerson = event.target.value;
+    
+  }
+  
+
   register() {
     this.authService.regiter(this.registerForm.value).subscribe((data) => {
       console.log(data);

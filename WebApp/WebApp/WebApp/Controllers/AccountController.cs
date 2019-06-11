@@ -323,6 +323,8 @@ namespace WebApp.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            var req = HttpContext.Current.Request;
+          
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -619,3 +619,8 @@ C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebAp
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddInitialValues4.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddInitialValues5.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.AddInitialValues6.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.TicketUpdate.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.TicketUpdate1.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.TicketUpdate2.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.TicketUpdate3.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.TicketUpdate4.resources

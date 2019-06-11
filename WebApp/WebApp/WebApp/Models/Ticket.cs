@@ -13,5 +13,12 @@ namespace WebApp.Models
         public TicketType Type { get; set; }
         public TimeSpan RemainingTime { get; set;}
         public bool Checked { get; set; }
+
+        
+      
+        public string CheckedTime { get; set; }
+
+        public ApplicationUser User { get; set; }
+
     }
 }

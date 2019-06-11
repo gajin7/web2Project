@@ -53,7 +53,7 @@ export class AuthService {
 
   regiter(user : RegisterUser) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Account/Register', `FirstName=`+ user.FirstName +`&Email=`+ user.Email +`&LastName=`+ user.LastName +`&Password=`+ user.Password +`&ConfirmPassword=`+ user.ConfirmPassword +`&Date=`+ user.Date +`&City=`+ user.City +`&Street=`+ user.Street +`&Number=`+ user.Number +`&Type=`+ user.TypeOfPesron, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Account/Register', `FirstName=`+ user.FirstName +`&Email=`+ user.Email +`&LastName=`+ user.LastName +`&Password=`+ user.Password +`&ConfirmPassword=`+ user.ConfirmPassword +`&Date=`+ user.Date +`&City=`+ user.City +`&Street=`+ user.Street +`&Number=`+ user.Number +`&TypeOfPerson=`+ user.TypeOfPesron, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handleError<any>('register'))
     );
   }

@@ -33,7 +33,10 @@ namespace WebApp.Controllers
         public IHttpActionResult BuyTimeTicket()
         {
             var req = HttpContext.Current.Request;
-            Ticket ticket = new Ticket() {  Checked=false, Price=0, RemainingTime=TimeSpan.FromMinutes(60),Type=Enums.TicketType.TimeTicket};
+            var temp = req["lineType"];
+            var t = _unitOfWork.Prices.GetAll();
+            var price = _unitOfWork.Prices.GetAll().Where(u => u.ticketType == TicketType.TimeTicket && u.LineType.ToString() == req["lineType"].Trim()).Select(u => u.price).FirstOrDefault();
+            Ticket ticket = new Ticket() { Checked = false, Price = price, RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket};
             if (!ModelState.IsValid)
             {
                   return BadRequest(ModelState);
@@ -43,12 +46,35 @@ namespace WebApp.Controllers
             _unitOfWork.Tickets.Add(ticket);
             _unitOfWork.Complete();
            
-            EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
+            EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "Type: " + ticket.Type + System.Environment.NewLine + "Price" + ticket.Price + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
 
            
            return Ok(ticket.Id);
 
         }
+
+        [HttpPost]
+        [System.Web.Http.Route("api/Ticket/ByTicket")]
+        public IHttpActionResult BuyTicket()
+        {
+            var req = HttpContext.Current.Request;
+            Ticket ticket = new Ticket() { Checked = false, Price = 0, RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket };
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            _unitOfWork.Tickets.Add(ticket);
+            _unitOfWork.Complete();
+
+            EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
+
+
+            return Ok(ticket.Id);
+
+        }
+
 
         [HttpPost]
         [System.Web.Http.Route("api/Ticket/GetTicketPrice")]
