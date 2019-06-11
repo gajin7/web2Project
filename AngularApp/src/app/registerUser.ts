@@ -7,7 +7,7 @@ export class RegisterUser {
     City: string;
     Street: string;
     Number: string;
-    TypeOfPesron: string;
+    TypeOfPerson: string;
     Picture: string;
     Date: string;
   }
