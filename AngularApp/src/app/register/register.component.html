@@ -110,12 +110,12 @@
 
     <div class="form-group">
         <label for="validationCustom05">Select the person type</label>
-        <select (change)="selected($event)" class="custom-select"  required>
+        <select  class="custom-select" formControlName="TypeOfPerson"  required>
 
       <option value=""> </option>
       <option value="Regular">Regular</option>
       <option value="Student">Student</option>
-      <option value="Student">Retiree</option>
+      <option value="Retiree">Retiree</option>
     </select>
         <div class="invalid-feedback">You must select type of pearson</div>
     </div>
@@ -123,7 +123,7 @@
 
     <div class="form-group">
         <label for="exampleFormControlFile1">Input a picture (index for student, check for retieree)</label>
-        <input type="file" formControlName="Picture" class="form-control-file" id="exampleFormControlFile1">
+        <input type="file" formControlName="Picture" (change)="onFileSelected($event)" class="form-control-file" id="exampleFormControlFile1">
     </div>
 
     

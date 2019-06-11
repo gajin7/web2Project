@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
     Picture: ['', Validators.required],
   });
 
+  selectedImage: any;
   constructor( private fb: FormBuilder,public authService: AuthService,public router: Router) { }
 
   ngOnInit() {
@@ -35,6 +36,11 @@ export class RegisterComponent implements OnInit {
     //update the ui
     this.registerForm.value.TypeOfPerson = event.target.value;
     
+  }
+
+  onFileSelected(event){
+    this.selectedImage = event.target.files;
+   
   }
   
 
