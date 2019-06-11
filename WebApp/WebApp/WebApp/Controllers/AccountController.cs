@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -14,6 +15,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
+using WebApp.Persistence.UnitOfWork;
 using WebApp.Providers;
 using WebApp.Results;
 
@@ -25,6 +27,8 @@ namespace WebApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private IUnitOfWork _unitOfWork;
+        private DbContext _context;
 
         public AccountController()
         {
@@ -35,6 +39,13 @@ namespace WebApp.Controllers
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
+          
+        }
+
+        public AccountController(IUnitOfWork unitOfWork, DbContext context)
+        {
+            _unitOfWork = unitOfWork;
+            _context = context;
         }
 
         public ApplicationUserManager UserManager
@@ -332,19 +343,39 @@ namespace WebApp.Controllers
 
             DateTime tempDate;
             DateTime.TryParse(model.Date, out tempDate);
+            Enums.UserType type = new Enums.UserType();
+            switch (model.TypeOfPerson)
+            {
+                case "Student":
+                    type = Enums.UserType.student;
+                    break;
+                case "Regular":
+                    type = Enums.UserType.regular;
+                    break;
+                case "Retirre":
+                    type = Enums.UserType.retiree;
+                    break;
+                default:
+                    break;
+            }
 
-            var Appuser = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var Appuser = new ApplicationUser() { Id = model.Email.Split('@')[0], UserName = model.Email, Email = model.Email, PasswordHash = ApplicationUser.HashPassword(model.Password) };
 
-            var user = new User() { _appUser = Appuser, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number};
+            var user = new User() { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type };
 
             IdentityResult result = await UserManager.CreateAsync(Appuser, model.Password);
 
+          //  UserManager.Create(Appuser);
             UserManager.AddToRole(Appuser.Id, "AppUser");
-
-            if (!result.Succeeded)
+            
+           
+           if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
+
+            _unitOfWork.Users.Add(user);
+            _unitOfWork.Complete();
 
             return Ok();
         }

@@ -17,5 +17,7 @@ namespace WebApp.Persistence.UnitOfWork
         IDiscountRepository Discounts { get; set; }
 
         IScheduleRepository Schedules { get; set; }
+
+        IUserRepository Users { get; set; }
     }
 }

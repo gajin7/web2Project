@@ -28,6 +28,9 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public IScheduleRepository Schedules { get; set; }
 
+        [Dependency]
+        public IUserRepository Users { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

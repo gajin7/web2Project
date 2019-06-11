@@ -336,6 +336,14 @@
     <Compile Include="Migrations\201906110842108_TicketUpdate4.Designer.cs">
       <DependentUpon>201906110842108_TicketUpdate4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906111015486_UserUpdate.cs" />
+    <Compile Include="Migrations\201906111015486_UserUpdate.Designer.cs">
+      <DependentUpon>201906111015486_UserUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906111026573_UserUpdate1.cs" />
+    <Compile Include="Migrations\201906111026573_UserUpdate1.Designer.cs">
+      <DependentUpon>201906111026573_UserUpdate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -529,6 +537,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906110842108_TicketUpdate4.resx">
       <DependentUpon>201906110842108_TicketUpdate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111015486_UserUpdate.resx">
+      <DependentUpon>201906111015486_UserUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111026573_UserUpdate1.resx">
+      <DependentUpon>201906111026573_UserUpdate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
