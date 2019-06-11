@@ -77,6 +77,7 @@ namespace WebApp.App_Start
             container.RegisterType<IDiscountRepository, DiscountRepository>();
             container.RegisterType<IScheduleRepository, ScheduleRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IPictureRepository, PictureRepository>();
         }
 
         public void Dispose()

@@ -38,9 +38,6 @@ namespace WebApp.Controllers
             }
 
 
-            var temp = req["day"];
-            var temp1 = req["line"];
-
             var s = _unitOfWork.Schedules.GetAll();
 
             var lineId = _unitOfWork.Lines.GetAll().Where(u => u.Name == req["line"].Trim()).Select(u => u.Id).FirstOrDefault();
