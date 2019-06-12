@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CheckInTicketService } from './check-in-ticket.service';
 
 @Component({
   selector: 'app-check-in-ticket',
@@ -7,10 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckInTicketComponent implements OnInit {
 
-  vremeKarte: string = "60";
-  constructor() { }
+  
+  ticketForm = this.fb.group({
+    Id: ['', Validators.required],
+   
+  });
+
+  mssg: string;
+  constructor(private service: CheckInTicketService, private fb: FormBuilder) { }
 
   ngOnInit() {
   }
+
+
+  CheckIn()
+  {
+    this.service.CheckInTcket(this.ticketForm.value.Id).subscribe((data)=>{this.mssg = data});
+  }
+
 
 }

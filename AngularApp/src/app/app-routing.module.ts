@@ -16,6 +16,7 @@ import { AppUserHomeComponent } from './app-user-home/app-user-home.component';
 import { CheckInTicketComponent } from './check-in-ticket/check-in-ticket.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MyTicketsComponent } from './my-tickets/my-tickets.component';
+import { ControlTicketComponent } from './control-ticket/control-ticket.component';
 
 const appRoutes: Routes = [
   { 
@@ -66,6 +67,10 @@ const appRoutes: Routes = [
   {
     path: 'edit-profile',
     component: EditProfileComponent
+  },
+  {
+    path: 'control-ticket',
+    component: ControlTicketComponent
   },
   {
     path: 'my-tickets',

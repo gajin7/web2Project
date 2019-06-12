@@ -38,6 +38,10 @@ export class LoginComponent {
       {
       this.router.navigate(['app-user-home']);
       }
+      else if(localStorage.role == "Controller")
+      {
+      this.router.navigate(['control-ticket']);
+      }
     }
     else
     {

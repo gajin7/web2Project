@@ -19,9 +19,9 @@
     </div>
 </nav>
 
-<form [formGroup]="ticketForm" class="needs-validation" (ngSubmit)="buyTimeTicket()" novalidate>
+<form [formGroup]="ticketForm" class="needs-validation" (ngSubmit)="CheckIn()" novalidate>
     <div class="poruka">
-        This is a place where you check your card. Once time when you check your ticket, you have {{vremeKarte}} minutes to use it.
+        This is a place where you check your card.
     </div>
 
     <div class="form-row">
@@ -30,7 +30,7 @@
 
         </div>
         <div class="col-md-6 mb-2 input">
-            <input type="text" class="form-control" id="validationCustom04" required>
+            <input type="text" class="form-control" formControlName="Id" id="validationCustom04"  required>
             <div class="invalid-feedback">
                 Please enter valid id.
             </div>
@@ -41,7 +41,7 @@
     <button class="btn btn-primary" type="submit">Check in</button>
 
     <br/>
-    <label class="message" for=""> {{poruka}}</label>
+    <textarea class="message" for=""> {{mssg}}</textarea>
 
 
 </form>

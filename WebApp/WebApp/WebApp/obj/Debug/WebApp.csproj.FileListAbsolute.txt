@@ -599,6 +599,7 @@ C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\bin\Microsoft.O
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\bin\System.Web.Http.Owin.xml
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csprojAssemblyReference.cache
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.Create.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.Create1.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.Create2.resources
@@ -625,11 +626,11 @@ C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebAp
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.UserUpdate4.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.PicturesAdded.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.PicturesAdded1.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.InitialValues.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.InitialValues1.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.InitialValuesUpdate.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csproj.GenerateResource.cache
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csproj.CoreCompileInputs.cache
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.pdb
-C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csprojAssemblyReference.cache
-C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.InitialValues.resources
-C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.InitialValues1.resources

@@ -67,6 +67,13 @@ namespace WebApp.Migrations
                 userManager.AddToRole(user.Id, "AppUser");
             }
 
+            if (!context.Users.Any(u => u.UserName == "control@yahoo.com"))
+            {
+                var user = new ApplicationUser() { Id = "control", UserName = "control@yahoo.com", Email = "control@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Control123!") };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Controller");
+            }
+
 
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.TimeTicket))
             {

@@ -33,18 +33,18 @@ namespace WebApp.Controllers
         {
             var req = HttpContext.Current.Request;
             int id = -1;
-            Int32.TryParse(req["ticketId"].Trim(), out id);
+            Int32.TryParse(req["Id"].Trim(), out id);
             if (id == -1)
-                return BadRequest("Wrong ticket Id");
+                return Ok("Wrong ticket Id");
 
-            if (_unitOfWork.Tickets.GetAll().Where(u => u.Id == id).First() == null)
+            if (_unitOfWork.Tickets.GetAll().Where(u => u.Id == id).FirstOrDefault() == null)
             {
-                return BadRequest("Ticket Id unkonwn");
+                return Ok("Ticket Id unkonwn");
             }
 
             if (_unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.Checked).First())
             {
-                return BadRequest("Ticket allredy checked");
+                return Ok("Ticket allredy checked");
             }
 
             Ticket ticket = _unitOfWork.Tickets.Get(id);
@@ -52,14 +52,66 @@ namespace WebApp.Controllers
             ticket.CheckedTime = DateTime.Now.ToString();
 
             _unitOfWork.Tickets.Update(ticket);
+            _unitOfWork.Complete();
 
-            TimeSpan rTime = DateTime.Parse(_unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.CheckedTime).First()) - DateTime.Now + TimeSpan.FromMinutes(60);
+            TimeSpan rTime = DateTime.Parse(ticket.CheckedTime) - DateTime.Now + TimeSpan.FromMinutes(60);
 
-            string retVal = "Type: " + _unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.Type).First().ToString() + System.Environment.NewLine +
-                "price: " + _unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.Price).First().ToString() + System.Environment.NewLine +
-                "valid time: " + _unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.RemainingTime).First().ToString() + System.Environment.NewLine +
-                "user" + _unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.User).FirstOrDefault().ToString() + System.Environment.NewLine +
+            string retVal = 
+                "Type: " + ticket.Type + System.Environment.NewLine +
+                "Price: " +ticket.Price + System.Environment.NewLine +
+                "Valid time: " + ticket.RemainingTime + System.Environment.NewLine +
                 "Remaining time: " + rTime.ToString();
+
+            return Ok(retVal);
+
+        }
+
+
+        [HttpPost]
+        [System.Web.Http.Route("api/CheckIn/ControlTicket")]
+        public IHttpActionResult ControlTicket()
+        {
+            var req = HttpContext.Current.Request;
+            int id = -1;
+            Int32.TryParse(req["Id"].Trim(), out id);
+            Ticket ticket = _unitOfWork.Tickets.Get(id);
+            if (id == -1)
+                return Ok("Ticket Id doens't excist in database. Please check your enter.");
+
+            if (ticket == null)
+            {
+                return Ok("Ticket Id unkonwn");
+            }
+
+            TimeSpan rTime = DateTime.Parse(ticket.CheckedTime) - DateTime.Now + TimeSpan.FromMinutes(60);
+            if (!_unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.Checked).First())
+            {
+
+                string retValue = "Ticket excist but not checked!" + System.Environment.NewLine + 
+                    "Type: " +ticket.Type.ToString() + System.Environment.NewLine +
+                    "Price: " + ticket.Price.ToString() + System.Environment.NewLine +
+                    "Valid time: " + ticket.RemainingTime.ToString() + System.Environment.NewLine +
+                    "User" + ticket.User.ToString() + System.Environment.NewLine +
+                    "Remaining time: " + rTime.ToString();
+                return Ok(retValue);
+            }
+
+
+            string retVal = "Ticket checked!" + System.Environment.NewLine + 
+                     " Checked: " + ticket.CheckedTime.ToString() + System.Environment.NewLine +
+                     " Type: " + ticket.Type.ToString() + System.Environment.NewLine +
+                     " Price: " + ticket.Price.ToString() + System.Environment.NewLine +
+                     " Valid time: " + ticket.RemainingTime.ToString() + System.Environment.NewLine +
+                     " Remaining time: " + rTime.ToString();
+
+            if (ticket.User != null)
+                retVal += System.Environment.NewLine +  " User" + ticket.User.ToString() ;
+
+            if(rTime < TimeSpan.FromSeconds(0))
+            {
+
+                retVal += System.Environment.NewLine + "TIcket expired!!!";
+            }
 
 
             return Ok(retVal);
