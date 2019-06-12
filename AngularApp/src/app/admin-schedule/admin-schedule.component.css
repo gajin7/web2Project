@@ -56,3 +56,8 @@ hr.new1 {
 .submitbutton {
     margin-left: 70px;
 }
+
+.change {
+    position: absolute;
+    left: 50%;
+}
