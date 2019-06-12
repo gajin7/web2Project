@@ -11,10 +11,7 @@ import { BuyTicketService } from './buy-ticket.service';
 
 export class AppUserBuyTicketComponent implements OnInit {
 
-  ticketForm = this.fb.group({
-    email: ['', Validators.required],
-   
-  });
+ 
 
   constructor(public service: BuyTicketService, private route: Router,private fb: FormBuilder) { }
 
@@ -45,8 +42,8 @@ export class AppUserBuyTicketComponent implements OnInit {
 
   buyTimeTicket()
   {
-    this.service.BuyTimeTicket(this.ticketForm.value.email).subscribe((data) => {
-      this.message = "You successfully bought your ticket. Ticket ID is" + data + ". We also sent it to email: " + this.ticketForm.value.email;});
+    this.service.BuyTicket(this.ticketType).subscribe((data) => {
+      this.message = "You successfully bought your ticket. Ticket ID is" + data;});
 
       
   }

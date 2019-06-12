@@ -87,13 +87,43 @@ namespace WebApp.Controllers
         [System.Web.Http.Route("api/Ticket/BuyTicket")]
         public IHttpActionResult BuyTicket()
         {
+
+        
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             var userId = User.Identity.GetUserId();
 
             var req = HttpContext.Current.Request;
-            
-            Ticket ticket = new Ticket() { Checked = false, Price = 0,   CheckedTime = DateTime.Now.ToString(), RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket, UserId = userId };
+            var ticketType = req["type"].Trim();
+            bool ch = false;
+            Enums.TicketType ty = new TicketType();
+            TimeSpan remTime = new TimeSpan();
+
+            switch (ticketType)
+            {
+                case "TimeTicket":
+                    ch = false;
+                    ty = TicketType.TimeTicket;
+                    remTime = TimeSpan.FromMinutes(60);
+                    break;
+                case "DailyTicket":
+                    ch = false;
+                    ty = TicketType.DailyTicket;
+                    break;
+                 case "MonthlyTicket":
+                    ch = false;
+                    ty = TicketType.MonthlyTicket;
+                    break;
+                case "AnnualTicket":
+                    ch = false;
+                    ty = TicketType.AnnualTicket;
+                    break;
+                default:
+                    break;
+            }
+
+
+            Ticket ticket = new Ticket() { Checked = ch, Price = 0,   CheckedTime = DateTime.Now.ToString(), RemainingTime = TimeSpan.FromMinutes(60), Type = ty, UserId = userId };
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

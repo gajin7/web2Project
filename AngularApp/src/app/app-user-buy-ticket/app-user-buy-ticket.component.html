@@ -18,10 +18,10 @@
     </div>
 </nav>
 
-<form [formGroup]="ticketForm" class="needs-validation" (ngSubmit)="buyTimeTicket()" novalidate>
+<form  class="needs-validation" (ngSubmit)="buyTimeTicket()" novalidate>
     <div class="form-group">
         <label for="validationCustom05">Select ticket type</label>
-        <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
+        <select (change)="selected($event)" class="custom-select" required>
         <option value="TimeTicket"> Time ticket</option>
         <option value="DailyTicket">Daily ticket</option>
         <option value="MonthlyTicket">Monthly ticket</option>

@@ -26,6 +26,8 @@ import { AdminLinesComponent } from './admin-lines/admin-lines.component';
 import { AdminStationComponent } from './admin-station/admin-station.component';
 import { EditProfileService } from './edit-profile/edit-profile.service';
 import { JwtInterceptor } from './auth/jwt-interceptor';
+import { MyTicketsService } from './my-tickets/my-tickets.service';
+import { BuyTicketService } from './app-user-buy-ticket/buy-ticket.service';
 
 
 
@@ -61,7 +63,9 @@ import { JwtInterceptor } from './auth/jwt-interceptor';
   ],
 
   providers: [ 
-    EditProfileService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    EditProfileService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    MyTicketsService,{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    BuyTicketService,{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
     
   ],
   bootstrap: [ AppComponent ]

@@ -54,13 +54,31 @@ namespace WebApp.Controllers
             _unitOfWork.Tickets.Update(ticket);
             _unitOfWork.Complete();
 
-            TimeSpan rTime = DateTime.Parse(ticket.CheckedTime) - DateTime.Now + TimeSpan.FromMinutes(60);
+            string retVal =
+                   "Type: " + ticket.Type + System.Environment.NewLine +
+                   "Price: " + ticket.Price + System.Environment.NewLine +
+                   "Valid time: " + ticket.RemainingTime + System.Environment.NewLine;
 
-            string retVal = 
-                "Type: " + ticket.Type + System.Environment.NewLine +
-                "Price: " +ticket.Price + System.Environment.NewLine +
-                "Valid time: " + ticket.RemainingTime + System.Environment.NewLine +
-                "Remaining time: " + rTime.ToString();
+
+            switch (ticket.Type)
+            {
+                case Enums.TicketType.TimeTicket:
+                    TimeSpan rTime = DateTime.Parse(ticket.CheckedTime) - DateTime.Now + ticket.RemainingTime;
+                     retVal += "Remaining time: " + rTime.ToString();
+                    break;
+                case Enums.TicketType.DailyTicket:
+                    retVal += "Remaining time: End of day" + ticket.CheckedTime.Trim(' ')[0];
+                    break;
+                case Enums.TicketType.MonthlyTicket:
+                    retVal += "Remaining time: End of month " + DateTime.Parse(ticket.CheckedTime).Month.ToString() + "/" + DateTime.Parse(ticket.CheckedTime).Year.ToString();
+                    break;
+                case Enums.TicketType.AnnualTicket:
+                    retVal += "Remaining time: End of year " + DateTime.Parse(ticket.CheckedTime).Year.ToString();
+                    break;
+                default:
+                    break;
+            }
+
 
             return Ok(retVal);
 
@@ -83,7 +101,7 @@ namespace WebApp.Controllers
                 return Ok("Ticket Id unkonwn");
             }
 
-            TimeSpan rTime = DateTime.Parse(ticket.CheckedTime) - DateTime.Now + TimeSpan.FromMinutes(60);
+           
             if (!_unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.Checked).First())
             {
 
@@ -92,7 +110,6 @@ namespace WebApp.Controllers
                     "Price: " + ticket.Price.ToString() + System.Environment.NewLine +
                     "Valid time: " + ticket.RemainingTime.ToString() + System.Environment.NewLine +
                     "User" + ticket.User.ToString() + System.Environment.NewLine +
-                    "Remaining time: " + rTime.ToString();
                 return Ok(retValue);
             }
 
@@ -102,16 +119,47 @@ namespace WebApp.Controllers
                      " Type: " + ticket.Type.ToString() + System.Environment.NewLine +
                      " Price: " + ticket.Price.ToString() + System.Environment.NewLine +
                      " Valid time: " + ticket.RemainingTime.ToString() + System.Environment.NewLine +
-                     " Remaining time: " + rTime.ToString();
+                    
 
             if (ticket.User != null)
                 retVal += System.Environment.NewLine +  " User" + ticket.User.ToString() ;
 
-            if(rTime < TimeSpan.FromSeconds(0))
-            {
 
-                retVal += System.Environment.NewLine + "TIcket expired!!!";
+            switch (ticket.Type)
+            {
+                case Enums.TicketType.TimeTicket:
+                    TimeSpan rTime = DateTime.Parse(ticket.CheckedTime) - DateTime.Now + ticket.RemainingTime;
+                    retVal += " Remaining time: " + rTime.ToString();
+                    if (rTime < TimeSpan.FromSeconds(0))
+                    {
+                        retVal += System.Environment.NewLine + "TIcket expired!!!";
+                    }
+                    break;
+                case Enums.TicketType.DailyTicket:
+                    retVal += "Remaining time: End of day" + ticket.CheckedTime.Trim(' ')[0];
+                    if (DateTime.Now.Date != DateTime.Parse(ticket.CheckedTime).Date)
+                    {
+                        retVal += System.Environment.NewLine + "TIcket expired!!!";
+                    }
+                    break;
+                case Enums.TicketType.MonthlyTicket:
+                    retVal += "Remaining time: End of month " + DateTime.Parse(ticket.CheckedTime).Month.ToString() + "/" + DateTime.Parse(ticket.CheckedTime).Year.ToString();
+                    if (DateTime.Now.Month != DateTime.Parse(ticket.CheckedTime).Month || DateTime.Now.Year != DateTime.Parse(ticket.CheckedTime).Year)
+                    {
+                        retVal += System.Environment.NewLine + "TIcket expired!!!";
+                    }
+                    break;
+                case Enums.TicketType.AnnualTicket:
+                    retVal += "Remaining time: End of year " + DateTime.Parse(ticket.CheckedTime).Year.ToString();
+                    if (DateTime.Now.Year != DateTime.Parse(ticket.CheckedTime).Year)
+                    {
+                        retVal += System.Environment.NewLine + "TIcket expired!!!";
+                    }
+                    break;
+                default:
+                    break;
             }
+            
 
 
             return Ok(retVal);
