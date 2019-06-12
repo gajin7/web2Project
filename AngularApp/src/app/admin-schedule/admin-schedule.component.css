@@ -1,0 +1,58 @@
+.navbar.navbar-expand-lg.navbar-dark.bg-primary {
+    position: relative;
+}
+
+.collapse.navbar-collapse {
+    right: 0%;
+    position: absolute;
+}
+
+.needs-validation {
+    /*  width: 500px;*/
+    margin-left: 10px;
+    margin-top: 10px;
+    /*position: absolute;
+      left:  20%*/
+}
+
+.card-body {
+    border-style: solid;
+    text-align: center;
+}
+
+.btn.btn-primary {
+    text-align: center;
+}
+
+.text1 {
+    margin-bottom: 20px;
+}
+
+.text2 {
+    margin-bottom: 20px;
+}
+
+hr.new1 {
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+.diss {
+    margin-left: 40px;
+}
+
+.savebutton {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+}
+
+.showshedule {
+    width: 60%;
+    position: absolute;
+    left: 20%;
+}
+
+.submitbutton {
+    margin-left: 70px;
+}
