@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Gradski saobracajni prevoz</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" routerLink="/admin" routerLinkActive="active">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" routerLink="/home" routerLinkActive="active">Log out</a>
+
+
+        </div>
+    </div>
+</nav>
+
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+
+    <div class="">
+        List of request to register
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Date</th>
+                <th scope="col">Type of pearson</th>
+                <th scope="col">Picture of document</th>
+                <th scope="col" colspan="2"></th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <th>1</th>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>
+                    <button class="btn btn-primary" type="submit">Accept</button>
+                </td>
+                <td>
+                    <button class="btn btn-primary" type="submit">Discard</button>
+                </td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>
+                    <button class="btn btn-primary" type="submit">Accept</button>
+                </td>
+                <td>
+                    <button class="btn btn-primary" type="submit">Discard</button>
+                </td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+    <div class="needs-validation-ticket">
+
+        <div class="ticket-validation">
+            <div class="text1">
+                Check validation of ticket
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="col-md-6 mb-2 id">
+                    Id ticket:
+
+                </div>
+                <div class="col-md-6 mb-2 input">
+                    <input type="text" class="form-control" id="validationCustom04" required>
+                    <div class="invalid-feedback">
+                        Please enter valid line.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="validation-text">
+                Karta je: (validna/nevalidna). Preostalo vreme: x dana, x sati, x minuta.
+            </div>
+
+        </div>
+        <!---------------------------------------------------->
+
+
+    </div>
+    <!---------------------------------------------------->
+
+
+
+    <hr class="new1">
+
+
+
+
+
+
+
+
+</form>

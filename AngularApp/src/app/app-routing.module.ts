@@ -21,6 +21,7 @@ import { AdminPriceListComponent } from './admin-price-list/admin-price-list.com
 import { AdminScheduleComponent } from './admin-schedule/admin-schedule.component';
 import { AdminLinesComponent } from './admin-lines/admin-lines.component';
 import { AdminStationComponent } from './admin-station/admin-station.component';
+import { ControlerComponent } from './controler/controler.component';
 
 const appRoutes: Routes = [
   { 
@@ -95,6 +96,10 @@ const appRoutes: Routes = [
   {
     path: 'admin-station',
     component: AdminStationComponent
+  },
+  {
+    path: 'controler',
+    component: ControlerComponent
   },
   {
     path: '**',

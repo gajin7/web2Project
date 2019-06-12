@@ -28,6 +28,7 @@ import { EditProfileService } from './edit-profile/edit-profile.service';
 import { JwtInterceptor } from './auth/jwt-interceptor';
 import { MyTicketsService } from './my-tickets/my-tickets.service';
 import { BuyTicketService } from './app-user-buy-ticket/buy-ticket.service';
+import { ControlerComponent } from './controler/controler.component';
 
 
 
@@ -51,7 +52,8 @@ import { BuyTicketService } from './app-user-buy-ticket/buy-ticket.service';
     AdminPriceListComponent,
     AdminScheduleComponent,
     AdminLinesComponent,
-    AdminStationComponent
+    AdminStationComponent,
+    ControlerComponent
 
   ],
   imports: [
