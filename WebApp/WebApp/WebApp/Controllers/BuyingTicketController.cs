@@ -1,13 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using WebApp.Models;
 using WebApp.Persistence.UnitOfWork;
+using static WebApp.Controllers.AccountController;
 using static WebApp.Models.Enums;
 
 namespace WebApp.Controllers
@@ -16,10 +21,34 @@ namespace WebApp.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private DbContext _context;
+        private const string LocalLoginProvider = "Local";
+        private ApplicationUserManager _userManager;
 
         public BuyingTicketController()
         {
         }
+
+        public BuyingTicketController(ApplicationUserManager userManager,
+           ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        {
+            UserManager = userManager;
+            AccessTokenFormat = accessTokenFormat;
+
+        }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
 
         public BuyingTicketController(IUnitOfWork unitOfWork, DbContext context)
         {
@@ -54,11 +83,17 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        [System.Web.Http.Route("api/Ticket/ByTicket")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Ticket/BuyTicket")]
         public IHttpActionResult BuyTicket()
         {
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            var userId = User.Identity.GetUserId();
+
             var req = HttpContext.Current.Request;
-            Ticket ticket = new Ticket() { Checked = false, Price = 0, RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket };
+            
+            Ticket ticket = new Ticket() { Checked = false, Price = 0,   CheckedTime = DateTime.Now.ToString(), RemainingTime = TimeSpan.FromMinutes(60), Type = Enums.TicketType.TimeTicket, UserId = userId };
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -68,10 +103,23 @@ namespace WebApp.Controllers
             _unitOfWork.Tickets.Add(ticket);
             _unitOfWork.Complete();
 
-            EmailHelper.SendEmail(req.Form["email"], "TIME BUS TICKET", "You just bought your time ticket." + System.Environment.NewLine + "Ticket ID: " + ticket.Id + System.Environment.NewLine + "NOTICE: Time ticket is valid 60 minutes after checked in.");
-
 
             return Ok(ticket.Id);
+
+        }
+
+        
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Ticket/GetTickets")]
+        public IHttpActionResult GetTickets()
+        {
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            var userId = User.Identity.GetUserId();
+
+            var retVal = _unitOfWork.Tickets.GetAll().Where(u => u.UserId == userId).ToList();
+            
+            return Ok(retVal);
 
         }
 
@@ -184,6 +232,8 @@ namespace WebApp.Controllers
            
         }
 
+
+
         public Int32 GetUniqueId()
         {
             var now = DateTime.Now;
@@ -192,6 +242,8 @@ namespace WebApp.Controllers
 
             return uniqueId;
         }
+
+
 
 
 

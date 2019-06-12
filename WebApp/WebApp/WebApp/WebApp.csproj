@@ -377,6 +377,10 @@
     <Compile Include="Migrations\201906120841015_InitialValuesUpdate.Designer.cs">
       <DependentUpon>201906120841015_InitialValuesUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906121250227_TicketUpdate5.cs" />
+    <Compile Include="Migrations\201906121250227_TicketUpdate5.Designer.cs">
+      <DependentUpon>201906121250227_TicketUpdate5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -603,6 +607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906120841015_InitialValuesUpdate.resx">
       <DependentUpon>201906120841015_InitialValuesUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906121250227_TicketUpdate5.resx">
+      <DependentUpon>201906121250227_TicketUpdate5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
