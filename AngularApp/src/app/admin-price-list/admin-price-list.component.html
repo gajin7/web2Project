@@ -19,7 +19,6 @@
     </div>
 </nav>
 
-
 <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
 
     <div class="needs-validation">
@@ -29,24 +28,21 @@
                     Enter regular price for:
                 </div>
 
-
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-2 id">
-                        Time ticket:
-
-                    </div>
-                    <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
-                        <div class="invalid-feedback">
-                            Please enter valid line.
-                        </div>
-                    </div>
-
+                <div class="form-group">
+                    <label for="validationCustom05">Select ticket type</label>
+                    <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
+          <option value=""></option>
+          <option value="TimeTicket"> Time ticket</option>
+          <option value="DailyTicket">Daily ticket</option>
+          <option value="MonthlyTicket">Monthly ticket</option>
+          <option value="AnnualTicket">Annual ticket</option>
+        </select>
+                    <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
                 </div>
+
                 <div class="form-row">
                     <div class="col-md-6 mb-2 id">
-                        Daily ticket:
+                        New value:
 
                     </div>
                     <div class="col-md-6 mb-2 input">
@@ -58,45 +54,47 @@
 
                 </div>
 
-                <div class="form-row">
-                    <div class="col-md-6 mb-2 id">
-                        Monthly ticket:
-
-                    </div>
-                    <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
-                        <div class="invalid-feedback">
-                            Please enter valid line.
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="col-md-6 mb-2 id">
-                        Annual ticket:
-
-                    </div>
-                    <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
-                        <div class="invalid-feedback">
-                            Please enter valid line.
-                        </div>
-                    </div>
-
+                <button type="button" class="btn btn-primary savebutton">Set</button>
+                <div>
+                    Ispis da je sacuvana nova cena.
                 </div>
 
             </div>
-
+            <!---------------------------------------------------->
             <div class="col-md-6 mb-2 diss">
-                <div class="text2">
-                    Enter discount for:
+                <div class="form-row">
+
+                    <div class="col-md-4 mb-2 id">
+                        <div class="text2">
+                            Enter discount for:
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2 id">
+                        Student discount: trenutni popust
+
+                    </div>
+
+                    <div class="col-md-4 mb-2 id">
+
+                        Retaire dicount: trenutni popust
+                    </div>
                 </div>
 
 
+
+                <div class="form-group">
+                    <label for="validationCustom05">Select pearson type</label>
+                    <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
+          <option value=""></option>
+          <option value="Student"> Student</option>
+          <option value="Retairee"> Retairee</option>
+        </select>
+                    <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
+                </div>
+
                 <div class="form-row">
                     <div class="col-md-6 mb-2 id">
-                        Student ticket:
+                        New value:
 
                     </div>
                     <div class="col-md-6 mb-2 input">
@@ -108,33 +106,23 @@
 
                 </div>
 
-                <div class="form-row">
-                    <div class="col-md-6 mb-2 id">
-                        Retairee ticket:
-
-                    </div>
-                    <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
-                        <div class="invalid-feedback">
-
-
-                        </div>
-                    </div>
+                <button type="button" class="btn btn-primary savebutton">Set</button>
+                <div>
+                    Ispis da je sacuvan nova popust.
                 </div>
-
             </div>
         </div>
     </div>
+    <!---------------------------------------------------->
 
 
 
     <hr class="new1">
 
-
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col"></th>
+
                 <th scope="col" colspan="2">Time ticket</th>
                 <th scope="col" colspan="2">Daily ticket</th>
                 <th scope="col" colspan="2">Monthly ticket</th>
@@ -144,7 +132,7 @@
         <tbody>
 
             <tr>
-                <th rowspan="3">Urban</th>
+
                 <td>Student</td>
                 <td>1</td>
                 <td>Student</td>
@@ -175,47 +163,15 @@
                 <td>3</td>
             </tr>
 
-            <tr>
-                <th colspan="9" bgcolor="#d3dde2">
-
-                </th>
-            </tr>
 
 
-            <tr>
-                <th rowspan="3">Suburban</th>
-                <td>Student</td>
-                <td>1</td>
-                <td>Student</td>
-                <td>1</td>
-                <td>Student</td>
-                <td>1</td>
-                <td>Student</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>Retaire</td>
-                <td>3</td>
-                <td>Retaire</td>
-                <td>3</td>
-                <td>Retaire</td>
-                <td>3</td>
-                <td>Retaire</td>
-                <td>3</td>
-            </tr>
+
+
 
         </tbody>
     </table>
+
+
 
 
 
