@@ -20,6 +20,8 @@ import { CheckInTicketComponent } from './check-in-ticket/check-in-ticket.compon
 import { ControlTicketComponent } from './control-ticket/control-ticket.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MyTicketsComponent } from './my-tickets/my-tickets.component';
+import { AdminPriceListComponent } from './admin-price-list/admin-price-list.component';
+import { AdminScheduleComponent } from './admin-schedule/admin-schedule.component';
 
 
 
@@ -39,7 +41,9 @@ import { MyTicketsComponent } from './my-tickets/my-tickets.component';
     CheckInTicketComponent,
     ControlTicketComponent,
     EditProfileComponent,
-    MyTicketsComponent
+    MyTicketsComponent,
+    AdminPriceListComponent,
+    AdminScheduleComponent
 
   ],
   imports: [
