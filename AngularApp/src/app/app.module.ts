@@ -1,7 +1,7 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { ReactiveFormsModule , FormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent }            from './app.component';
 import { PageNotFoundComponent }   from './page-not-found/page-not-found.component';
@@ -20,6 +20,8 @@ import { CheckInTicketComponent } from './check-in-ticket/check-in-ticket.compon
 import { ControlTicketComponent } from './control-ticket/control-ticket.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MyTicketsComponent } from './my-tickets/my-tickets.component';
+import { EditProfileService } from './edit-profile/edit-profile.service';
+import { JwtInterceptor } from './auth/jwt-interceptor';
 
 
 
@@ -48,6 +50,11 @@ import { MyTicketsComponent } from './my-tickets/my-tickets.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+  ],
+
+  providers: [ 
+    EditProfileService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    
   ],
   bootstrap: [ AppComponent ]
 })

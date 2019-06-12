@@ -20,12 +20,12 @@
     </div>
 </nav>
 
-<form class="needs-validation" novalidate>
+<form [formGroup]="Form" (submit)="EditProfile()" class="needs-validation" novalidate>
     <div class="all">
 
         <div class="first_name">
             <label for="validationCustom01">First name</label>
-            <input type="text" class="form-control" id="validationCustom01" required>
+            <input type="text" class="form-control" formControlName="FirstName" id="validationCustom01" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -36,7 +36,7 @@
 
         <div class="last_name">
             <label for="validationCustom01">Last name</label>
-            <input type="text" class="form-control" id="validationCustom01" required>
+            <input type="text" class="form-control" formControlName="LastName" id="validationCustom01" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -47,7 +47,7 @@
 
         <div class="email">
             <label for="exampleFormControlInput1">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <input type="email" class="form-control" formControlName="Email" id="exampleFormControlInput1" placeholder="name@example.com">
             <!--
     Popraviti za prazno polje da bude nevalidno.
     -->
@@ -60,58 +60,34 @@
         </div>
 
 
-        <div class="password">
-            <label for="validationCustom02">Password</label>
-            <input type="password" class="form-control" id="validationCustom02" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please choose a valid password.
-            </div>
-        </div>
-
-        <div class="confirm_password">
-            <label for="validationCustom02">Confirm password</label>
-            <input type="password" class="form-control" id="validationCustom02" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Paswords didn't match (or password didn't entered).
-            </div>
-        </div>
-
-
-
     </div>
     <!-- proveriti ovaj tag ponovo (mozda je visak) --->
 
     <div class="form-group">
         <label for="birthDate" class="control-label">Date of Birth</label>
         <div class="">
-            <input type="date" id="birthDate" class="form-control">
+            <input type="date" formControlName="Date" id="birthDate" class="form-control">
         </div>
     </div>
 
     <div class="form-row">
         <div class="col-md-5 mb-3">
             <label for="validationCustom03">City</label>
-            <input type="text" class="form-control" id="validationCustom03" required>
+            <input type="text" formControlName="City" class="form-control" id="validationCustom03" required>
             <div class="invalid-feedback">
                 Please provide a valid city.
             </div>
         </div>
         <div class="col-md-5 mb-3">
             <label for="validationCustom04">Street</label>
-            <input type="text" class="form-control" id="validationCustom04" required>
+            <input type="text" formControlName="Street" class="form-control" id="validationCustom04" required>
             <div class="invalid-feedback">
                 Please provide a valid street.
             </div>
         </div>
         <div class="col-md-2 mb-3">
             <label for="validationCustom05">Number</label>
-            <input type="text" class="form-control" id="validationCustom05" required>
+            <input type="text" formControlName="Number" class="form-control" id="validationCustom05" required>
             <div class="invalid-feedback">
                 Please provide a valid number.
             </div>
@@ -120,12 +96,12 @@
 
     <div class="form-group">
         <label for="validationCustom05">Select the person type</label>
-        <select class="custom-select" required>
+        <select class="custom-select" formControlName="TypeOfPerson" required>
 
       <option value=""> </option>
-      <option value="1">Regular</option>
-      <option value="2">Student</option>
-      <option value="3">Retiree</option>
+      <option value="Regular">Regular</option>
+      <option value="Student">Student</option>
+      <option value="Retiree">Retiree</option>
     </select>
         <div class="invalid-feedback">You must select type of pearson</div>
     </div>

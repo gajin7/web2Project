@@ -6,24 +6,18 @@ import { Observable } from 'rxjs';
 export class JwtInterceptor implements HttpInterceptor {
     constructor() { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-        console.log("Intercepted");
-        console.log("Token : ", localStorage.jwt);
-
-        // add authorization header with jwt token if available
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        //throw new Error("Method not implemented.");
         let jwt = localStorage.jwt;
-        if (jwt) {
-
-            console.log(request)
-            request = request.clone({
+        console.log(req);
+        if(jwt){
+            req = req.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${jwt}`
+                    "Authorization": "Bearer "+jwt
                 }
             });
-            console.log(request)
         }
-
-        return next.handle(request);
+        return next.handle(req);
     }
+
 }
