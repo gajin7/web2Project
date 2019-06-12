@@ -1,0 +1,304 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Gradski saobracajni prevoz</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" routerLink="/admin" routerLinkActive="active">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" routerLink="/home" routerLinkActive="active">Log out</a>
+
+
+        </div>
+    </div>
+</nav>
+
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+
+    <div class="needs-validation">
+        <div class="form-row">
+            <div class="col-md-5 mb-2 id1">
+                <div class="text1">
+                    ADD STATION
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-2 id">
+                        Name:
+
+                    </div>
+                    <div class="col-md-6 mb-2 input">
+                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <div class="invalid-feedback">
+                            Please enter valid name.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-2 id">
+                        Address:
+
+                    </div>
+                    <div class="col-md-6 mb-2 input">
+                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <div class="invalid-feedback">
+                            Please enter valid address.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-2 id">
+                        Longitude:
+
+                    </div>
+                    <div class="col-md-6 mb-2 input">
+                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <div class="invalid-feedback">
+                            Please enter valid longitude.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-2 id">
+                        Latitude:
+
+                    </div>
+                    <div class="col-md-6 mb-2 input">
+                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <div class="invalid-feedback">
+                            Please enter valid latitude.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 mb-2 id">
+                        Lines:
+
+                    </div>
+                    <div class="col-md-6 mb-2 input">
+                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <div class="invalid-feedback">
+                            Dogovor za linije.
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+                <button type="button" class="btn btn-primary savebutton"> Add</button>
+                <div>
+                    Ispis da je sacuvana stanica u bazu nakon sto se dugme klikne.
+                </div>
+
+
+            </div>
+            <!---------------------------------------------------->
+            <div class="col-md-6 mb-2 diss">
+
+                <div class="row">
+                    <div class="col-6 col-sm-10">
+                        <div class="text2">
+                            DELETE
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Enter number of station:
+
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid number.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="btn btn-primary savebutton"> Delete</button>
+                        <div>
+                            Ispis da je obrisana stanica iz baze nakon sto se dugme klikne.
+                        </div>
+
+                        <hr class="new1">
+                    </div>
+
+
+                    <!-- Force next columns to break to new line -->
+                    <div class="w-100"></div>
+
+                    <div class="col-6 col-sm-10">
+                        <div class="text2">
+                            CHANGE
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Name:
+
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid name.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Address:
+
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid address.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Longitude:
+
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid longitude.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Latitude:
+
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid latitude.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Lines:
+
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Dogovor za linije.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="btn btn-primary savebutton"> Save changes</button>
+                        <div>
+                            Ispis da je obrisana stanica iz baze nakon sto se dugme klikne.
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <!---------------------------------------------------->
+
+
+
+    <hr class="new1">
+
+    <div class="text2">
+        SHOW STATION
+    </div>
+    <div class="form-row showshedule">
+
+
+
+        <div class="col-md-4 mb-2 id">
+            <button type="button" class="btn btn-primary submitbutton"> Show </button>
+
+        </div>
+
+
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+
+                    <th scope="col">Station name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Longitude</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Stations</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+                <tr>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+</form>
