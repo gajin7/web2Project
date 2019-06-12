@@ -11,7 +11,7 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" routerLink="/check-in-ticket" routerLinkActive="active">check in</a>
+
             <a class="nav-item nav-link active" routerLink="/admin" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link active" routerLink="/login" routerLinkActive="active">Log in</a>
             <a class="nav-item nav-link active" routerLink="/register" routerLinkActive="active">Register</a>
@@ -70,6 +70,17 @@
         <div class="card-body">
             <h5 class="card-title">Red voznje</h5>
             <p class="card-text">Ovde mozete da pogledate red voznje za sve linije.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+
+    <div class="card col-md-3 mb-3">
+        <a routerLink="/check-in-ticket" routerLinkActive="active">
+            <img src="assets/images/timetable.png" class="card-img-top" alt="...">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">Check in ticket</h5>
+            <p class="card-text">Ovde mozete da chekirate kartu.</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
