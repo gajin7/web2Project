@@ -79,7 +79,43 @@ namespace WebApp.Models
         [Display(Name = "TypeOfPerson")]
         public string TypeOfPerson { get; set; }
 
+    }
 
+    public class EditProfileBindingModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+
+        [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+
+        [Required]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+
+        [Required]
+        [Display(Name = "Number")]
+        public string Number { get; set; }
+
+        [Required]
+        [Display(Name = "TypeOfPerson")]
+        public string TypeOfPerson { get; set; }
+
+        [Required]
+        [Display(Name = "Date")]
+        public string Date { get; set; }
     }
 
     public class RegisterExternalBindingModel

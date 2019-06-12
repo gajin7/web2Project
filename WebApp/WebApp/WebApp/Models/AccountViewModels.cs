@@ -29,9 +29,23 @@ namespace WebApp.Models
     {
         public string Email { get; set; }
 
-        public bool HasRegistered { get; set; }
+        public string FirstName { get; set; }
 
-        public string LoginProvider { get; set; }
+        public string LastName { get; set; }
+
+        public string Date { get; set; }
+
+        public string City { get; set; }
+
+        public string Street { get; set; }
+
+        public string Number { get; set; }
+
+        public string Type { get; set; }
+
+       // public bool HasRegistered { get; set; }
+
+       // public string LoginProvider { get; set; }
     }
 
     public class UserLoginInfoViewModel

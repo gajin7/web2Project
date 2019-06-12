@@ -74,12 +74,53 @@ namespace WebApp.Controllers
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
+            var userId = User.Identity.GetUserId();
+            User usr = _unitOfWork.Users.GetAll().Where(u => u.AppUserId == userId).FirstOrDefault();
+
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                FirstName = usr.FirstName,
+                LastName = usr.LastName,
+                Date = usr.DateOfBirth.Date.ToString().Split(' ')[0],
+                City = usr.Address.Split(',')[0],
+                Street = usr.Address.Split(',')[1],
+                Number = usr.Address.Split(',')[2],
+                Type = usr.UserType.ToString()
+
+
+
+                // HasRegistered = externalLogin == null,
+                // LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
+        }
+
+        [HttpPost]
+        [System.Web.Http.Route("api/Profile/GetInfo")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("EditProfile")]
+        public IHttpActionResult EditProfile(EditProfileBindingModel model)
+        {
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            var userId = User.Identity.GetUserId();
+            ApplicationUser appUsr = UserManager.Users.Where(u => u.Id == userId).FirstOrDefault();
+            appUsr.Email = model.Email;
+            appUsr.UserName = model.Email;
+            UserManager.UpdateAsync(appUsr);
+
+
+            User usr = _unitOfWork.Users.GetAll().Where(u => u.AppUserId == userId).FirstOrDefault();
+            usr.FirstName = model.FirstName;
+            usr.LastName = model.LastName;
+            usr.Address = model.City + "," + model.Street + "," + model.Number;
+
+            _unitOfWork.Users.Update(usr);
+            _unitOfWork.Complete();
+
+
+            return Ok();
+
         }
 
         // POST api/Account/Logout

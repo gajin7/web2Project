@@ -1,7 +1,7 @@
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { ReactiveFormsModule , FormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent }            from './app.component';
 import { PageNotFoundComponent }   from './page-not-found/page-not-found.component';
@@ -56,6 +56,11 @@ import { AdminStationComponent } from './admin-station/admin-station.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+  ],
+
+  providers: [ 
+    EditProfileService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    
   ],
   bootstrap: [ AppComponent ]
 })

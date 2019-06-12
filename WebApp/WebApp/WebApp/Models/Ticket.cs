@@ -14,9 +14,8 @@ namespace WebApp.Models
         public TimeSpan RemainingTime { get; set;}
         public bool Checked { get; set; }
 
-        
-      
         public string CheckedTime { get; set; }
+
 
         public ApplicationUser User { get; set; }
 
