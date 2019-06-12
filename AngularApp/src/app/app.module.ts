@@ -22,6 +22,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MyTicketsComponent } from './my-tickets/my-tickets.component';
 import { AdminPriceListComponent } from './admin-price-list/admin-price-list.component';
 import { AdminScheduleComponent } from './admin-schedule/admin-schedule.component';
+import { AdminLinesComponent } from './admin-lines/admin-lines.component';
+import { AdminStationComponent } from './admin-station/admin-station.component';
 import { EditProfileService } from './edit-profile/edit-profile.service';
 import { JwtInterceptor } from './auth/jwt-interceptor';
 
@@ -45,7 +47,9 @@ import { JwtInterceptor } from './auth/jwt-interceptor';
     EditProfileComponent,
     MyTicketsComponent,
     AdminPriceListComponent,
-    AdminScheduleComponent
+    AdminScheduleComponent,
+    AdminLinesComponent,
+    AdminStationComponent
 
   ],
   imports: [

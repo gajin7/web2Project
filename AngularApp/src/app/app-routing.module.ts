@@ -19,6 +19,8 @@ import { MyTicketsComponent } from './my-tickets/my-tickets.component';
 import { ControlTicketComponent } from './control-ticket/control-ticket.component';
 import { AdminPriceListComponent } from './admin-price-list/admin-price-list.component';
 import { AdminScheduleComponent } from './admin-schedule/admin-schedule.component';
+import { AdminLinesComponent } from './admin-lines/admin-lines.component';
+import { AdminStationComponent } from './admin-station/admin-station.component';
 
 const appRoutes: Routes = [
   { 
@@ -85,6 +87,14 @@ const appRoutes: Routes = [
   {
     path: 'admin-schedule',
     component: AdminScheduleComponent
+  },
+  {
+    path: 'admin-lines',
+    component: AdminLinesComponent
+  },
+  {
+    path: 'admin-station',
+    component: AdminStationComponent
   },
   {
     path: '**',
