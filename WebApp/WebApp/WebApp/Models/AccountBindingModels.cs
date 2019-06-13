@@ -149,4 +149,23 @@ namespace WebApp.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class AddStationModel
+    {
+        [Required]
+        [Display(Name = "name")]
+        public string name { get; set; }
+
+        [Required]
+        [Display(Name = "address")]
+        public string address { get; set; }
+
+        [Required]
+        [Display(Name = "longitude")]
+        public string longitude { get; set; }
+
+        [Required]
+        [Display(Name = "latitude")]
+        public string latitude { get; set; }
+    }
 }

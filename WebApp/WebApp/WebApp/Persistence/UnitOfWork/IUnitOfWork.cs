@@ -22,5 +22,9 @@ namespace WebApp.Persistence.UnitOfWork
         IPictureRepository Pictures { get; set; }
 
         IDepatureRepository Depatures { get; set; }
+
+        IStationRepository Stations { get; set; }
+
+        ILocationRepository Locations { get; set; }
     }
 }

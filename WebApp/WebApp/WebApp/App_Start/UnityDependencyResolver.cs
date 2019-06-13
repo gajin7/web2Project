@@ -79,6 +79,8 @@ namespace WebApp.App_Start
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IPictureRepository, PictureRepository>();
             container.RegisterType<IDepatureRepository, DepatureRepository>();
+            container.RegisterType<IStationRepository, StationRepository>();
+            container.RegisterType<ILocationRepository, LocationRepository>();
         }
 
         public void Dispose()

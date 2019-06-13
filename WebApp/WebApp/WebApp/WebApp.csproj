@@ -82,6 +82,9 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -401,6 +404,34 @@
     <Compile Include="Migrations\201906130836218_AprovedUsrrAdded1.Designer.cs">
       <DependentUpon>201906130836218_AprovedUsrrAdded1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906131420005_AprovedUsrrAdded2.cs" />
+    <Compile Include="Migrations\201906131420005_AprovedUsrrAdded2.Designer.cs">
+      <DependentUpon>201906131420005_AprovedUsrrAdded2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131513168_AprovedUsrrAdded3.cs" />
+    <Compile Include="Migrations\201906131513168_AprovedUsrrAdded3.Designer.cs">
+      <DependentUpon>201906131513168_AprovedUsrrAdded3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131515176_AprovedUsrrAdded4.cs" />
+    <Compile Include="Migrations\201906131515176_AprovedUsrrAdded4.Designer.cs">
+      <DependentUpon>201906131515176_AprovedUsrrAdded4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131530361_AprovedUsrrAdded5.cs" />
+    <Compile Include="Migrations\201906131530361_AprovedUsrrAdded5.Designer.cs">
+      <DependentUpon>201906131530361_AprovedUsrrAdded5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131531127_AprovedUsrrAdded6.cs" />
+    <Compile Include="Migrations\201906131531127_AprovedUsrrAdded6.Designer.cs">
+      <DependentUpon>201906131531127_AprovedUsrrAdded6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131536580_AprovedUsrrAdded7.cs" />
+    <Compile Include="Migrations\201906131536580_AprovedUsrrAdded7.Designer.cs">
+      <DependentUpon>201906131536580_AprovedUsrrAdded7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906131539506_AprovedUsrrAdded8.cs" />
+    <Compile Include="Migrations\201906131539506_AprovedUsrrAdded8.Designer.cs">
+      <DependentUpon>201906131539506_AprovedUsrrAdded8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -449,6 +480,7 @@
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -494,6 +526,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -647,6 +680,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906130836218_AprovedUsrrAdded1.resx">
       <DependentUpon>201906130836218_AprovedUsrrAdded1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131420005_AprovedUsrrAdded2.resx">
+      <DependentUpon>201906131420005_AprovedUsrrAdded2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131513168_AprovedUsrrAdded3.resx">
+      <DependentUpon>201906131513168_AprovedUsrrAdded3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131515176_AprovedUsrrAdded4.resx">
+      <DependentUpon>201906131515176_AprovedUsrrAdded4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131530361_AprovedUsrrAdded5.resx">
+      <DependentUpon>201906131530361_AprovedUsrrAdded5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131531127_AprovedUsrrAdded6.resx">
+      <DependentUpon>201906131531127_AprovedUsrrAdded6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131536580_AprovedUsrrAdded7.resx">
+      <DependentUpon>201906131536580_AprovedUsrrAdded7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906131539506_AprovedUsrrAdded8.resx">
+      <DependentUpon>201906131539506_AprovedUsrrAdded8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

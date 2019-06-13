@@ -23,20 +23,19 @@
 
     <div class="needs-validation">
         <div class="form-row">
+                
             <div class="col-md-5 mb-2 id1">
                 <div class="text1">
                     ADD STATION
                 </div>
-
-
-
+                <form [formGroup]="AddForm" class="needs-validation" novalidate> 
                 <div class="form-row">
                     <div class="col-md-6 mb-2 id">
                         Name:
 
                     </div>
                     <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <input type="text" formControlName="name" class="form-control" id="validationCustom04" required>
                         <div class="invalid-feedback">
                             Please enter valid name.
                         </div>
@@ -50,7 +49,7 @@
 
                     </div>
                     <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <input type="text" formControlName="address" class="form-control" id="validationCustom04" required>
                         <div class="invalid-feedback">
                             Please enter valid address.
                         </div>
@@ -64,7 +63,7 @@
 
                     </div>
                     <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <input type="text" formControlName="longitude" class="form-control" id="validationCustom04" required>
                         <div class="invalid-feedback">
                             Please enter valid longitude.
                         </div>
@@ -78,7 +77,7 @@
 
                     </div>
                     <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <input type="text" formControlName="latitude" class="form-control" id="validationCustom04" required>
                         <div class="invalid-feedback">
                             Please enter valid latitude.
                         </div>
@@ -86,30 +85,14 @@
 
                 </div>
 
-                <div class="form-row">
-                    <div class="col-md-6 mb-2 id">
-                        Lines:
-
-                    </div>
-                    <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
-                        <div class="invalid-feedback">
-                            Dogovor za linije.
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-                <button type="button" class="btn btn-primary savebutton"> Add</button>
+                <button type="button" (click)="AddStation()" class="btn btn-primary savebutton"> Add</button>
                 <div>
-                    Ispis da je sacuvana stanica u bazu nakon sto se dugme klikne.
+                   {{addMssg}}
                 </div>
-
+                </form>
 
             </div>
+            
             <!---------------------------------------------------->
             <div class="col-md-6 mb-2 diss">
 
@@ -119,14 +102,14 @@
                             DELETE
                         </div>
 
-
+                        <form [formGroup]="deleteForm"  class="needs-validation" novalidate> 
                         <div class="form-row">
                             <div class="col-md-6 mb-2 id">
                                 Enter number of station:
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <input type="text" formControlName="id" class="form-control" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid number.
                                 </div>
@@ -134,12 +117,13 @@
 
                         </div>
 
-                        <button type="button" class="btn btn-primary savebutton"> Delete</button>
+                        <button type="button" (click)="DeleteStation()" class="btn btn-primary savebutton"> Delete</button>
                         <div>
-                            Ispis da je obrisana stanica iz baze nakon sto se dugme klikne.
+                                {{deleteMssg}}
                         </div>
 
                         <hr class="new1">
+                        </form>
                     </div>
 
 
@@ -150,7 +134,7 @@
                         <div class="text2">
                             CHANGE
                         </div>
-
+                        <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate> 
                         <div class="form-row">
                             <div class="col-md-6 mb-2 id">
                                 Name:
@@ -207,19 +191,6 @@
 
                         </div>
 
-                        <div class="form-row">
-                            <div class="col-md-6 mb-2 id">
-                                Lines:
-
-                            </div>
-                            <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
-                                <div class="invalid-feedback">
-                                    Dogovor za linije.
-                                </div>
-                            </div>
-
-                        </div>
 
                         <button type="button" class="btn btn-primary savebutton"> Save changes</button>
                         <div>
@@ -229,7 +200,7 @@
 
 
 
-
+                        </form>
 
                     </div>
 
@@ -255,7 +226,7 @@
     <div class="form-row showshedule">
 
 
-
+            <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate> 
         <div class="col-md-4 mb-2 id">
             <button type="button" class="btn btn-primary submitbutton"> Show </button>
 
@@ -289,10 +260,9 @@
 
 
 
-
-
             </tbody>
         </table>
+    </form>
     </div>
 
 

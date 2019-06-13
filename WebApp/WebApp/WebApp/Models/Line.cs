@@ -16,7 +16,6 @@ namespace WebApp.Models
         public string Name { get; set; }
         public virtual List<Station> Stations { get; set; }
         public LineTypes LineType { get; set; }
-        public virtual List<Location> Locations { get; set; }
         
     }
 }

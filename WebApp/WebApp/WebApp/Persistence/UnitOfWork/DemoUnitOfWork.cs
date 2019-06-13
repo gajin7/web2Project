@@ -37,6 +37,12 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public IDepatureRepository Depatures { get; set; }
 
+        [Dependency]
+        public IStationRepository Stations { get; set; }
+
+        [Dependency]
+        public ILocationRepository Locations { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

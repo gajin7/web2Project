@@ -17,6 +17,15 @@ export class AdminScheduleComponent implements OnInit {
   Form = this.fb.group({
     deps: ['',Validators.required],
   });
+
+
+  AddForm = this.fb.group({
+    dep: ['',Validators.required],
+  });
+
+  RemoveForm = this.fb.group({
+    dep: ['',Validators.required],
+  });
   
 
   constructor(public service: AdminScheduleService, public fb : FormBuilder) { }
@@ -48,7 +57,7 @@ export class AdminScheduleComponent implements OnInit {
 
   Add()
   {
-    this.service.AddDepature(this.type,this.line,this.Form.value.addDepature).subscribe((data)=> {
+    this.service.AddDepature(this.type,this.line,this.AddForm.value.dep).subscribe((data)=> {
         this.mssg = data;
         this.service.GetDepatures(this.type,this.line).subscribe((data) => { 
           this.Form.setValue({
@@ -59,7 +68,7 @@ export class AdminScheduleComponent implements OnInit {
 
   Remove()
   {
-    this.service.RemoveDepature(this.type,this.line,this.Form.value.addDepature).subscribe((data)=> {
+    this.service.RemoveDepature(this.type,this.line,this.RemoveForm.value.dep).subscribe((data)=> {
         this.mssg = data;
         this.service.GetDepatures(this.type,this.line).subscribe((data) => { 
           this.Form.setValue({
