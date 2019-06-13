@@ -3,7 +3,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">Gradski saobracajni prevoz</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,8 +18,10 @@
     </div>
 </nav>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+<form  class="needs-validation" novalidate>
 
+
+    
     <div class="needs-validation">
         <div class="form-row">
             <div class="col-md-5 mb-2 id1">
@@ -28,15 +29,15 @@
                     ADD LINE
                 </div>
 
-
-                <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+                        
+                <form [formGroup]="Form"   class="needs-validation" novalidate>
                     <div class="form-row">
                         <div class="col-md-6 mb-2 id">
                             Enter line name:
 
                         </div>
                         <div class="col-md-6 mb-2 input">
-                            <input type="text" class="form-control" id="validationCustom04" required>
+                            <input type="text" class="form-control" formControlName="name" id="validationCustom04" required>
                             <div class="invalid-feedback">
                                 Please enter valid id.
                             </div>
@@ -48,52 +49,45 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-2 id">
                             Choose stations:
-
                         </div>
+                        <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control" [(ngModel)]="selectedStations" formControlName="stations" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid stations.
+                                </div>
+                            </div>
 
-                        <div class="dropdown cq-dropdown" data-name='statuses'>
-                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                              Stations
-                              <span class="caret"></span>
-                            </button>
-
-                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
-                                <li>
-                                    <label class="radio-btn">
-                                      <input type="checkbox" value='option1'>
-                                      Option 1
-                                  </label>
-                                </li>
-                                <li>
-                                    <label class="radio-btn">
-                                      <input type="checkbox" value='option2'>
-                                      Option 2
-                                  </label>
-                                </li>
-                                <li>
-                                    <label class="radio-btn">
-                                      <input type="checkbox" value='option3'>
-                                      Option 3
-                                  </label>
-                                    <li>
-
-                                        <!--    <li class='text-center'>
-                                  <button type='button' class='btn btn-xs btn-danger clear close-dropdown' value='Clear'>Clear</button>
-                                  <button type='button' class='btn btn-xs btn-success save' value='Save'>Save</button>
-                              </li> -->
-                            </ul>
-                        </div>
 
                     </div>
 
+                    <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Choose type:
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                    <select class="custom-select" (change)="select($event)" required>
+                                            <option value=""></option>
+                                            <option value="Urban">Urban</option>
+                                            <option value="Suburban">Suburban</option> 
+                                        </select>
+                                </div>
+    
+    
+                        </div>
 
 
-
-                    <button type="button" class="btn btn-primary savebutton"> Add</button>
+                    <button type="button" (click)="AddLine()" class="btn btn-primary savebutton"> Add</button>
                     <div>
-                        Ispis da je sacuvana linija u bazu nakon sto se dugme klikne.
+                        {{addMssg}}
                     </div>
-
+                    <br/><br/>
+                    <div>
+                    <label>Stations</label>
+                    <select class="custom-select" (change)="selectedStation($event)" required>
+                            <option></option>
+                            <option *ngFor="let obj of stations" [value]="obj">{{obj}}</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <!---------------------------------------------------->
@@ -105,7 +99,7 @@
                             DELETE
                         </div>
 
-                        <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+                        <form  class="needs-validation" novalidate>
 
 
                             <div class="form-row">
@@ -140,68 +134,119 @@
                             CHANGE
                         </div>
 
-                        <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+                        <form  class="needs-validation" novalidate>
+
+                           <div class="form-row">
+                            <div class="col-md-6 mb-2 id">
+                                Line id:
+
+                            </div>
+                            <div class="col-md-6 mb-2 input">
+                                <input type="text" class="form-control"  id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid departure.
+                                </div>
+                            </div>
+                            
+
+                         
+                        </div>
 
                             <div class="form-row">
-                                <div class="col-md-6 mb-2 id">
-
-                                    Enter line id:
-
-                                </div>
-                                <div class="col-md-6 mb-2 input">
-                                    <input type="text" class="form-control" id="validationCustom04" required>
-                                    <div class="invalid-feedback">
-                                        Please enter valid id.
+                                    <div class="col-md-6 mb-2 id">
+    
+                                        line name:
+    
+                                    </div>
+                                    <div class="col-md-6 mb-2 input">
+                                        <input type="text" class="form-control" id="validationCustom04" required>
+                                        <div class="invalid-feedback">
+                                            Please enter valid id.
+                                        </div>
                                     </div>
                                 </div>
 
-
-
-                            </div>
-
                             <div class="form-row">
                                 <div class="col-md-6 mb-2 id">
-                                    Choose stations:
-
+                                     stations:
                                 </div>
-
-                                <div class="dropdown cq-dropdown" data-name='statuses'>
-                                    <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                      Stations
-                                      <span class="caret"></span>
-                                    </button>
-
-                                    <ul class="dropdown-menu" aria-labelledby="btndropdown">
-                                        <li>
-                                            <label class="radio-btn">
-                                              <input type="checkbox" value='option1'>
-                                              Option 1
-                                          </label>
-                                        </li>
-                                        <li>
-                                            <label class="radio-btn">
-                                              <input type="checkbox" value='option2'>
-                                              Option 2
-                                          </label>
-                                        </li>
-                                        <li>
-                                            <label class="radio-btn">
-                                              <input type="checkbox" value='option3'>
-                                              Option 3
-                                          </label>
-                                            <li>
-
-                                                <!--    <li class='text-center'>
-                                          <button type='button' class='btn btn-xs btn-danger clear close-dropdown' value='Clear'>Clear</button>
-                                          <button type='button' class='btn btn-xs btn-success save' value='Save'>Save</button>
-                                      </li> -->
-                                    </ul>
-                                </div>
+                                <div class="col-md-6 mb-2 input">
+                                        <input type="text" class="form-control" id="validationCustom04" required>
+                                        <div class="invalid-feedback">
+                                            Please enter valid id.
+                                        </div>
+                                    </div>
 
                             </div>
+                            
+                            <button type="button" (click)="Show()" class="btn btn-primary savebutton"> Show</button>
+
+                            <div class="col-6 col-sm-10 change">
+
+                                    <div class="text3">
+                                        ADD AND DELETE
+                                    </div>
+                                    <div class="text3">
+                                        
+                                    </div>
+                                    <form   class="needs-validation" novalidate>
+                                    <div class="form-row">
+            
+                                       
+                                            <div class="col-md-2 mb-2 id">
+                                                Add:
+            
+                                            </div>
+                                            <div class="col-md-4 mb-2 input">
+                                                <input type="text" class="form-control"  id="validationCustom04" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter valid departure.
+                                                </div>
+                                            </div>
+            
+                                            <div class="col-md-6 mb-2 input">
+                                                <button type="button" (click)="Add()" class="btn btn-primary savebuttonn"> Add</button>
+                                            </div>
+                                       
+            
+            
+                                    </div>
+                                </form>
+                                </div>
+            
+                                <div class="col-6 col-sm-10 change">
+            
+            
+                                        <form [formGroup]="RemoveForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+                                    <div class="form-row">
+                                        
+                                            <div class="col-md-2 mb-2 id">
+                                                Delete:
+            
+                                            </div>
+                                            <div class="col-md-4 mb-2 input">
+                                                <input type="text" class="form-control" formControlName="dep" id="validationCustom04" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter valid departure.
+                                                </div>
+                                            </div>
+            
+                                            <div class="col-md-6 mb-2 input">
+                                                <button type="button" (click)="Remove()" class="btn btn-primary savebuttonn"> Delete</button>
+                                            </div>
+                                        
+                                        <div>
+                                                {{mssg}}
+                                        </div>
+            
+            
+                                    </div>
+                                </form>
+                                </div>
+            
 
 
-                            <button type="button" class="btn btn-primary savebutton"> Save changes</button>
+                           
 
                         </form>
                     </div>
@@ -210,4 +255,7 @@
         </div>
     </div>
     <!---------------------------------------------------->
+
+    <hr class="new1">
+ 
 </form>

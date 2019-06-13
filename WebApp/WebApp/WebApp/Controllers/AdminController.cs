@@ -71,9 +71,13 @@ namespace WebApp.Controllers
             Prices price = _unitOfWork.Prices.GetAll().Where((u) => u.ticketType.ToString().Equals(req["type"].Trim())).FirstOrDefault();
 
 
-            price.price = tmp;
-            _unitOfWork.Prices.Update(price);
-            _unitOfWork.Complete();
+            lock (_unitOfWork.Prices)
+            {
+
+                price.price = tmp;
+                _unitOfWork.Prices.Update(price);
+                _unitOfWork.Complete();
+            }
 
 
             return Ok("Price successfully changed");
@@ -96,10 +100,11 @@ namespace WebApp.Controllers
             Discounts discount = _unitOfWork.Discounts.GetAll().Where((u) => u.Type.ToString().Equals(req["type"].Trim())).FirstOrDefault();
             discount.Discount = tmp / 100;
 
-
-            _unitOfWork.Discounts.Update(discount);
-            _unitOfWork.Complete();
-
+            lock (_unitOfWork.Discounts)
+            {
+                _unitOfWork.Discounts.Update(discount);
+                _unitOfWork.Complete();
+            }
 
             return Ok("Discount successfully updated");
         }
@@ -222,8 +227,12 @@ namespace WebApp.Controllers
                 return BadRequest("Defined depature not excist");
             }
 
-            _unitOfWork.Depatures.Remove(dep);
-            _unitOfWork.Complete();
+            lock (_unitOfWork.Depatures)
+            {
+
+                _unitOfWork.Depatures.Remove(dep);
+                _unitOfWork.Complete();
+            }
 
             return Ok("Changes saved");
 
@@ -287,11 +296,14 @@ namespace WebApp.Controllers
                 return BadRequest("There is no station with entered number");
             }
 
-            _unitOfWork.Stations.Remove(station);
-            _unitOfWork.Locations.Remove(_unitOfWork.Locations.Get(station.LocationId));
-            _unitOfWork.Complete();
+            lock (_unitOfWork.Stations)
+            {
 
+                _unitOfWork.Stations.Remove(station);
+                _unitOfWork.Locations.Remove(_unitOfWork.Locations.Get(station.LocationId));
+                _unitOfWork.Complete();
 
+            }
          
 
             return Ok("Station deleted");
@@ -369,21 +381,74 @@ namespace WebApp.Controllers
                 return BadRequest("Wrong longitude");
             }
 
-            Station station = _unitOfWork.Stations.GetAll().Where(u => u.StationNum.ToString() == model.id.Trim()).FirstOrDefault();
-            station.Name = model.name;
-            station.Address = model.address;
-            _unitOfWork.Stations.Update(station);
-            var location = _unitOfWork.Locations.Get(station.LocationId);
 
-            location.Lat = lat;
-            location.Lon = lon;
+            lock (_unitOfWork.Stations)
+            {
+                Station station = _unitOfWork.Stations.GetAll().Where(u => u.StationNum.ToString() == model.id.Trim()).FirstOrDefault();
+                station.Name = model.name;
+                station.Address = model.address;
+                _unitOfWork.Stations.Update(station);
+                var location = _unitOfWork.Locations.Get(station.LocationId);
 
-            _unitOfWork.Locations.Update(location);
-            _unitOfWork.Complete();
+                location.Lat = lat;
+                location.Lon = lon;
+
+                _unitOfWork.Locations.Update(location);
+                _unitOfWork.Complete();
+            }
 
 
             return Ok("Changes saved");
 
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/AddLine")]
+       // [Authorize(Roles = "Admin")]
+        public IHttpActionResult AddLine()
+        {
+            var req = HttpContext.Current.Request;
+            
+            if (req["name"] == "undefined" || req["name"] == "" || req["name"] == null)
+                return BadRequest("Please enter name");
+            if (req["stations"] == "undefined" || req["stations"] == "" || req["stations"] == null)
+                return BadRequest("Please chose stations");
+
+           
+           
+
+            string[] stations = req["stations"].Trim().Split(',');
+            List<Station> stats = new List<Station>();
+            foreach (var item in stations)
+            {
+                Station station = _unitOfWork.Stations.GetAll().Where((u) => u.LocationId.ToString() == item).FirstOrDefault();
+                if(station != null)
+                {
+                    stats.Add(station);
+                }
+            }
+
+            Line line = new Line() { Name = req["name"] };
+            if (req["type"].Trim() == "Urban")
+            {
+                line.LineType = Enums.LineTypes.Urban;
+            }
+            else if (req["type"].Trim() == "Suburban")
+            {
+                line.LineType = Enums.LineTypes.Suburban;
+            }
+
+            line.Stations = stats;
+
+            lock(_unitOfWork.Lines)
+            {
+                _unitOfWork.Lines.Add(line);
+                _unitOfWork.Complete();
+            }
+
+
+            return Ok("Line Added");
         }
 
     }

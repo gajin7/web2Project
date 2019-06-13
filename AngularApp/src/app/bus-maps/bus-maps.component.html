@@ -1,0 +1,27 @@
+<div style="width:50%; height: 50%; margin: 5% 25%">
+    <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="18">  
+     <div>
+      <agm-marker  *ngFor="let stat of stati" [latitude]="stat.Latitude" [longitude]="stat.Longitude" [title]="stat.Name" [label]="" [iconUrl]="iconPath"></agm-marker>
+        
+    </div>
+    
+    
+    <div *ngFor="let oneLine of showLines, let i = index">
+      <div  *ngFor="let dire of oneLine.Stations, let j = index">
+          <agm-direction 
+          [renderOptions] = "{polylineOptions: {strokeColor: oneLine.ColorLine}, suppressMarkers: true}"
+           *ngIf="oneLine.Stations[j+1]"  
+          [origin]="{ lat: oneLine.Stations[j].Latitude, lng: oneLine.Stations[j].Longitude }" 
+          [destination]="{ lat: oneLine.Stations[j+1].Latitude, lng: oneLine.Stations[j+1].Longitude }">
+              <!-- <agm-polyline-point  *ngFor="let point of oneLine.Stations" [latitude]="point.Latitude" [longitude]="point.Longitude">
+              [strokeColor]="oneLine.ColorLine"
+              </agm-polyline-point> -->
+            </agm-direction>
+      </div>
+    
+    </div>
+      <!-- <agm-marker *ngFor="let point of selLine.path" [latitude]="point.latitude" [longitude]="point.longitude" [iconUrl]="selLine.icon">
+       </agm-marker> -->
+  
+    </agm-map>
+  </div>

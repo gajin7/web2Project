@@ -29,6 +29,9 @@ import { JwtInterceptor } from './auth/jwt-interceptor';
 import { MyTicketsService } from './my-tickets/my-tickets.service';
 import { BuyTicketService } from './app-user-buy-ticket/buy-ticket.service';
 import { ControlerComponent } from './controler/controler.component';
+import { BusMapsComponent } from './bus-maps/bus-maps.component';
+import { AgmDirectionModule } from 'agm-direction';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -55,6 +58,7 @@ import { ControlerComponent } from './controler/controler.component';
     AdminLinesComponent,
     AdminStationComponent,
     ControlerComponent,
+    BusMapsComponent,
   
 
   ],
@@ -64,6 +68,8 @@ import { ControlerComponent } from './controler/controler.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    AgmDirectionModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
   ],
 
   providers: [ 
