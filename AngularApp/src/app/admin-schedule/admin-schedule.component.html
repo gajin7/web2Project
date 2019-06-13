@@ -43,7 +43,7 @@
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <select class="custom-select"  (change)="selectedLine($event)" required>
+                                <select class="custom-select" (change)="selectedLine($event)" required>
                                     <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
                                 </select>
                                 <div class="invalid-feedback">
@@ -58,10 +58,10 @@
 
                             </div>
                             <div class="col-md-6 mb-2 id">
-                                <select  class="custom-select" (change)="selectedType($event)"  required>
+                                <select class="custom-select" (change)="selectedType($event)" required>
                                      <option value="WorkDay"> Work Day</option>
                                      <option value="Saturday"> Saturday</option>
-                                    <option value="Sunday">Sunday </option>                               
+                                    <option value="Sunday">Sunday </option>
                                 </select>
                             </div>
 
@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-2 id">
-                                Departure:
+                                Departures:
 
                             </div>
                             <div class="col-md-6 mb-2 input">
@@ -79,13 +79,74 @@
                                 </div>
                             </div>
                             <button type="button" (click)="Show()" class="btn btn-primary savebutton"> Show</button>
-                            <button type="button" class="btn btn-primary savebutton"> Save changes</button>
+
                             <div>
                                 Ispis da je sacuvana linija u bazu nakon sto se dugme klikne.
                             </div>
                         </div>
 
                     </div>
+
+
+
+                    <div class="col-6 col-sm-10 change">
+
+                        <div class="text3">
+                            ADD AND DELETE
+                        </div>
+                        <div class="text3">
+                            You must enter value in format: hh:mm
+                        </div>
+                        <div class="form-row">
+
+                            <div class="col-md-2 mb-2 id">
+                                Add:
+
+                            </div>
+                            <div class="col-md-4 mb-2 input">
+                                <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid departure.
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-2 input">
+                                <button type="button" class="btn btn-primary savebuttonn"> Add</button>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-6 col-sm-10 change">
+
+
+
+                        <div class="form-row">
+                            <div class="col-md-2 mb-2 id">
+                                Delete:
+
+                            </div>
+                            <div class="col-md-4 mb-2 input">
+                                <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
+                                <div class="invalid-feedback">
+                                    Please enter valid departure.
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-2 input">
+                                <button type="button" class="btn btn-primary savebuttonn"> Delete</button>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
 
                 </div>
 
