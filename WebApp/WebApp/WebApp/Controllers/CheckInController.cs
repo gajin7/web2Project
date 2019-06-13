@@ -84,6 +84,7 @@ namespace WebApp.Controllers
         }
 
 
+        [Authorize(Roles = "Controller")]
         [HttpPost]
         [System.Web.Http.Route("api/CheckIn/ControlTicket")]
         public IHttpActionResult ControlTicket()

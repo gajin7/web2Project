@@ -41,7 +41,7 @@ export class AuthService {
         localStorage.setItem('role', role);
       }),
 
-      catchError(this.handle)
+      catchError(this.handle2)
     );
   }
 
@@ -80,4 +80,8 @@ export class AuthService {
   private handle(error: any) {
       return of (error.error.Message);
   }
+
+  private handle2(error: any) {
+    return of (error.message);
+}
 }

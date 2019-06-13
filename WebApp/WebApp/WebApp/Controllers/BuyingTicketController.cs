@@ -89,6 +89,7 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Authorize(Roles = "AppUser")]
         [System.Web.Http.Route("api/Ticket/BuyTicket")]
         public IHttpActionResult BuyTicket()
         {

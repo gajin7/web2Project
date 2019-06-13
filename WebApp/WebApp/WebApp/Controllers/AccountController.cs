@@ -95,6 +95,7 @@ namespace WebApp.Controllers
             };
         }
 
+        [Authorize(Roles = "AppUser")]
         [HttpPost]
         [System.Web.Http.Route("api/Profile/GetInfo")]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -163,6 +164,7 @@ namespace WebApp.Controllers
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
+        [Authorize(Roles = "AppUser")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
             IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -203,6 +205,7 @@ namespace WebApp.Controllers
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
+        [Authorize(Roles = "AppUser")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)

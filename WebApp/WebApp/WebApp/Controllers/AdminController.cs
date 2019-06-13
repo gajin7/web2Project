@@ -56,6 +56,7 @@ namespace WebApp.Controllers
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/ChangePrice")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult ChangePrice()
         {
             var req = HttpContext.Current.Request;
@@ -79,6 +80,7 @@ namespace WebApp.Controllers
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/ChangeDiscount")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult ChangeDiscount()
         {
             var req = HttpContext.Current.Request;
@@ -103,6 +105,7 @@ namespace WebApp.Controllers
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/GetLines")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult GetLines()
         {
           
@@ -121,6 +124,7 @@ namespace WebApp.Controllers
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/GetDepatures")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult GetDepatures()
         {
 
