@@ -29,12 +29,40 @@ export class TicketPriceComponent implements OnInit {
 
   public goHome()
   {
-    this.router.navigate(['home']);
+    if(localStorage.role == "AppUser")
+    {
+      this.router.navigate(['app-user-home']);
+    }
+    else
+    {
+      this.router.navigate(['home']);
+    }
   }
 
   public buyTicket()
   {
-    this.router.navigate(['buying-ticket']);
+    if(localStorage.role == "AppUser")
+    {
+      this.router.navigate(['app-user-buy-ticket']);
+    }
+    else
+    {
+      this.router.navigate(['buying-ticket']);
+    }
+    
+  }
+
+  Navigate()
+  {
+    if(localStorage.role == "AppUser")
+    {
+      this.router.navigate(['app-user-home']);
+    }
+    else
+    {
+      this.router.navigate(['home']);
+    }
+    
   }
 
   

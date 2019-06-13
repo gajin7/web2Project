@@ -381,6 +381,26 @@
     <Compile Include="Migrations\201906121250227_TicketUpdate5.Designer.cs">
       <DependentUpon>201906121250227_TicketUpdate5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906121436359_InitialValues2.cs" />
+    <Compile Include="Migrations\201906121436359_InitialValues2.Designer.cs">
+      <DependentUpon>201906121436359_InitialValues2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906122046541_InitialValues3.cs" />
+    <Compile Include="Migrations\201906122046541_InitialValues3.Designer.cs">
+      <DependentUpon>201906122046541_InitialValues3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906122047386_InitialValues4.cs" />
+    <Compile Include="Migrations\201906122047386_InitialValues4.Designer.cs">
+      <DependentUpon>201906122047386_InitialValues4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906130834232_AprovedUsrrAdded.cs" />
+    <Compile Include="Migrations\201906130834232_AprovedUsrrAdded.Designer.cs">
+      <DependentUpon>201906130834232_AprovedUsrrAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906130836218_AprovedUsrrAdded1.cs" />
+    <Compile Include="Migrations\201906130836218_AprovedUsrrAdded1.Designer.cs">
+      <DependentUpon>201906130836218_AprovedUsrrAdded1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -398,7 +418,9 @@
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repository\DepatureRepository.cs" />
     <Compile Include="Persistence\Repository\DiscountRepository.cs" />
+    <Compile Include="Persistence\Repository\IDepatureRepository.cs" />
     <Compile Include="Persistence\Repository\IDiscountRepository.cs" />
     <Compile Include="Persistence\Repository\IPictureRepository.cs" />
     <Compile Include="Persistence\Repository\ILineRepository.cs" />
@@ -610,6 +632,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906121250227_TicketUpdate5.resx">
       <DependentUpon>201906121250227_TicketUpdate5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906121436359_InitialValues2.resx">
+      <DependentUpon>201906121436359_InitialValues2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906122046541_InitialValues3.resx">
+      <DependentUpon>201906122046541_InitialValues3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906122047386_InitialValues4.resx">
+      <DependentUpon>201906122047386_InitialValues4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906130834232_AprovedUsrrAdded.resx">
+      <DependentUpon>201906130834232_AprovedUsrrAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906130836218_AprovedUsrrAdded1.resx">
+      <DependentUpon>201906130836218_AprovedUsrrAdded1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,7 +19,7 @@
     </div>
 </nav>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+<form [formGroup]="Form" (ngSubmit)="register()" class="needs-validation" novalidate>
 
     <div class="needs-validation">
         <div class="form-row">
@@ -28,8 +28,6 @@
             <div class="col-md-6 mb-2 diss">
 
                 <div class="row">
-
-
 
                     <!-- Force next columns to break to new line -->
                     <div class="w-100"></div>
@@ -45,7 +43,9 @@
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <select class="custom-select"  (change)="selectedLine($event)" required>
+                                    <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
+                                </select>
                                 <div class="invalid-feedback">
                                     Please enter valid line.
                                 </div>
@@ -58,41 +58,36 @@
 
                             </div>
                             <div class="col-md-6 mb-2 id">
-                                <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
-        <option value="WorkDay"> Work Day</option>
-        <option value="Saturday"> Saturday</option>
-        <option value="Sunday">Sunday </option>                               </select>
-
+                                <select  class="custom-select" (change)="selectedType($event)"  required>
+                                     <option value="WorkDay"> Work Day</option>
+                                     <option value="Saturday"> Saturday</option>
+                                    <option value="Sunday">Sunday </option>                               
+                                </select>
                             </div>
 
                             <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
                         </div>
-
                         <div class="form-row">
                             <div class="col-md-6 mb-2 id">
                                 Departure:
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid departure.
                                 </div>
                             </div>
+                            <button type="button" (click)="Show()" class="btn btn-primary savebutton"> Show</button>
                             <button type="button" class="btn btn-primary savebutton"> Save changes</button>
                             <div>
                                 Ispis da je sacuvana linija u bazu nakon sto se dugme klikne.
                             </div>
                         </div>
 
-
-
                     </div>
 
                 </div>
-
-
-
 
 
             </div>
@@ -100,67 +95,5 @@
         </div>
     </div>
     <!---------------------------------------------------->
-
-
-
-    <hr class="new1">
-
-    <div class="text2">
-        SHOW
-    </div>
-    <div class="form-row showshedule">
-
-        <div class="col-md-4 mb-2 id">
-            Line:
-
-        </div>
-        <div class="col-md-4 mb-2 input">
-            <input type="text" class="form-control" id="validationCustom04" required>
-            <div class="invalid-feedback">
-                Please enter valid line.
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-2 id">
-            <button type="button" class="btn btn-primary submitbutton"> Submit </button>
-
-        </div>
-
-
-        Za zadatu liniju ispisace se red voznje.
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-
-                    <th scope="col">Work Days</th>
-                    <th scope="col">Saturday</th>
-                    <th scope="col">Sunday</th>
-
-                </tr>
-            </thead>
-            <tbody>
-
-
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-
-
-
-
-
-
-            </tbody>
-        </table>
-    </div>
-
-
-
-    <!-- <textarea class="message" for=""> {{mssg}}</textarea> -->
-
-
 
 </form>

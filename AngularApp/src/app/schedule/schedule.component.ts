@@ -45,4 +45,17 @@ export class ScheduleComponent implements OnInit {
     this.service.GetSchedule("Sunday",this.LineForm.value.LineName).subscribe((data) => { 
           this.sunday = data; });
   }
+
+  Navigate()
+  {
+    if(localStorage.role == "AppUser")
+    {
+      this.route.navigate(['app-user-home']);
+    }
+    else
+    {
+      this.route.navigate(['home']);
+    }
+    
+  }
 }

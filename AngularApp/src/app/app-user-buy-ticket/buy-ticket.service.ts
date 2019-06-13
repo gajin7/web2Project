@@ -14,7 +14,7 @@ export class BuyTicketService {
   BuyTicket(type: string) : Observable<any>
   {
    return this.http.post<any>('http://localhost:52295/api/Ticket/BuyTicket', `type=`+type, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
-      catchError(this.handleError<any>('BuyTimeTicket'))
+      catchError(this.handle)
     );
   }
 
@@ -29,5 +29,10 @@ export class BuyTicketService {
     return (error: any): Observable<T> => {
       return of(result as T);
     };
+
   }
+
+  private handle(error: any) {
+    return of (error.error.Message);
+}
 }

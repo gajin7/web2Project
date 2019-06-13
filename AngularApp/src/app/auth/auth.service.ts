@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, pipe, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from './user';
 import { RegisterUser } from '../registerUser';
+
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,7 @@ export class AuthService {
         localStorage.setItem('role', role);
       }),
 
-      catchError(this.handleError<any>('login'))
+      catchError(this.handle)
     );
   }
 
@@ -54,7 +55,7 @@ export class AuthService {
   regiter(user : RegisterUser) : Observable<any>
   {
    return this.http.post<any>('http://localhost:52295/api/Account/Register', user).pipe(
-      catchError(this.handleError<any>('register'))
+      catchError(this.handle)
     );
   }
 
@@ -64,7 +65,9 @@ export class AuthService {
     for (let selectedFile of selectedFiles){
       sendImage.append(selectedFile.name, selectedFile)
     }    
-    return this.http.post("http://localhost:52295/api/Account/PostImage?Email="+Email ,sendImage);
+    return this.http.post<any>("http://localhost:52295/api/Account/PostImage?Email="+Email ,sendImage).pipe(
+      catchError(this.handle)
+      );
   }  
   
 
@@ -72,5 +75,9 @@ export class AuthService {
     return (error: any): Observable<T> => {
       return of(result as T);
     };
+  }
+
+  private handle(error: any) {
+      return of (error.error.Message);
   }
 }

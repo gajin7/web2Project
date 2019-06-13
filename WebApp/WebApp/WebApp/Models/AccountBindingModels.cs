@@ -109,7 +109,7 @@ namespace WebApp.Models
         [Display(Name = "Number")]
         public string Number { get; set; }
 
-        [Required]
+      
         [Display(Name = "TypeOfPerson")]
         public string TypeOfPerson { get; set; }
 

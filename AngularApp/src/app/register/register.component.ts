@@ -52,10 +52,16 @@ export class RegisterComponent implements OnInit {
    
 
     if (this.selectedImage != undefined){
-      this.authService.sendImage(this.selectedImage, this.registerForm.value.Email).subscribe();
-   }
+      this.authService.sendImage(this.selectedImage, this.registerForm.value.Email).subscribe((data) =>{
+      this.mssg += data;
+   });
 
-  });
+    }
+    else if(this.selectedImage == undefined && this.registerForm.value.TypeOfPerson != "Regular" )
+    {
+      this.mssg += " You didn't added image of document. You can do it later, but you can't buy any ticket before you do that."
+    }
+});
   }
 
 }

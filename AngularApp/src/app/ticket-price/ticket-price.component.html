@@ -11,15 +11,12 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" routerLink="/login" routerLinkActive="active">Log in</a>
-            <a class="nav-item nav-link active" routerLink="/register" routerLinkActive="active">Register</a>
-
+            <a class="nav-item nav-link active" (click)="Navigate()">Home <span class="sr-only">(current)</span></a>
         </div>
     </div>
 </nav>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+<form  (ngSubmit)="register()" class="needs-validation" novalidate>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -32,7 +29,6 @@
         </thead>
         <tbody>
             <tr>
-                <th rowspan="3">Urban</th>
                 <td>Regular</td>
                 <td>{{prices[0]}} RSD</td>
                 <td>Regular</td>
@@ -72,40 +68,6 @@
                 </th>
             </tr>
 
-            <tr>
-                <th rowspan="3">Suburban</th>
-                <td>Regular</td>
-                <td>{{prices[12]}} RSD</td>
-                <td>Regular</td>
-                <td>{{prices[15]}} RSD</td>
-                <td>Regular</td>
-                <td>{{prices[18]}} RSD</td>
-                <td>Regular</td>
-                <td>{{prices[21]}} RSD</td>
-            </tr>
-            <tr>
-
-                <td>Student</td>
-                <td>{{prices[13]}} RSD</td>
-                <td>Student</td>
-                <td>{{prices[16]}} RSD</td>
-                <td>Student</td>
-                <td>{{prices[19]}} RSD</td>
-                <td>Student</td>
-                <td>{{prices[12]}} RSD</td>
-            </tr>
-
-            <tr>
-                <td>Retaire</td>
-                <td>{{prices[14]}} RSD</td>
-                <td>Retaire</td>
-                <td>{{prices[17]}} RSD</td>
-                <td>Retaire</td>
-                <td>{{prices[20]}} RSD</td>
-                <td>Retaire</td>
-                <td>{{prices[23]}} RSD</td>
-            </tr>
-
         </tbody>
     </table>
 
@@ -119,8 +81,8 @@
 
     <button class="btn btn-primary" (click)="buyTicket()">Go to buy ticket</button>
     <br/>
-    <label>Students discount: {{prices[24]}}%</label>
+    <label>Students discount: {{prices[12]}}%</label>
     <br/>
-    <label>Retree discount: {{prices[25]}}%</label>
+    <label>Retree discount: {{prices[13]}}%</label>
 
 </form>

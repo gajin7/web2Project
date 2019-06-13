@@ -18,7 +18,14 @@ export class EditProfileService {
 
   EditProfile(user: profile) : Observable<any>
   {
-   return this.http.post('http://localhost:52295/api/Account/EditProfile',user);
+   return this.http.post('http://localhost:52295/api/Account/EditProfile',user).pipe(
+    catchError(this.handle));
+  }
+
+  ChangePassword(pass : any) : Observable<any>
+  {
+   return this.http.post('http://localhost:52295/api/Account/ChangePassword',pass).pipe(
+    catchError(this.handle));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -26,4 +33,8 @@ export class EditProfileService {
       return of(result as T);
     };
   }
+
+  private handle(error: any) {
+    return of (error.error.Message);
+}
 }

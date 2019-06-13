@@ -17,7 +17,7 @@ export class BuyingTicketService {
   BuyTimeTicket(lineType : string, mail: string) : Observable<any>
   {
    return this.http.post<any>('http://localhost:52295/api/Ticket/ByTimeTicket', `lineType=` + lineType + `&email=`+mail, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
-      catchError(this.handleError<any>('BuyTimeTicket'))
+      catchError(this.handle)
     );
   }
 
@@ -33,6 +33,10 @@ export class BuyingTicketService {
       return of(result as T);
     };
   }
+
+  private handle(error: any) {
+    return of (error.error.Message);
+}
 }
 
 

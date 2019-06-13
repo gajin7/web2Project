@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CheckInTicketService } from './check-in-ticket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-in-ticket',
@@ -16,7 +17,7 @@ export class CheckInTicketComponent implements OnInit {
   });
 
   mssg: string;
-  constructor(private service: CheckInTicketService, private fb: FormBuilder) { }
+  constructor(private service: CheckInTicketService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
   }
@@ -25,6 +26,19 @@ export class CheckInTicketComponent implements OnInit {
   CheckIn()
   {
     this.service.CheckInTcket(this.ticketForm.value.Id).subscribe((data)=>{this.mssg = data});
+  }
+
+  Navigate()
+  {
+    if(localStorage.role == "AppUser")
+    {
+      this.router.navigate(['app-user-home']);
+    }
+    else
+    {
+      this.router.navigate(['home']);
+    }
+    
   }
 
 

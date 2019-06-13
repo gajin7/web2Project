@@ -22,6 +22,8 @@ import { AdminScheduleComponent } from './admin-schedule/admin-schedule.componen
 import { AdminLinesComponent } from './admin-lines/admin-lines.component';
 import { AdminStationComponent } from './admin-station/admin-station.component';
 import { ControlerComponent } from './controler/controler.component';
+import { UserGuard } from './auth/user.guard';
+import { ControlorGuard } from './auth/controlor.guard';
 
 const appRoutes: Routes = [
   { 
@@ -59,11 +61,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'app-user-buy-ticket',
-    component: AppUserBuyTicketComponent
+    component: AppUserBuyTicketComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'app-user-home',
-    component: AppUserHomeComponent
+    component: AppUserHomeComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'check-in-ticket',
@@ -71,35 +75,43 @@ const appRoutes: Routes = [
   },
   {
     path: 'edit-profile',
-    component: EditProfileComponent
+    component: EditProfileComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'control-ticket',
-    component: ControlTicketComponent
+    component: ControlTicketComponent,
+    canActivate: [ControlorGuard]
   },
   {
     path: 'my-tickets',
-    component: MyTicketsComponent
+    component: MyTicketsComponent,
+    canActivate: [UserGuard]
   },
   {
     path: 'admin-price-list',
-    component: AdminPriceListComponent
+    component: AdminPriceListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin-schedule',
-    component: AdminScheduleComponent
+    component: AdminScheduleComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin-lines',
-    component: AdminLinesComponent
+    component: AdminLinesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin-station',
-    component: AdminStationComponent
+    component: AdminStationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'controler',
-    component: ControlerComponent
+    component: ControlerComponent,
+    canActivate: [ControlorGuard]
   },
   {
     path: '**',

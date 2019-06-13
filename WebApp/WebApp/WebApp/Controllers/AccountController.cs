@@ -101,13 +101,22 @@ namespace WebApp.Controllers
         [Route("EditProfile")]
         public IHttpActionResult EditProfile(EditProfileBindingModel model)
         {
+
+
+            if (!ModelState.IsValid)
+            {
+                var mssg = ModelState.Values.Select((u) => u.Errors.Select((i) => i.ErrorMessage).FirstOrDefault()).FirstOrDefault();
+                return BadRequest(ModelState);
+            }
+
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             var userId = User.Identity.GetUserId();
             ApplicationUser appUsr = UserManager.Users.Where(u => u.Id == userId).FirstOrDefault();
             appUsr.Email = model.Email;
             appUsr.UserName = model.Email;
-            UserManager.UpdateAsync(appUsr);
+          
+            UserManager.Update(appUsr);
 
 
             User usr = _unitOfWork.Users.GetAll().Where(u => u.AppUserId == userId).FirstOrDefault();
@@ -115,11 +124,32 @@ namespace WebApp.Controllers
             usr.LastName = model.LastName;
             usr.Address = model.City + "," + model.Street + "," + model.Number;
 
+            switch (model.TypeOfPerson)
+            {
+                case "Regular":
+                    usr.UserType = Enums.UserType.regular;
+                    usr.postedImage = false;
+                    usr.Approved = true;
+                    break;
+                case "Student":
+                    usr.UserType = Enums.UserType.student;
+                    usr.postedImage = false;
+                    usr.Approved = false;
+                    break;
+                case "Retiree":
+                    usr.UserType = Enums.UserType.retiree;
+                    usr.postedImage = false;
+                    usr.Approved = false;
+                    break;
+                default:
+                    break;
+            }
+
             _unitOfWork.Users.Update(usr);
             _unitOfWork.Complete();
 
 
-            return Ok();
+            return Ok("Changes saved");
 
         }
 
@@ -177,7 +207,8 @@ namespace WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var mssg = ModelState.Values.Select((u) => u.Errors.Select((i) => i.ErrorMessage).FirstOrDefault()).FirstOrDefault();
+                return BadRequest(mssg);
             }
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
@@ -185,10 +216,10 @@ namespace WebApp.Controllers
             
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return BadRequest(result.Errors.LastOrDefault());
             }
 
-            return Ok();
+            return Ok("Password succesfully changed");
         }
 
         // POST api/Account/SetPassword
@@ -380,16 +411,17 @@ namespace WebApp.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            var req = HttpContext.Current.Request;
           
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var mssg = ModelState.Values.Select((u) => u.Errors.Select((i) => i.ErrorMessage).FirstOrDefault()).FirstOrDefault();
+                return BadRequest(mssg);
             }
 
             DateTime tempDate;
             DateTime.TryParse(model.Date, out tempDate);
             Enums.UserType type = new Enums.UserType();
+            bool approved = false;
             switch (model.TypeOfPerson)
             {
                 case "Student":
@@ -397,6 +429,7 @@ namespace WebApp.Controllers
                     break;
                 case "Regular":
                     type = Enums.UserType.regular;
+                    approved = true;
                     break;
                 case "Retirre":
                     type = Enums.UserType.retiree;
@@ -410,26 +443,28 @@ namespace WebApp.Controllers
           
             IdentityResult result = await UserManager.CreateAsync(Appuser, model.Password);
 
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.LastOrDefault());
+            }
+
             UserManager.AddToRole(Appuser.Id, "AppUser");
             
            
-           if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
+          
 
-            var user = new User() { AppUserId = Appuser.Id, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type };
+            var user = new User() { AppUserId = Appuser.Id, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type, Approved = approved, postedImage = false };
             _unitOfWork.Users.Add(user);
             _unitOfWork.Complete();
 
          
 
-            return Ok();
+            return Ok("Succesfully registrated! Please login to continue");
         }
 
         [AllowAnonymous]
         [Route("PostImage")]
-        public async Task<HttpResponseMessage> PostImage()
+        public async Task<IHttpActionResult> PostImage()
         {
             var req = HttpContext.Current.Request;
 
@@ -451,30 +486,38 @@ namespace WebApp.Controllers
 
                         var message = string.Format("Please Upload image of type .jpg,.gif,.png,.img,.jpeg.");
 
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, message);
+                        return BadRequest(message);
                     }
                     else if (postedFile.ContentLength > MaxContentLength)
                     {
                         var message = string.Format("Please Upload a file upto 1 mb.");
 
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, message);
+                        return BadRequest(message);
                     }
                     else
                     {
+                        var userId = UserManager.Users.Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
+
+                        var tempUser = _unitOfWork.Users.GetAll().Where((u) => u.AppUserId == userId).FirstOrDefault();
+                        if(tempUser.UserType != Enums.UserType.retiree || tempUser.UserType != Enums.UserType.student)
+                            return BadRequest("You can't add image for regular user!");
+                        tempUser.postedImage = true;
+                        _unitOfWork.Users.Update(tempUser);
+                        _unitOfWork.Complete();
 
                         Bitmap bmp = new Bitmap(postedFile.InputStream);
                         System.Drawing.Image img = (System.Drawing.Image)bmp;
                         byte[] imagebytes = ImageToByteArray(img);
 
-                        var userId = UserManager.Users.Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
 
                         _unitOfWork.Pictures.Add(new Picture() { ImageSource = imagebytes, AppUserId = userId });
                         _unitOfWork.Complete();
 
+ 
                     }
                 }
             }
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
 
         }
 

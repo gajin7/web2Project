@@ -47,27 +47,26 @@ namespace WebApp.Controllers
                 return Ok("Ticket allredy checked");
             }
 
+
             Ticket ticket = _unitOfWork.Tickets.Get(id);
-            ticket.Checked = true;
-            ticket.CheckedTime = DateTime.Now.ToString();
-
-            _unitOfWork.Tickets.Update(ticket);
-            _unitOfWork.Complete();
-
             string retVal =
                    "Type: " + ticket.Type + System.Environment.NewLine +
-                   "Price: " + ticket.Price + System.Environment.NewLine +
-                   "Valid time: " + ticket.RemainingTime + System.Environment.NewLine;
+                   "Price: " + ticket.Price + System.Environment.NewLine;
 
 
             switch (ticket.Type)
             {
                 case Enums.TicketType.TimeTicket:
+                    ticket.Checked = true;
+                    ticket.CheckedTime = DateTime.Now.ToString();
+
+                    _unitOfWork.Tickets.Update(ticket);
+                    _unitOfWork.Complete();
                     TimeSpan rTime = DateTime.Parse(ticket.CheckedTime) - DateTime.Now + ticket.RemainingTime;
                      retVal += "Remaining time: " + rTime.ToString();
                     break;
                 case Enums.TicketType.DailyTicket:
-                    retVal += "Remaining time: End of day" + ticket.CheckedTime.Trim(' ')[0];
+                    retVal += "Remaining time: End of day" + DateTime.Parse(ticket.CheckedTime).Date;
                     break;
                 case Enums.TicketType.MonthlyTicket:
                     retVal += "Remaining time: End of month " + DateTime.Parse(ticket.CheckedTime).Month.ToString() + "/" + DateTime.Parse(ticket.CheckedTime).Year.ToString();
@@ -105,26 +104,23 @@ namespace WebApp.Controllers
             if (!_unitOfWork.Tickets.GetAll().Where(u => u.Id == id).Select(u => u.Checked).First())
             {
 
-                string retValue = "Ticket excist but not checked!" + System.Environment.NewLine + 
-                    "Type: " +ticket.Type.ToString() + System.Environment.NewLine +
-                    "Price: " + ticket.Price.ToString() + System.Environment.NewLine +
-                    "Valid time: " + ticket.RemainingTime.ToString() + System.Environment.NewLine +
-                    "User" + ticket.User.ToString() + System.Environment.NewLine +
+                string retValue = "Ticket excist but not checked!" + System.Environment.NewLine +
+                    "Type: " + ticket.Type.ToString() + System.Environment.NewLine +
+                    "Price: " + ticket.Price.ToString() + System.Environment.NewLine;
                 return Ok(retValue);
             }
 
 
-            string retVal = "Ticket checked!" + System.Environment.NewLine + 
+            string retVal = "Ticket checked!" + System.Environment.NewLine +
                      " Checked: " + ticket.CheckedTime.ToString() + System.Environment.NewLine +
                      " Type: " + ticket.Type.ToString() + System.Environment.NewLine +
-                     " Price: " + ticket.Price.ToString() + System.Environment.NewLine +
-                     " Valid time: " + ticket.RemainingTime.ToString() + System.Environment.NewLine +
+                     " Price: " + ticket.Price.ToString() + System.Environment.NewLine;
                     
 
             if (ticket.User != null)
                 retVal += System.Environment.NewLine +  " User" + ticket.User.ToString() ;
 
-
+            string userName = "";
             switch (ticket.Type)
             {
                 case Enums.TicketType.TimeTicket:
@@ -136,6 +132,9 @@ namespace WebApp.Controllers
                     }
                     break;
                 case Enums.TicketType.DailyTicket:
+                     userName = _unitOfWork.Users.GetAll().Where(u => u.AppUserId == ticket.UserId).Select(u => u.FirstName).FirstOrDefault() + " " +
+                        _unitOfWork.Users.GetAll().Where(u => u.AppUserId == ticket.UserId).Select(u => u.LastName).FirstOrDefault();
+                    retVal += "User:" + userName + System.Environment.NewLine;
                     retVal += "Remaining time: End of day" + ticket.CheckedTime.Trim(' ')[0];
                     if (DateTime.Now.Date != DateTime.Parse(ticket.CheckedTime).Date)
                     {
@@ -143,6 +142,9 @@ namespace WebApp.Controllers
                     }
                     break;
                 case Enums.TicketType.MonthlyTicket:
+                     userName = _unitOfWork.Users.GetAll().Where(u => u.AppUserId == ticket.UserId).Select(u => u.FirstName).FirstOrDefault() + " " +
+                        _unitOfWork.Users.GetAll().Where(u => u.AppUserId == ticket.UserId).Select(u => u.LastName).FirstOrDefault();
+                    retVal += "User:" + userName + System.Environment.NewLine;
                     retVal += "Remaining time: End of month " + DateTime.Parse(ticket.CheckedTime).Month.ToString() + "/" + DateTime.Parse(ticket.CheckedTime).Year.ToString();
                     if (DateTime.Now.Month != DateTime.Parse(ticket.CheckedTime).Month || DateTime.Now.Year != DateTime.Parse(ticket.CheckedTime).Year)
                     {
@@ -150,6 +152,9 @@ namespace WebApp.Controllers
                     }
                     break;
                 case Enums.TicketType.AnnualTicket:
+                     userName = _unitOfWork.Users.GetAll().Where(u => u.AppUserId == ticket.UserId).Select(u => u.FirstName).FirstOrDefault() + " " +
+                        _unitOfWork.Users.GetAll().Where(u => u.AppUserId == ticket.UserId).Select(u => u.LastName).FirstOrDefault();
+                    retVal += "User:" + userName + System.Environment.NewLine;
                     retVal += "Remaining time: End of year " + DateTime.Parse(ticket.CheckedTime).Year.ToString();
                     if (DateTime.Now.Year != DateTime.Parse(ticket.CheckedTime).Year)
                     {

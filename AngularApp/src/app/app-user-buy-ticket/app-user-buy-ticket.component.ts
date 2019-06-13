@@ -43,7 +43,7 @@ export class AppUserBuyTicketComponent implements OnInit {
   buyTimeTicket()
   {
     this.service.BuyTicket(this.ticketType).subscribe((data) => {
-      this.message = "You successfully bought your ticket. Ticket ID is" + data;});
+      this.message =  data;});
 
       
   }

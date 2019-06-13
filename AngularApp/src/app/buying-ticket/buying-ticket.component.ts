@@ -40,7 +40,7 @@ export class BuyingTicketComponent implements OnInit {
   buyTimeTicket()
   {
     this.service.BuyTimeTicket(this.lineType,this.ticketForm.value.email).subscribe((data) => {
-      this.message = "You successfully bought your ticket. Ticket ID is" + data + ". We also sent it to email: " + this.ticketForm.value.email;});
+      this.message = data });
 
       
   }

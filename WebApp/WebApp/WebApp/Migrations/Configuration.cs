@@ -77,47 +77,28 @@ namespace WebApp.Migrations
 
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.TimeTicket))
             {
-                var price = new Prices() { price = 179, ticketType = Enums.TicketType.TimeTicket, LineType = Enums.LineTypes.Urban };
+                var price = new Prices() { price = 179, ticketType = Enums.TicketType.TimeTicket };
                 context.Prices.Add(price);
             }
-            if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.TimeTicket))
-            {
-                var price = new Prices() { price = 229, ticketType = Enums.TicketType.TimeTicket, LineType = Enums.LineTypes.Suburban };
-                context.Prices.Add(price);
-            }
+           
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.MonthlyTicket))
             {
-                var price = new Prices() { price = 2990, ticketType = Enums.TicketType.MonthlyTicket, LineType = Enums.LineTypes.Urban };
+                var price = new Prices() { price = 2990, ticketType = Enums.TicketType.MonthlyTicket };
                 context.Prices.Add(price);
             }
-            if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.MonthlyTicket))
-            {
-                var price = new Prices() { price = 3490, ticketType = Enums.TicketType.MonthlyTicket, LineType = Enums.LineTypes.Suburban };
-                context.Prices.Add(price);
-            }
+           
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.AnnualTicket))
             {
-                var price = new Prices() { price = 25502, ticketType = Enums.TicketType.AnnualTicket, LineType = Enums.LineTypes.Urban };
+                var price = new Prices() { price = 25502, ticketType = Enums.TicketType.AnnualTicket};
                 context.Prices.Add(price);
             }
-            if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.AnnualTicket))
-            {
-                var price = new Prices() { price = 28704, ticketType = Enums.TicketType.AnnualTicket, LineType = Enums.LineTypes.Suburban };
-                context.Prices.Add(price);
-            }
+           
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.DailyTicket))
             {
-                var price = new Prices() { price = 499, ticketType = Enums.TicketType.DailyTicket, LineType = Enums.LineTypes.Urban };
+                var price = new Prices() { price = 499, ticketType = Enums.TicketType.DailyTicket };
                 context.Prices.Add(price);
             }
-            if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.DailyTicket))
-            {
-                var price = new Prices() { price = 625, ticketType = Enums.TicketType.DailyTicket, LineType = Enums.LineTypes.Suburban };
-                context.Prices.Add(price);
-            }
-
-
-
+       
 
             if (!context.Discounts.Any(u => u.Type == Enums.UserType.regular))
             {

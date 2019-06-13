@@ -11,7 +11,7 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" routerLink="/admin" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" routerLink="/app-user-home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
 
 
 
@@ -115,6 +115,7 @@
 
 
     <button class="btn btn-primary" type="submit">Submit form</button>
+    <label>{{mssgEdit}}</label>
 </form>
 
 <script>
@@ -137,3 +138,42 @@
         }, false);
     })();
 </script>
+
+<form [formGroup]="changePasswordForm" (ngSubmit)=" ChangePassword()" class="needs-validation" novalidate>
+    <div class="all">
+        <div class="password">
+            <label for="validationCustom02">Old Password</label>
+            <input type="password" formControlName="OldPassword" class="form-control" id="validationCustom02" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please choose a valid password.
+            </div>
+        </div>
+
+        <div class="password">
+            <label for="validationCustom02">New Password</label>
+            <input type="password" formControlName="NewPassword" class="form-control" id="validationCustom02" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please choose a valid password.
+            </div>
+        </div>
+
+        <div class="confirm_password">
+            <label for="validationCustom02">Confirm new password</label>
+            <input type="password" formControlName="ConfirmPassword" class="form-control" id="validationCustom02" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Paswords didn't match (or password didn't entered).
+            </div>
+        </div>
+         <button class="btn btn-primary" type="submit">Submit form</button>
+         <label>{{mssg}}</label>
+    </div>
+</form>

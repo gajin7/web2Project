@@ -32,6 +32,7 @@ import { ControlerComponent } from './controler/controler.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import { ControlerComponent } from './controler/controler.component';
     AdminScheduleComponent,
     AdminLinesComponent,
     AdminStationComponent,
-    ControlerComponent
+    ControlerComponent,
+  
 
   ],
   imports: [

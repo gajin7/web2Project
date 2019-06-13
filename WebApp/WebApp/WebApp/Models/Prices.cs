@@ -10,7 +10,6 @@ namespace WebApp.Models
     {
         public int Id { get; set; }
         public TicketType ticketType { get; set; }
-        public Enums.LineTypes LineType { get; set; }
         public double price { get; set; }
     }
 }

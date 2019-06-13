@@ -21,8 +21,16 @@ export class EditProfileComponent implements OnInit {
     TypeOfPerson: ['', Validators.required],
   });
 
+  changePasswordForm = this.fb.group({
+    OldPassword :['', Validators.required],
+    NewPassword :['', Validators.required],
+    ConfirmPassword :['', Validators.required]
+  });
+
 
   selectedImage: any;
+  mssg : string;
+  mssgEdit : string;
   constructor( private fb: FormBuilder,public Service: EditProfileService,public router: Router) { }
 
 
@@ -45,8 +53,15 @@ export class EditProfileComponent implements OnInit {
   EditProfile()
   {
     this.Service.EditProfile(this.Form.value).subscribe((data) =>{
-
+      this.mssgEdit = data;
     });
+  }
+
+  ChangePassword()
+  {
+    this.Service.ChangePassword(this.changePasswordForm.value).subscribe((data) =>{
+        this.mssg = data;
+      }); 
   }
 
 }

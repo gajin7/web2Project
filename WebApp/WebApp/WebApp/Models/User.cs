@@ -20,6 +20,10 @@ namespace WebApp.Models
 
         public Enums.UserType UserType { get; set; }
 
+        public bool Approved { get; set; }
+
+        public bool postedImage { get; set; }
+
 
     }
 }

@@ -20,5 +20,7 @@ namespace WebApp.Persistence.UnitOfWork
 
         IUserRepository Users { get; set; }
         IPictureRepository Pictures { get; set; }
+
+        IDepatureRepository Depatures { get; set; }
     }
 }

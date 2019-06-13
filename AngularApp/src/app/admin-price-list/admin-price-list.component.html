@@ -19,7 +19,7 @@
     </div>
 </nav>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+<form  [formGroup]="ticketForm" class="needs-validation"  novalidate>
 
     <div class="needs-validation">
         <div class="form-row">
@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                     <label for="validationCustom05">Select ticket type</label>
-                    <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
+                    <select (change)="selected($event)"  class="custom-select"  required>
           <option value=""></option>
           <option value="TimeTicket"> Time ticket</option>
           <option value="DailyTicket">Daily ticket</option>
@@ -46,7 +46,7 @@
 
                     </div>
                     <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <input type="text" class="form-control" formControlName="newPrice" id="validationCustom04" required>
                         <div class="invalid-feedback">
                             Please enter valid line.
                         </div>
@@ -54,10 +54,9 @@
 
                 </div>
 
-                <button type="button" class="btn btn-primary savebutton">Set</button>
-                <div>
-                    Ispis da je sacuvana nova cena.
-                </div>
+                <button type="button" (click)="ChangePrice()" class="btn btn-primary savebutton">Set</button>
+                <label>{{mssgPrice}}</label>
+               
 
             </div>
             <!---------------------------------------------------->
@@ -70,24 +69,22 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-2 id">
-                        Student discount: trenutni popust
+                        Student discount: {{prices[12]}} %
 
                     </div>
 
                     <div class="col-md-4 mb-2 id">
 
-                        Retaire dicount: trenutni popust
+                        Retaire dicount:{{prices[13]}} %
                     </div>
                 </div>
 
-
-
                 <div class="form-group">
                     <label for="validationCustom05">Select pearson type</label>
-                    <select (change)="selected($event)" class="custom-select" formControlName="TypeOfPerson" required>
+                    <select (change)="selectedUser($event)" class="custom-select"  required>
           <option value=""></option>
-          <option value="Student"> Student</option>
-          <option value="Retairee"> Retairee</option>
+          <option value="student"> Student</option>
+          <option value="retiree"> Retairee</option>
         </select>
                     <!--  <div class="invalid-feedback">You must select type of pearson</div>-->
                 </div>
@@ -98,7 +95,7 @@
 
                     </div>
                     <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
+                        <input type="text" class="form-control" formControlName="newDiscount" id="validationCustom04" required>
                         <div class="invalid-feedback">
                             Please enter valid line.
                         </div>
@@ -106,11 +103,12 @@
 
                 </div>
 
-                <button type="button" class="btn btn-primary savebutton">Set</button>
-                <div>
-                    Ispis da je sacuvan nova popust.
-                </div>
+                <button type="button" (click)="ChangeDiscount()" class="btn btn-primary savebutton">Set</button>
+                <label>{{mssgDiscount}}</label>
+                
+            
             </div>
+       
         </div>
     </div>
     <!---------------------------------------------------->
@@ -122,7 +120,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-
+                <th scope="col"></th>
                 <th scope="col" colspan="2">Time ticket</th>
                 <th scope="col" colspan="2">Daily ticket</th>
                 <th scope="col" colspan="2">Monthly ticket</th>
@@ -130,51 +128,40 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td>Regular</td>
+                <td>{{prices[0]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[3]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[6]}} RSD</td>
+                <td>Regular</td>
+                <td>{{prices[9]}} RSD</td>
+            </tr>
 
             <tr>
 
                 <td>Student</td>
-                <td>1</td>
+                <td>{{prices[1]}} RSD</td>
                 <td>Student</td>
-                <td>1</td>
+                <td>{{prices[4]}} RSD</td>
                 <td>Student</td>
-                <td>1</td>
+                <td>{{prices[7]}} RSD</td>
                 <td>Student</td>
-                <td>1</td>
+                <td>{{prices[10]}} RSD</td>
             </tr>
-            <tr>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-                <td>Regular</td>
-                <td>2</td>
-            </tr>
+
             <tr>
                 <td>Retaire</td>
-                <td>3</td>
+                <td>{{prices[2]}} RSD</td>
                 <td>Retaire</td>
-                <td>3</td>
+                <td>{{prices[5]}} RSD</td>
                 <td>Retaire</td>
-                <td>3</td>
+                <td>{{prices[8]}} RSD</td>
                 <td>Retaire</td>
-                <td>3</td>
+                <td>{{prices[11]}} RSD</td>
             </tr>
-
-
-
-
-
 
         </tbody>
     </table>
-
-
-
-
-
-
-
 </form>

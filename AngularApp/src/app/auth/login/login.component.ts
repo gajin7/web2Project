@@ -26,7 +26,7 @@ export class LoginComponent {
 
   login() {
     this.authService.login(this.loginForm.value).subscribe((data) => {
-      console.log(data);
+      ;
    
     if(this.authService.isLoggedIn)
     {
@@ -45,7 +45,7 @@ export class LoginComponent {
     }
     else
     {
-      this.message = "Error, please try again";
+      this.message = "Username or password incorect";
     }
   });
     
