@@ -99,21 +99,22 @@
                         </div>
                         <div class="form-row">
 
-                            <div class="col-md-2 mb-2 id">
-                                Add:
+                            <form [formGroup]="Form" (ngSubmit)="register()" class="needs-validation" novalidate>
+                                <div class="col-md-2 mb-2 id">
+                                    Add:
 
-                            </div>
-                            <div class="col-md-4 mb-2 input">
-                                <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
-                                <div class="invalid-feedback">
-                                    Please enter valid departure.
                                 </div>
-                            </div>
+                                <div class="col-md-4 mb-2 input">
+                                    <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
+                                    <div class="invalid-feedback">
+                                        Please enter valid departure.
+                                    </div>
+                                </div>
 
-                            <div class="col-md-6 mb-2 input">
-                                <button type="button" class="btn btn-primary savebuttonn"> Add</button>
-                            </div>
-
+                                <div class="col-md-6 mb-2 input">
+                                    <button type="button" class="btn btn-primary savebuttonn"> Add</button>
+                                </div>
+                            </form>
 
 
                         </div>
@@ -125,20 +126,22 @@
 
 
                         <div class="form-row">
-                            <div class="col-md-2 mb-2 id">
-                                Delete:
+                            <form [formGroup]="Form" (ngSubmit)="register()" class="needs-validation" novalidate>
+                                <div class="col-md-2 mb-2 id">
+                                    Delete:
 
-                            </div>
-                            <div class="col-md-4 mb-2 input">
-                                <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
-                                <div class="invalid-feedback">
-                                    Please enter valid departure.
                                 </div>
-                            </div>
+                                <div class="col-md-4 mb-2 input">
+                                    <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
+                                    <div class="invalid-feedback">
+                                        Please enter valid departure.
+                                    </div>
+                                </div>
 
-                            <div class="col-md-6 mb-2 input">
-                                <button type="button" class="btn btn-primary savebuttonn"> Delete</button>
-                            </div>
+                                <div class="col-md-6 mb-2 input">
+                                    <button type="button" class="btn btn-primary savebuttonn"> Delete</button>
+                                </div>
+                            </form>
 
 
 
