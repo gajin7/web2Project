@@ -270,7 +270,6 @@ namespace WebApp.Controllers
         public IHttpActionResult DeleteStation()
         {
             var req = HttpContext.Current.Request;
-            var t = req["id"];
             if (req["id"] == "undefined" || req["id"] == "" || req["id"] == null)
             {
                 return BadRequest("Please enter station number");
@@ -299,7 +298,93 @@ namespace WebApp.Controllers
 
         }
 
+        [HttpGet]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/GetStations")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult GetStations()
+        {
+           
+           
+            var stations = _unitOfWork.Stations.GetAll().Select(u => u.StationNum);
 
+
+            return Json(stations);
+
+        }
+
+      
+
+    [HttpPost]
+    [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+    [System.Web.Http.Route("api/Admin/GetStationInfo")]
+    [Authorize(Roles = "Admin")]
+    public StationViewModel GetStationInfo()
+    {
+
+            var req = HttpContext.Current.Request;
+            if (req["id"] == "undefined" || req["id"] == "" || req["id"] == null)
+            {
+                return new StationViewModel
+                {
+                    name = "",
+                    address = "",
+                    longitude = "",
+                    latitude = "",
+
+                };
+            }
+            Station station = _unitOfWork.Stations.GetAll().Where(u => u.StationNum.ToString() == req["id"].Trim()).FirstOrDefault();
+
+
+            return new StationViewModel
+            {
+                name = station.Name,
+                address = station.Address,
+                longitude = _unitOfWork.Locations.GetAll().Where((u) => u.Id == station.LocationId).Select((u) => u.Lon).FirstOrDefault().ToString(),
+                latitude = _unitOfWork.Locations.GetAll().Where((u) => u.Id == station.LocationId).Select((u) => u.Lat).FirstOrDefault().ToString()
+
+            };
+
+    }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/ChangeStation")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult ChangeStation(ChangeStationModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var mssg = ModelState.Values.Select((u) => u.Errors.Select((i) => i.ErrorMessage).FirstOrDefault()).FirstOrDefault();
+                return BadRequest(mssg);
+            }
+            double lon, lat = new double();
+            if(!Double.TryParse(model.latitude,out lat))
+            {
+                return BadRequest("Wrong latitude");
+            }
+            if (!Double.TryParse(model.longitude, out lon))
+            {
+                return BadRequest("Wrong longitude");
+            }
+
+            Station station = _unitOfWork.Stations.GetAll().Where(u => u.StationNum.ToString() == model.id.Trim()).FirstOrDefault();
+            station.Name = model.name;
+            station.Address = model.address;
+            _unitOfWork.Stations.Update(station);
+            var location = _unitOfWork.Locations.Get(station.LocationId);
+
+            location.Lat = lat;
+            location.Lon = lon;
+
+            _unitOfWork.Locations.Update(location);
+            _unitOfWork.Complete();
+
+
+            return Ok("Changes saved");
+
+        }
 
     }
 }

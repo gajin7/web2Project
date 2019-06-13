@@ -133,15 +133,31 @@
                     <div class="col-6 col-sm-10">
                         <div class="text2">
                             CHANGE
+
                         </div>
-                        <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate> 
+                        <form [formGroup]="changeForm" (ngSubmit)="register()" class="needs-validation" novalidate> 
+                                <div class="form-row">
+                                        <div class="col-md-6 mb-2 id">
+                                            Id:
+                                        </div>
+                                        <div class="col-md-6 mb-2 input">
+                                                <select class="custom-select" (change)="selected($event)" required>
+                                                        <option></option>
+                                                        <option *ngFor="let obj of ids" [value]="obj">{{obj}}</option>
+                                                    </select>
+                                            <div class="invalid-feedback">
+                                                Please enter valid address.
+                                            </div>
+                                        </div>
+            
+                            </div>
                         <div class="form-row">
                             <div class="col-md-6 mb-2 id">
                                 Name:
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <input type="text" class="form-control" formControlName="name" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid name.
                                 </div>
@@ -155,7 +171,7 @@
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <input type="text" class="form-control" formControlName="address" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid address.
                                 </div>
@@ -169,7 +185,7 @@
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <input type="text" class="form-control" formControlName="longitude" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid longitude.
                                 </div>
@@ -183,7 +199,7 @@
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
+                                <input type="text" class="form-control" formControlName="latitude" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid latitude.
                                 </div>
@@ -192,9 +208,9 @@
                         </div>
 
 
-                        <button type="button" class="btn btn-primary savebutton"> Save changes</button>
+                        <button type="button" (click)="Change()" class="btn btn-primary savebutton"> Save changes</button>
                         <div>
-                            Ispis da je obrisana stanica iz baze nakon sto se dugme klikne.
+                           {{changeMssg}}
                         </div>
 
 
@@ -215,60 +231,5 @@
         </div>
     </div>
     <!---------------------------------------------------->
-
-
-
-    <hr class="new1">
-
-    <div class="text2">
-        SHOW STATION
-    </div>
-    <div class="form-row showshedule">
-
-
-            <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate> 
-        <div class="col-md-4 mb-2 id">
-            <button type="button" class="btn btn-primary submitbutton"> Show </button>
-
-        </div>
-
-
-
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-
-                    <th scope="col">Station name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Longitude</th>
-                    <th scope="col">Latitude</th>
-                    <th scope="col">Stations</th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-
-                <tr>
-                    <td></td>
-                    <td></td>
-
-                </tr>
-
-
-
-
-            </tbody>
-        </table>
-    </form>
-    </div>
-
-
-
-
-
-
 
 </form>

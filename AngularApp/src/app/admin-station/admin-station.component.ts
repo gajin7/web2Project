@@ -20,18 +20,48 @@ export class AdminStationComponent implements OnInit {
     id: ['',Validators.required]
   });
 
+  changeForm = this.fb.group({
+    name: ['',Validators.required],
+    address: ['',Validators.required],
+    longitude: ['',Validators.required],
+    latitude: ['',Validators.required],
+  });
+
   addMssg : string;
   deleteMssg : string;
+  changeMssg : string;
+  ids: string[];
+  id: string;
 
   constructor(private fb: FormBuilder, private service: AdminStationService) { }
 
   ngOnInit() {
+    this.service.GetStations().subscribe((data)=> {
+      this.ids = data;
+    });
+  }
+
+  selected (event: any) {
+    //update the ui
+    this.id = event.target.value;
+    this.service.GetStationInfo(this.id).subscribe((data)=>{
+      this.changeForm.setValue({
+        name : data.name,
+        address : data.address,
+        longitude: data.longitude,
+        latitude : data.latitude
+      });
+    })
+
   }
 
   AddStation()
   {
     this.service.AddStation(this.AddForm.value).subscribe((data)=>{
       this.addMssg = data;
+      this.service.GetStations().subscribe((data)=> {
+        this.ids = data;
+      });
     });
   }
 
@@ -39,6 +69,13 @@ export class AdminStationComponent implements OnInit {
   {
     this.service.DeleteStation(this.deleteForm.value.id).subscribe((data)=>{
       this.deleteMssg = data;
+    });
+  }
+
+  Change()
+  {
+    this.service.ChangeStation(this.id,this.changeForm.value).subscribe((data)=>{
+      this.changeMssg = data;
     });
   }
 

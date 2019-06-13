@@ -14,23 +14,37 @@
     </div>
 
     <div class="form-row">
-        <div class="col-md-6 mb-2 id">
-            Enter your id:
-
-        </div>
-        <div class="col-md-6 mb-2 input">
-            <input type="text" class="form-control" formControlName="Id" id="validationCustom04"  required>
-            <div class="invalid-feedback">
-                Please enter valid id.
+            <div class="col-md-4 mb-2 id">
+                Enter your id:
+    
             </div>
+            <div class="col-md-4 mb-2 input">
+                <input type="text" class="form-control" formControlName="Id" id="validationCustom04"  required>
+                <div class="invalid-feedback">
+                    Please enter valid id.
+                </div>
+            </div>
+            <div class="col-md-4 mb-2 id">
+              <button class="btn btn-primary" type="submit">Check in</button>
+    
+            </div>
+    
+    
         </div>
-
-
-    </div>
-    <button class="btn btn-primary" type="submit">Check in</button>
-
-    <br/>
-    <textarea class="message" for=""> {{mssg}}</textarea>
+    
+        <div class="form-row info">
+            <div class="col-md-3 mb-2 info-text">
+              Info:
+    
+            </div>
+            <div class="col-md-2 mb-2 input">
+                <textarea class="message" for=""> {{mssg}}</textarea>
+            </div>
+    
+    
+        </div>
+    
 
 
 </form>
+

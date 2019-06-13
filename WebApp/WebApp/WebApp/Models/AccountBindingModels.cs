@@ -168,4 +168,28 @@ namespace WebApp.Models
         [Display(Name = "latitude")]
         public string latitude { get; set; }
     }
+
+    public class ChangeStationModel
+    {
+
+        [Required]
+        [Display(Name = "id")]
+        public string id { get; set; }
+
+        [Required]
+        [Display(Name = "name")]
+        public string name { get; set; }
+
+        [Required]
+        [Display(Name = "address")]
+        public string address { get; set; }
+
+        [Required]
+        [Display(Name = "longitude")]
+        public string longitude { get; set; }
+
+        [Required]
+        [Display(Name = "latitude")]
+        public string latitude { get; set; }
+    }
 }

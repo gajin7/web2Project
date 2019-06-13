@@ -54,4 +54,13 @@ namespace WebApp.Models
 
         public string ProviderKey { get; set; }
     }
+
+    public class StationViewModel
+    {
+        public string name { get; set; }
+
+        public string address { get; set; }
+        public string longitude { get; set; }
+        public string latitude { get; set; }
+    }
 }
