@@ -1,8 +1,14 @@
 .navbar.navbar-expand-lg.navbar-dark.bg-primary {
     position: relative;
+    width: 100%;
+    height: 60px;
 }
 
 .collapse.navbar-collapse {
     right: 0%;
     position: absolute;
+}
+
+.card-deck {
+    margin-top: 40px;
 }
