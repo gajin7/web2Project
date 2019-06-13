@@ -29,32 +29,72 @@
                 </div>
 
 
+                <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-2 id">
+                            Enter line name:
 
-                <div class="form-row">
-                    <div class="col-md-6 mb-2 id">
-                        Enter line id:
-
-                    </div>
-                    <div class="col-md-6 mb-2 input">
-                        <input type="text" class="form-control" id="validationCustom04" required>
-                        <div class="invalid-feedback">
-                            Please enter valid id.
                         </div>
+                        <div class="col-md-6 mb-2 input">
+                            <input type="text" class="form-control" id="validationCustom04" required>
+                            <div class="invalid-feedback">
+                                Please enter valid id.
+                            </div>
+                        </div>
+
+
                     </div>
 
-                    Smisliti kako dodati da se ucitaju stanice pa da se dodaju u liniju.
+                    <div class="form-row">
+                        <div class="col-md-6 mb-2 id">
+                            Choose stations:
 
-                </div>
+                        </div>
+
+                        <div class="dropdown cq-dropdown" data-name='statuses'>
+                            <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              Stations
+                              <span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                <li>
+                                    <label class="radio-btn">
+                                      <input type="checkbox" value='option1'>
+                                      Option 1
+                                  </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                      <input type="checkbox" value='option2'>
+                                      Option 2
+                                  </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                      <input type="checkbox" value='option3'>
+                                      Option 3
+                                  </label>
+                                    <li>
+
+                                        <!--    <li class='text-center'>
+                                  <button type='button' class='btn btn-xs btn-danger clear close-dropdown' value='Clear'>Clear</button>
+                                  <button type='button' class='btn btn-xs btn-success save' value='Save'>Save</button>
+                              </li> -->
+                            </ul>
+                        </div>
+
+                    </div>
 
 
 
 
-                <button type="button" class="btn btn-primary savebutton"> Add</button>
-                <div>
-                    Ispis da je sacuvana linija u bazu nakon sto se dugme klikne.
-                </div>
+                    <button type="button" class="btn btn-primary savebutton"> Add</button>
+                    <div>
+                        Ispis da je sacuvana linija u bazu nakon sto se dugme klikne.
+                    </div>
 
-
+                </form>
             </div>
             <!---------------------------------------------------->
             <div class="col-md-6 mb-2 diss">
@@ -65,27 +105,30 @@
                             DELETE
                         </div>
 
+                        <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
 
-                        <div class="form-row">
-                            <div class="col-md-6 mb-2 id">
-                                Enter line id:
 
-                            </div>
-                            <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
-                                <div class="invalid-feedback">
-                                    Please enter valid id.
+                            <div class="form-row">
+                                <div class="col-md-6 mb-2 id">
+                                    Enter line id:
+
                                 </div>
+                                <div class="col-md-6 mb-2 input">
+                                    <input type="text" class="form-control" id="validationCustom04" required>
+                                    <div class="invalid-feedback">
+                                        Please enter valid id.
+                                    </div>
+                                </div>
+
                             </div>
 
-                        </div>
+                            <button type="button" class="btn btn-primary savebutton"> Delete</button>
+                            <div>
+                                Ispis da je obrisana linija iz baze nakon sto se dugme klikne.
+                            </div>
 
-                        <button type="button" class="btn btn-primary savebutton"> Delete</button>
-                        <div>
-                            Ispis da je obrisana linija iz baze nakon sto se dugme klikne.
-                        </div>
-
-                        <hr class="new1">
+                            <hr class="new1">
+                        </form>
                     </div>
 
 
@@ -97,93 +140,101 @@
                             CHANGE
                         </div>
 
-                        <div class="form-row">
-                            <div class="col-md-6 mb-2 id">
-                                Enter line id:
+                        <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
 
-                            </div>
-                            <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control" id="validationCustom04" required>
-                                <div class="invalid-feedback">
-                                    Please enter valid id.
+                            <div class="form-row">
+                                <div class="col-md-6 mb-2 id">
+
+                                    Enter line id:
+
                                 </div>
+                                <div class="col-md-6 mb-2 input">
+                                    <input type="text" class="form-control" id="validationCustom04" required>
+                                    <div class="invalid-feedback">
+                                        Please enter valid id.
+                                    </div>
+                                </div>
+
+
+
                             </div>
 
-                            Dogovoriti se kako ce da se menja linija.
+                            <div class="form-row">
+                                <div class="col-md-6 mb-2 id">
+                                    Choose stations:
 
-                        </div>
+                                </div>
+
+                                <div class="dropdown cq-dropdown" data-name='statuses'>
+                                    <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      Stations
+                                      <span class="caret"></span>
+                                    </button>
+
+                                    <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                        <li>
+                                            <label class="radio-btn">
+                                              <input type="checkbox" value='option1'>
+                                              Option 1
+                                          </label>
+                                        </li>
+                                        <li>
+                                            <label class="radio-btn">
+                                              <input type="checkbox" value='option2'>
+                                              Option 2
+                                          </label>
+                                        </li>
+                                        <li>
+                                            <label class="radio-btn">
+                                              <input type="checkbox" value='option3'>
+                                              Option 3
+                                          </label>
+                                            <li>
+
+                                                <!--    <li class='text-center'>
+                                          <button type='button' class='btn btn-xs btn-danger clear close-dropdown' value='Clear'>Clear</button>
+                                          <button type='button' class='btn btn-xs btn-success save' value='Save'>Save</button>
+                                      </li> -->
+                                    </ul>
+                                </div>
+
+                            </div>
 
 
+                            <button type="button" class="btn btn-primary savebutton"> Save changes</button>
 
-
-
-
-
+                        </form>
                     </div>
-
                 </div>
-
-
-
-
-
             </div>
-
         </div>
     </div>
     <!---------------------------------------------------->
 
-
-
     <hr class="new1">
-
     <div class="text2">
         SHOW LINES
     </div>
-    <div class="form-row showshedule">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
 
-
-
-        <div class="col-md-4 mb-2 id">
-            <button type="button" class="btn btn-primary submitbutton"> Show </button>
-
+        <div class="form-row showshedule">
+            <div class="col-md-4 mb-2 id">
+                <button type="button" class="btn btn-primary submitbutton"> Show </button>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Stations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-
-
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-
-                    <th scope="col">Id</th>
-                    <th scope="col">Stations</th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-
-                <tr>
-                    <td></td>
-                    <td></td>
-
-                </tr>
-
-
-
-
-
-
-            </tbody>
-        </table>
-    </div>
-
-
-
-    <!-- <textarea class="message" for=""> {{mssg}}</textarea> -->
-
-
-
+    </form>
 </form>
