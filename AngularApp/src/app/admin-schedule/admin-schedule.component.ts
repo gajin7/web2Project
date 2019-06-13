@@ -12,10 +12,12 @@ export class AdminScheduleComponent implements OnInit {
   lines : string[];
   line: string;
   type: string;
+  mssg : string;
 
   Form = this.fb.group({
     deps: ['',Validators.required],
   });
+  
 
   constructor(public service: AdminScheduleService, public fb : FormBuilder) { }
 
@@ -42,6 +44,28 @@ export class AdminScheduleComponent implements OnInit {
         deps : data,
       });
        });
+  }
+
+  Add()
+  {
+    this.service.AddDepature(this.type,this.line,this.Form.value.addDepature).subscribe((data)=> {
+        this.mssg = data;
+        this.service.GetDepatures(this.type,this.line).subscribe((data) => { 
+          this.Form.setValue({
+            deps : data,});
+          });
+    });
+  }
+
+  Remove()
+  {
+    this.service.RemoveDepature(this.type,this.line,this.Form.value.addDepature).subscribe((data)=> {
+        this.mssg = data;
+        this.service.GetDepatures(this.type,this.line).subscribe((data) => { 
+          this.Form.setValue({
+            deps : data,});
+          });
+    });
   }
 
 }

@@ -20,14 +20,23 @@ export class AdminScheduleService {
   GetDepatures(type: string, line:string) : Observable<any>
   {
    return this.http.post<any>('http://localhost:52295/api/Admin/GetDepatures',`type=`+type + `&line=`+line, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
-      catchError(this.handleError<any>('GetLines'))
+      catchError(this.handle)
     );
   }
 
-  ChangeSchedule(type: string, line:string) : Observable<any>
+  
+
+  AddDepature(type: string, line:string, depature:string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/GetLines',`type=`+type + `&line=`+line, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
-      catchError(this.handleError<any>('GetLines'))
+   return this.http.post<any>('http://localhost:52295/api/Admin/AddDepature',`type=`+type + `&line=`+line + `&depature=`+depature, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handle)
+    );
+  }
+
+  RemoveDepature(type: string, line:string, depature:string) : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/Admin/RemoveDepature',`type=`+type + `&line=`+line + `&depature=`+depature, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handle)
     );
   }
 
@@ -36,4 +45,8 @@ export class AdminScheduleService {
       return of(result as T);
     };
   }
+
+  private handle(error: any) {
+    return of (error.error.Message);
+}
 }

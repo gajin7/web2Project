@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
 using WebApp.Models;
@@ -109,10 +110,6 @@ namespace WebApp.Controllers
         public IHttpActionResult GetLines()
         {
           
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             var lines = _unitOfWork.Lines.GetAll().Select(u => u.Name);
 
@@ -129,12 +126,13 @@ namespace WebApp.Controllers
         {
 
             var req = HttpContext.Current.Request;
-            var temp = req["type"];
-            var temp1 = req["line"];
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+
+            if (req["line"] == "" || req["line"] == "undefined")
+                return BadRequest("Please select line");
+
+            if (req["type"] == "" || req["type"] == "undefined")
+                return BadRequest("Please select type");
+
 
             var lineId = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["line"].Trim()).Select((u) => u.Id).FirstOrDefault();
 
@@ -149,10 +147,84 @@ namespace WebApp.Controllers
                 retVal += item + ", ";
             }
 
-           
-
-
             return Json(retVal);
+
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/AddDepature")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult AddDepature()
+        {
+
+            var req = HttpContext.Current.Request;
+
+            var r = new Regex("^(\\d\\d:\\d\\d)$");
+           
+            if (req["line"] == "" || req["line"] == "undefined")
+                return BadRequest("Please select line");
+
+            if (req["type"] == "" || req["type"] == "undefined")
+                return BadRequest("Please select type");
+            if (!r.IsMatch(req["depature"]))
+                return BadRequest("Input in wrong format");
+
+
+            var lineId = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["line"].Trim()).Select((u) => u.Id).FirstOrDefault();
+            var scheduleId = _unitOfWork.Schedules.GetAll().Where((u) => u.LineId == lineId && u.Day.ToString() == req["type"].Trim()).Select((u) => u.Id).FirstOrDefault();
+
+            var depatures = _unitOfWork.Depatures.GetAll();
+
+            if(depatures.Where((u)=> u.ScheduleId == scheduleId && u.DepatureTime == req["depature"].Trim()).FirstOrDefault() != null)
+            {
+                return BadRequest("Defined depature allredy excist");
+            }
+
+            Depature dep = new Depature() { ScheduleId = scheduleId, DepatureTime = req["depature"].Trim() };
+
+            _unitOfWork.Depatures.Add(dep);
+            _unitOfWork.Complete();
+
+            return Ok("Changes Saved");
+
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/RemoveDepature")]
+         [Authorize(Roles = "Admin")]
+        public IHttpActionResult RemoveDepature()
+        {
+
+            var req = HttpContext.Current.Request;
+
+            var r = new Regex("^(\\d\\d:\\d\\d)$");
+
+            if (req["line"] == "" || req["line"] == "undefined")
+                return BadRequest("Please select line");
+
+            if (req["type"] == "" || req["type"] == "undefined")
+                return BadRequest("Please select type");
+            if (!r.IsMatch(req["depature"]))
+                return BadRequest("Input in wrong format");
+
+
+            var lineId = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["line"].Trim()).Select((u) => u.Id).FirstOrDefault();
+            var scheduleId = _unitOfWork.Schedules.GetAll().Where((u) => u.LineId == lineId && u.Day.ToString() == req["type"].Trim()).Select((u) => u.Id).FirstOrDefault();
+
+            var depatures = _unitOfWork.Depatures.GetAll();
+
+            var dep = depatures.Where((u) => u.ScheduleId == scheduleId && u.DepatureTime == req["depature"].Trim()).FirstOrDefault();
+            if (dep == null)
+            {
+                return BadRequest("Defined depature not excist");
+            }
+
+            _unitOfWork.Depatures.Remove(dep);
+            _unitOfWork.Complete();
+
+            return Ok("Changes saved");
 
         }
 

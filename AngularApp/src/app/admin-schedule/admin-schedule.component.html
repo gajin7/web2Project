@@ -20,7 +20,6 @@
 </nav>
 
 <form [formGroup]="Form" (ngSubmit)="register()" class="needs-validation" novalidate>
-
     <div class="needs-validation">
         <div class="form-row">
 
@@ -44,6 +43,7 @@
                             </div>
                             <div class="col-md-6 mb-2 input">
                                 <select class="custom-select" (change)="selectedLine($event)" required>
+                                    <option></option>
                                     <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
                                 </select>
                                 <div class="invalid-feedback">
@@ -59,6 +59,7 @@
                             </div>
                             <div class="col-md-6 mb-2 id">
                                 <select class="custom-select" (change)="selectedType($event)" required>
+                                     <option></option>
                                      <option value="WorkDay"> Work Day</option>
                                      <option value="Saturday"> Saturday</option>
                                     <option value="Sunday">Sunday </option>
@@ -81,7 +82,7 @@
                             <button type="button" (click)="Show()" class="btn btn-primary savebutton"> Show</button>
 
                             <div>
-                                Ispis da je sacuvana linija u bazu nakon sto se dugme klikne.
+                                {{mssg}}
                             </div>
                         </div>
 
@@ -104,14 +105,14 @@
 
                             </div>
                             <div class="col-md-4 mb-2 input">
-                                <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
+                                <input type="text" class="form-control" formControlName="addDepature" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid departure.
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-2 input">
-                                <button type="button" class="btn btn-primary savebuttonn"> Add</button>
+                                <button type="button" (click)="Add()" class="btn btn-primary savebuttonn"> Add</button>
                             </div>
 
 
@@ -130,7 +131,7 @@
 
                             </div>
                             <div class="col-md-4 mb-2 input">
-                                <input type="text" class="form-control" formControlName="deps" id="validationCustom04" required>
+                                <input type="text" class="form-control" formControlName="removeDepature" id="validationCustom04" required>
                                 <div class="invalid-feedback">
                                     Please enter valid departure.
                                 </div>
