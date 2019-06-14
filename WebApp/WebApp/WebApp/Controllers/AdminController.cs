@@ -87,7 +87,7 @@ namespace WebApp.Controllers
             }
             catch (Exception)
             {
-
+                return BadRequest("Error.Please reload and try again.");
             }
 
 
@@ -124,7 +124,7 @@ namespace WebApp.Controllers
             }
             catch (Exception)
             {
-
+                return BadRequest("Error.Please reload and try again.");
             }
 
 
@@ -426,7 +426,7 @@ namespace WebApp.Controllers
             }
             catch (Exception)
             {
-
+                return BadRequest("Error.Please reload and try again.");
             }
 
 
@@ -622,7 +622,7 @@ namespace WebApp.Controllers
             }
             catch (Exception)
             {
-
+                return BadRequest("Error.Please reload and try again.");
             }
 
 
@@ -675,7 +675,7 @@ namespace WebApp.Controllers
             }
             catch (Exception)
             {
-
+                return BadRequest("Error.Please reload and try again.");
             }
 
 
