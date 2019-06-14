@@ -85,6 +85,10 @@ namespace WebApp.Controllers
 
                 return BadRequest("You have old version of files. Please reload page.");
             }
+            catch (Exception)
+            {
+
+            }
 
 
             return Ok("Price successfully changed");
@@ -117,6 +121,10 @@ namespace WebApp.Controllers
             {
 
                 return BadRequest("You have old version of files. Please reload page.");
+            }
+            catch (Exception)
+            {
+
             }
 
 
@@ -411,10 +419,14 @@ namespace WebApp.Controllers
                 _unitOfWork.Locations.Update(location);
                 _unitOfWork.Complete();
             }
-            catch (ChangeConflictException)
+             catch (ChangeConflictException)
             {
 
                 return BadRequest("You have old version of files. Please reload page.");
+            }
+            catch (Exception)
+            {
+
             }
 
 
@@ -608,6 +620,10 @@ namespace WebApp.Controllers
 
                 return BadRequest("You have old version of files. Please reload page.");
             }
+            catch (Exception)
+            {
+
+            }
 
 
             return Ok("Station " + req["station"] + " added");
@@ -657,7 +673,11 @@ namespace WebApp.Controllers
 
                 return BadRequest("You have old version of files. Please reload page.");
             }
-           
+            catch (Exception)
+            {
+
+            }
+
 
 
 
