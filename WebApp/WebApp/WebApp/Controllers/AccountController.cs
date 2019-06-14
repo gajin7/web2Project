@@ -434,7 +434,7 @@ namespace WebApp.Controllers
                     type = Enums.UserType.regular;
                     approved = true;
                     break;
-                case "Retirre":
+                case "Retiree":
                     type = Enums.UserType.retiree;
                     break;
                 default:
@@ -502,7 +502,7 @@ namespace WebApp.Controllers
                         var userId = UserManager.Users.Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
 
                         var tempUser = _unitOfWork.Users.GetAll().Where((u) => u.AppUserId == userId).FirstOrDefault();
-                        if(tempUser.UserType != Enums.UserType.retiree || tempUser.UserType != Enums.UserType.student)
+                        if(tempUser.UserType != Enums.UserType.retiree && tempUser.UserType != Enums.UserType.student)
                             return BadRequest("You can't add image for regular user!");
                         tempUser.postedImage = true;
                         _unitOfWork.Users.Update(tempUser);

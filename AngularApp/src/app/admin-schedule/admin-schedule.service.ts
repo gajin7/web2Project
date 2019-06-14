@@ -13,7 +13,7 @@ export class AdminScheduleService {
   GetLines() : Observable<any>
   {
    return this.http.post<any>('http://localhost:52295/api/Admin/GetLines', { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
-      catchError(this.handleError<any>('GetLines'))
+      catchError(this.handle)
     );
   }
 

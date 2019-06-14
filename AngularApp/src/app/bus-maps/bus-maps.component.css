@@ -1,0 +1,8 @@
+.navbar.navbar-expand-lg.navbar-dark.bg-primary {
+    position: relative;
+}
+
+.collapse.navbar-collapse {
+    right: 0%;
+    position: absolute;
+}

@@ -14,12 +14,20 @@ export class AdminLinesComponent implements OnInit {
   stations : string[];
   selectedStations: string = "";
   addMssg : string;
+  deleteMssg : string;
+  stationMssg : string;
   type : string = "";
+  lines: string[];
+  deleteLine: string;
+  showStations: string;
+  addStation: string;
 
   Form = this.fb.group({
     name: ['',Validators.required],
     stations : ['',Validators.required],
   });
+
+  
 
   constructor(private formBuilder: FormBuilder, private service: AdminLinesService, private fb : FormBuilder) {
 
@@ -29,11 +37,19 @@ export class AdminLinesComponent implements OnInit {
   {
     this.type = event.target.value;
   }
+
+  selectDelete(event : any)
+  {
+    this.deleteLine = event.target.value;
+  }
   
  
   ngOnInit() {
     this.service.GetStations().subscribe((data)=> {
       this.stations = data;
+    });
+    this.service.GetLines().subscribe((data)=> {
+      this.lines = data;
     });
   }
 
@@ -46,12 +62,57 @@ export class AdminLinesComponent implements OnInit {
     }
   }
 
+  selectedStationAdd(event: any) {
+    //update the ui
+    if(event.target.value != "")
+    {
+       this.addStation = event.target.value;
+    }
+  }
+
 AddLine()
 {
   this.service.AddLine(this.Form.value.name,this.selectedStations,this.type).subscribe((data)=>{
       this.addMssg = data;
+      this.service.GetLines().subscribe((data)=> {
+        this.lines = data;
+      });
   });
   
+}
+
+Delete()
+{
+  this.service.RemoveLine(this.deleteLine).subscribe((data)=>{
+    this.deleteMssg = data;
+    this.service.GetLines().subscribe((data)=> {
+      this.lines = data;
+    });
+  });
+}
+
+Show()
+{
+  this.service.ShowLine(this.deleteLine).subscribe((data)=>{
+    this.showStations = data;
+    
+  });
+}
+
+AddStation()
+{
+  this.service.AddStation(this.deleteLine,this.addStation).subscribe((data)=>{
+    this.stationMssg = data;
+    
+  });
+}
+
+DeleteStation()
+{
+  this.service.DeleteStation(this.deleteLine,this.addStation).subscribe((data)=>{
+    this.stationMssg = data;
+    
+  });
 }
 
 

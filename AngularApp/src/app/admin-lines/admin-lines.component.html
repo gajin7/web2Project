@@ -11,7 +11,6 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" routerLink="/admin" routerLinkActive="active">Home<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link active" routerLink="/home" routerLinkActive="active">Log out</a>
 
 
         </div>
@@ -104,11 +103,14 @@
 
                             <div class="form-row">
                                 <div class="col-md-6 mb-2 id">
-                                    Enter line id:
+                                    Chose line:
 
                                 </div>
                                 <div class="col-md-6 mb-2 input">
-                                    <input type="text" class="form-control" id="validationCustom04" required>
+                                        <select class="custom-select" (change)="selectDelete($event)" required>
+                                                <option></option>
+                                                <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
+                                            </select>
                                     <div class="invalid-feedback">
                                         Please enter valid id.
                                     </div>
@@ -116,9 +118,9 @@
 
                             </div>
 
-                            <button type="button" class="btn btn-primary savebutton"> Delete</button>
+                            <button type="button" (click)="Delete()" class="btn btn-primary savebutton"> Delete</button>
                             <div>
-                                Ispis da je obrisana linija iz baze nakon sto se dugme klikne.
+                                    {{deleteMssg}}
                             </div>
 
                             <hr class="new1">
@@ -138,14 +140,14 @@
 
                            <div class="form-row">
                             <div class="col-md-6 mb-2 id">
-                                Line id:
+                                Line:
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" class="form-control"  id="validationCustom04" required>
-                                <div class="invalid-feedback">
-                                    Please enter valid departure.
-                                </div>
+                                    <select class="custom-select" (change)="selectDelete($event)" required>
+                                            <option></option>
+                                            <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
+                                        </select>
                             </div>
                             
 
@@ -153,25 +155,11 @@
                         </div>
 
                             <div class="form-row">
-                                    <div class="col-md-6 mb-2 id">
-    
-                                        line name:
-    
-                                    </div>
-                                    <div class="col-md-6 mb-2 input">
-                                        <input type="text" class="form-control" id="validationCustom04" required>
-                                        <div class="invalid-feedback">
-                                            Please enter valid id.
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <div class="form-row">
                                 <div class="col-md-6 mb-2 id">
                                      stations:
                                 </div>
                                 <div class="col-md-6 mb-2 input">
-                                        <input type="text" class="form-control" id="validationCustom04" required>
+                                        <input type="text" class="form-control" [(ngModel)]="showStations" [ngModelOptions]="{standalone: true}" id="validationCustom04" required>
                                         <div class="invalid-feedback">
                                             Please enter valid id.
                                         </div>
@@ -184,70 +172,37 @@
                             <div class="col-6 col-sm-10 change">
 
                                     <div class="text3">
-                                        ADD AND DELETE
+                                        ADD AND DELETE STATIONS
                                     </div>
                                     <div class="text3">
                                         
                                     </div>
-                                    <form   class="needs-validation" novalidate>
+                                    <form    class="needs-validation" novalidate>     
                                     <div class="form-row">
-            
-                                       
                                             <div class="col-md-2 mb-2 id">
                                                 Add:
             
                                             </div>
                                             <div class="col-md-4 mb-2 input">
-                                                <input type="text" class="form-control"  id="validationCustom04" required>
-                                                <div class="invalid-feedback">
-                                                    Please enter valid departure.
-                                                </div>
+                                                    <select class="custom-select" (change)="selectedStationAdd($event)" required>
+                                                            <option></option>
+                                                            <option *ngFor="let obj of stations" [value]="obj">{{obj}}</option>
+                                                 </select>
                                             </div>
             
                                             <div class="col-md-6 mb-2 input">
-                                                <button type="button" (click)="Add()" class="btn btn-primary savebuttonn"> Add</button>
+                                                <button type="button" (click)="AddStation()" class="btn btn-primary savebuttonn"> Add</button>
+                                                <button type="button" (click)="DeleteStation()" class="btn btn-primary savebuttonn"> Delete</button>
                                             </div>
-                                       
-            
-            
+                                            <div>
+                                                    {{stationMssg}}
+                                            </div>
+                
                                     </div>
                                 </form>
                                 </div>
             
-                                <div class="col-6 col-sm-10 change">
-            
-            
-                                        <form [formGroup]="RemoveForm" (ngSubmit)="register()" class="needs-validation" novalidate>
-                                    <div class="form-row">
-                                        
-                                            <div class="col-md-2 mb-2 id">
-                                                Delete:
-            
-                                            </div>
-                                            <div class="col-md-4 mb-2 input">
-                                                <input type="text" class="form-control" formControlName="dep" id="validationCustom04" required>
-                                                <div class="invalid-feedback">
-                                                    Please enter valid departure.
-                                                </div>
-                                            </div>
-            
-                                            <div class="col-md-6 mb-2 input">
-                                                <button type="button" (click)="Remove()" class="btn btn-primary savebuttonn"> Delete</button>
-                                            </div>
-                                        
-                                        <div>
-                                                {{mssg}}
-                                        </div>
-            
-            
-                                    </div>
-                                </form>
-                                </div>
-            
-
-
-                           
-
+        
                         </form>
                     </div>
                 </div>

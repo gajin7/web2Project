@@ -121,36 +121,13 @@ namespace WebApp.Migrations
                 var line = new Line() { Name = "1", LineType = Enums.LineTypes.Urban };
                 context.Lines.Add(line);
             }
-            if (!context.Lines.Any(u => u.Name == "3"))
-            {
-                var line = new Line() { Name = "3", LineType = Enums.LineTypes.Urban };
-                context.Lines.Add(line);
-            }
-            if (!context.Lines.Any(u => u.Name == "5"))
-            {
-                var line = new Line() { Name = "5", LineType = Enums.LineTypes.Urban };
-                context.Lines.Add(line);
-            }
-            if (!context.Lines.Any(u => u.Name == "2"))
-            {
-                var line = new Line() { Name = "2", LineType = Enums.LineTypes.Suburban };
-                context.Lines.Add(line);
-            }
+            
             if (!context.Lines.Any(u => u.Name == "4"))
             {
                 var line = new Line() { Name = "4", LineType = Enums.LineTypes.Suburban };
                 context.Lines.Add(line);
             }
-            if (!context.Lines.Any(u => u.Name == "6"))
-            {
-                var line = new Line() { Name = "6", LineType = Enums.LineTypes.Suburban };
-                context.Lines.Add(line);
-            }
-            if (!context.Lines.Any(u => u.Name == "7"))
-            {
-                var line = new Line() { Name = "7", LineType = Enums.LineTypes.Suburban };
-                context.Lines.Add(line);
-            }
+           
 
            if (!context.Schedules.Any(u => u.Line.Name == "1" && u.Day == Day.WorkDay))
             {

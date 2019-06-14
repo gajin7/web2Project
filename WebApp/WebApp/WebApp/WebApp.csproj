@@ -87,6 +87,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Services" />
@@ -432,6 +433,18 @@
     <Compile Include="Migrations\201906131539506_AprovedUsrrAdded8.Designer.cs">
       <DependentUpon>201906131539506_AprovedUsrrAdded8.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906132336351_AprovedUsrrAdded9.cs" />
+    <Compile Include="Migrations\201906132336351_AprovedUsrrAdded9.Designer.cs">
+      <DependentUpon>201906132336351_AprovedUsrrAdded9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906140036167_AprovedUsrrAdded10.cs" />
+    <Compile Include="Migrations\201906140036167_AprovedUsrrAdded10.Designer.cs">
+      <DependentUpon>201906140036167_AprovedUsrrAdded10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906140044462_VersionAdded.cs" />
+    <Compile Include="Migrations\201906140044462_VersionAdded.Designer.cs">
+      <DependentUpon>201906140044462_VersionAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -701,6 +714,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906131539506_AprovedUsrrAdded8.resx">
       <DependentUpon>201906131539506_AprovedUsrrAdded8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906132336351_AprovedUsrrAdded9.resx">
+      <DependentUpon>201906132336351_AprovedUsrrAdded9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906140036167_AprovedUsrrAdded10.resx">
+      <DependentUpon>201906140036167_AprovedUsrrAdded10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906140044462_VersionAdded.resx">
+      <DependentUpon>201906140044462_VersionAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

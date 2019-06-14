@@ -12,5 +12,10 @@ namespace WebApp.Persistence.Repository
         public LineRepository(DbContext context) : base(context)
         {
         }
+
+        public Line Get(int v)
+        {
+            return context.Set<Line>().Find(v);
+        }
     }
 }

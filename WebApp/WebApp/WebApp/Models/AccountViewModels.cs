@@ -63,4 +63,13 @@ namespace WebApp.Models
         public string longitude { get; set; }
         public string latitude { get; set; }
     }
+
+
+    public class LineViewModel
+    {
+        public string name { get; set; }
+
+        public string stations { get; set; }
+       
+    }
 }

@@ -5,6 +5,7 @@ using Microsoft.SqlServer.Types;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Linq;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -71,12 +72,18 @@ namespace WebApp.Controllers
             Prices price = _unitOfWork.Prices.GetAll().Where((u) => u.ticketType.ToString().Equals(req["type"].Trim())).FirstOrDefault();
 
 
-            lock (_unitOfWork.Prices)
-            {
 
-                price.price = tmp;
+            price.price = tmp;
+
+            try
+            {
                 _unitOfWork.Prices.Update(price);
                 _unitOfWork.Complete();
+            }
+            catch (ChangeConflictException)
+            {
+
+                return BadRequest("You have old version of files. Please reload page.");
             }
 
 
@@ -100,11 +107,18 @@ namespace WebApp.Controllers
             Discounts discount = _unitOfWork.Discounts.GetAll().Where((u) => u.Type.ToString().Equals(req["type"].Trim())).FirstOrDefault();
             discount.Discount = tmp / 100;
 
-            lock (_unitOfWork.Discounts)
+
+            try
             {
                 _unitOfWork.Discounts.Update(discount);
                 _unitOfWork.Complete();
             }
+            catch (ChangeConflictException)
+            {
+
+                return BadRequest("You have old version of files. Please reload page.");
+            }
+
 
             return Ok("Discount successfully updated");
         }
@@ -227,12 +241,11 @@ namespace WebApp.Controllers
                 return BadRequest("Defined depature not excist");
             }
 
-            lock (_unitOfWork.Depatures)
-            {
 
-                _unitOfWork.Depatures.Remove(dep);
-                _unitOfWork.Complete();
-            }
+
+            _unitOfWork.Depatures.Remove(dep);
+            _unitOfWork.Complete();
+
 
             return Ok("Changes saved");
 
@@ -296,15 +309,14 @@ namespace WebApp.Controllers
                 return BadRequest("There is no station with entered number");
             }
 
-            lock (_unitOfWork.Stations)
-            {
 
-                _unitOfWork.Stations.Remove(station);
-                _unitOfWork.Locations.Remove(_unitOfWork.Locations.Get(station.LocationId));
-                _unitOfWork.Complete();
 
-            }
-         
+            _unitOfWork.Stations.Remove(station);
+            _unitOfWork.Locations.Remove(_unitOfWork.Locations.Get(station.LocationId));
+            _unitOfWork.Complete();
+
+
+
 
             return Ok("Station deleted");
 
@@ -316,8 +328,8 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult GetStations()
         {
-           
-           
+
+
             var stations = _unitOfWork.Stations.GetAll().Select(u => u.StationNum);
 
 
@@ -325,14 +337,14 @@ namespace WebApp.Controllers
 
         }
 
-      
 
-    [HttpPost]
-    [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-    [System.Web.Http.Route("api/Admin/GetStationInfo")]
-    [Authorize(Roles = "Admin")]
-    public StationViewModel GetStationInfo()
-    {
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/GetStationInfo")]
+        [Authorize(Roles = "Admin")]
+        public StationViewModel GetStationInfo()
+        {
 
             var req = HttpContext.Current.Request;
             if (req["id"] == "undefined" || req["id"] == "" || req["id"] == null)
@@ -358,7 +370,7 @@ namespace WebApp.Controllers
 
             };
 
-    }
+        }
 
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -372,7 +384,7 @@ namespace WebApp.Controllers
                 return BadRequest(mssg);
             }
             double lon, lat = new double();
-            if(!Double.TryParse(model.latitude,out lat))
+            if (!Double.TryParse(model.latitude, out lat))
             {
                 return BadRequest("Wrong latitude");
             }
@@ -382,11 +394,14 @@ namespace WebApp.Controllers
             }
 
 
-            lock (_unitOfWork.Stations)
+
+            Station station = _unitOfWork.Stations.GetAll().Where(u => u.StationNum.ToString() == model.id.Trim()).FirstOrDefault();
+            station.Name = model.name;
+            station.Address = model.address;
+
+
+            try
             {
-                Station station = _unitOfWork.Stations.GetAll().Where(u => u.StationNum.ToString() == model.id.Trim()).FirstOrDefault();
-                station.Name = model.name;
-                station.Address = model.address;
                 _unitOfWork.Stations.Update(station);
                 var location = _unitOfWork.Locations.Get(station.LocationId);
 
@@ -396,6 +411,12 @@ namespace WebApp.Controllers
                 _unitOfWork.Locations.Update(location);
                 _unitOfWork.Complete();
             }
+            catch (ChangeConflictException)
+            {
+
+                return BadRequest("You have old version of files. Please reload page.");
+            }
+
 
 
             return Ok("Changes saved");
@@ -405,25 +426,25 @@ namespace WebApp.Controllers
         [HttpPost]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/AddLine")]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult AddLine()
         {
             var req = HttpContext.Current.Request;
-            
+
             if (req["name"] == "undefined" || req["name"] == "" || req["name"] == null)
                 return BadRequest("Please enter name");
             if (req["stations"] == "undefined" || req["stations"] == "" || req["stations"] == null)
                 return BadRequest("Please chose stations");
 
-           
-           
+
+
 
             string[] stations = req["stations"].Trim().Split(',');
             List<Station> stats = new List<Station>();
             foreach (var item in stations)
             {
                 Station station = _unitOfWork.Stations.GetAll().Where((u) => u.LocationId.ToString() == item).FirstOrDefault();
-                if(station != null)
+                if (station != null)
                 {
                     stats.Add(station);
                 }
@@ -441,11 +462,260 @@ namespace WebApp.Controllers
 
             line.Stations = stats;
 
-            lock(_unitOfWork.Lines)
+
+            _unitOfWork.Lines.Add(line);
+            _unitOfWork.Schedules.Add(new Schedule() { LineId = line.Id, Day = Enums.Day.WorkDay });
+            _unitOfWork.Schedules.Add(new Schedule() { LineId = line.Id, Day = Enums.Day.Saturday });
+            _unitOfWork.Schedules.Add(new Schedule() { LineId = line.Id, Day = Enums.Day.Sunday });
+            _unitOfWork.Complete();
+
+
+
+            return Ok("Line Added");
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/DeleteLine")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult DeleteLine()
+        {
+            var req = HttpContext.Current.Request;
+            var temp = req["id"];
+            if (req["id"] == "undefined" || req["id"] == null || req["id"] == "")
             {
-                _unitOfWork.Lines.Add(line);
+                return BadRequest("Please select line");
+            }
+
+            Line line = _unitOfWork.Lines.GetAll().Where((u) => u.Name == (req["id"].Trim())).FirstOrDefault();
+            _unitOfWork.Lines.Remove(line);
+            _unitOfWork.Complete();
+
+            return Ok("Line " + req["id"] + " removed");
+        }
+
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/RemoveLine")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult RemoveLine()
+        {
+            var req = HttpContext.Current.Request;
+
+            if (req["name"] == "undefined" || req["name"] == "" || req["name"] == null)
+                return BadRequest("Please enter name");
+            if (req["stations"] == "undefined" || req["stations"] == "" || req["stations"] == null)
+                return BadRequest("Please chose stations");
+
+
+
+
+            string[] stations = req["stations"].Trim().Split(',');
+            List<Station> stats = new List<Station>();
+            foreach (var item in stations)
+            {
+                Station station = _unitOfWork.Stations.GetAll().Where((u) => u.LocationId.ToString() == item).FirstOrDefault();
+                if (station != null)
+                {
+                    stats.Add(station);
+                }
+            }
+
+            Line line = new Line() { Name = req["name"] };
+            if (req["type"].Trim() == "Urban")
+            {
+                line.LineType = Enums.LineTypes.Urban;
+            }
+            else if (req["type"].Trim() == "Suburban")
+            {
+                line.LineType = Enums.LineTypes.Suburban;
+            }
+
+            line.Stations = stats;
+
+
+            _unitOfWork.Lines.Add(line);
+            _unitOfWork.Complete();
+
+
+
+            return Ok("Line Added");
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/GetLineInfo")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult GetLineInfo()
+        {
+            var req = HttpContext.Current.Request;
+            var temp = req["id"];
+            if (req["id"] == "undefined" || req["id"] == null || req["id"] == "")
+            {
+                return BadRequest("Please select line");
+            };
+
+            Line Line = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["id"].Trim()).FirstOrDefault();
+            string retVal = "";
+            foreach (var item in Line.Stations)
+            {
+                retVal += item.StationNum + ",";
+            }
+
+
+            return Ok(retVal);
+            
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/AddStationToLine")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult AddStationToLine()
+        {
+            var req = HttpContext.Current.Request;
+            var temp = req["id"];
+            var temp1 = req["station"];
+            if (req["id"] == "undefined" || req["id"] == null || req["id"] == "")
+            {
+                return BadRequest("Please select line");
+            };
+
+            if (req["station"] == "undefined" || req["station"] == null || req["station"] == "")
+            {
+                return BadRequest("Please select line");
+            };
+
+            Line line = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["id"].Trim()).FirstOrDefault();
+            if (line.Stations.Contains(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault()))
+            {
+                return BadRequest("There is allredy station " + req["station"] + "in line " + req["id"]);
+            }
+
+
+
+            line.Stations.Add(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault());
+
+            try
+            {
+                _unitOfWork.Lines.Update(line);
+                _unitOfWork.Complete();
+                
+            }
+            catch (ChangeConflictException)
+            {
+
+                return BadRequest("You have old version of files. Please reload page.");
+            }
+
+
+            return Ok("Station " + req["station"] + " added");
+
+
+        }
+
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/DeleteStationToLine")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult DeleteStationToLine()
+        {
+            var req = HttpContext.Current.Request;
+            var temp = req["id"];
+            var temp1 = req["station"];
+            if (req["id"] == "undefined" || req["id"] == null || req["id"] == "")
+            {
+                return BadRequest("Please select line");
+            };
+
+            if (req["station"] == "undefined" || req["station"] == null || req["station"] == "")
+            {
+                return BadRequest("Please select line");
+            };
+
+
+
+            Line line = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["id"].Trim()).FirstOrDefault();
+            if (!line.Stations.Contains(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault()))
+            {
+                return BadRequest("There is no station " + req["station"] + "in line " + req["id"]);
+            }
+
+
+
+            line.Stations.Remove(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault());
+
+            try
+            {
+                _unitOfWork.Lines.Update(line);
                 _unitOfWork.Complete();
             }
+            catch (ChangeConflictException)
+            {
+
+                return BadRequest("You have old version of files. Please reload page.");
+            }
+           
+
+
+
+            return Ok("Station " + req["station"] + " removed");
+
+
+        }
+
+
+
+
+
+
+
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/ChangeLine")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult ChangeLine()
+        {
+            var req = HttpContext.Current.Request;
+
+            if (req["name"] == "undefined" || req["name"] == "" || req["name"] == null)
+                return BadRequest("Please enter name");
+            if (req["stations"] == "undefined" || req["stations"] == "" || req["stations"] == null)
+                return BadRequest("Please chose stations");
+
+
+
+
+            string[] stations = req["stations"].Trim().Split(',');
+            List<Station> stats = new List<Station>();
+            foreach (var item in stations)
+            {
+                Station station = _unitOfWork.Stations.GetAll().Where((u) => u.LocationId.ToString() == item).FirstOrDefault();
+                if (station != null)
+                {
+                    stats.Add(station);
+                }
+            }
+
+            Line line = new Line() { Name = req["name"] };
+            if (req["type"].Trim() == "Urban")
+            {
+                line.LineType = Enums.LineTypes.Urban;
+            }
+            else if (req["type"].Trim() == "Suburban")
+            {
+                line.LineType = Enums.LineTypes.Suburban;
+            }
+
+            line.Stations = stats;
+
+
+            _unitOfWork.Lines.Add(line);
+            _unitOfWork.Complete();
+
 
 
             return Ok("Line Added");

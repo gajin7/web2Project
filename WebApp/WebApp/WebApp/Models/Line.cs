@@ -16,6 +16,9 @@ namespace WebApp.Models
         public string Name { get; set; }
         public virtual List<Station> Stations { get; set; }
         public LineTypes LineType { get; set; }
-        
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
     }
 }
