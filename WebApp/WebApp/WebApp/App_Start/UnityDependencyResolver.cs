@@ -81,6 +81,7 @@ namespace WebApp.App_Start
             container.RegisterType<IDepatureRepository, DepatureRepository>();
             container.RegisterType<IStationRepository, StationRepository>();
             container.RegisterType<ILocationRepository, LocationRepository>();
+            container.RegisterType<IPayPalInfoRepository, PayPalInfoRepository>();
         }
 
         public void Dispose()

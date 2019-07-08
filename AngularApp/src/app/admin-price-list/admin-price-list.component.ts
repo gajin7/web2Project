@@ -61,5 +61,6 @@ export class AdminPriceListComponent implements OnInit {
         this.prices = data});
     });
   }
+  
 
 }

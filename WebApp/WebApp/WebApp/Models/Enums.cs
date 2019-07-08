@@ -33,7 +33,25 @@ namespace WebApp.Models
             regular = 0,
             student,
             retiree
+        }
 
+
+
+
+        public enum Colors
+        {
+            Aqua = 0,
+            Blue,
+            BlueViolet,
+            Brown,
+            Chartreuse,
+            Coral,
+            Crimson,
+            Gold,
+            Green,
+            GreenYellow,
+            Indigo,
+            Maroon
         }
     }
 }

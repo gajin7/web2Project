@@ -19,7 +19,8 @@
     </div>
 </nav>
 
-<form [formGroup]="ticketForm" class="needs-validation" (ngSubmit)="buyTimeTicket()" novalidate>
+
+<form [formGroup]="ticketForm" class="needs-validation" (ngSubmit)="SetTimeTicketForSale()" novalidate>
     <div class="form-group">
         <label for="validationCustom05">Select ticket type</label>
         <br/>
@@ -34,7 +35,14 @@
     <button class="btn btn-primary" type="submit">Submit form</button>
 
     <br/>
-    <label for=""> {{price}}</label>
     <label for=""> {{message}}</label>
 
+    <br/>
+    <br/>
+    <br/>
+ <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+
+
 </form>
+
+    

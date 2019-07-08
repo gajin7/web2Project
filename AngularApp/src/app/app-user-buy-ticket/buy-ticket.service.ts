@@ -11,9 +11,16 @@ export class BuyTicketService {
 
   constructor(private http: HttpClient) { }
 
-  BuyTicket(type: string) : Observable<any>
+  BuyTicket(type: string,data : any) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Ticket/BuyTicket', `type=`+type, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Ticket/BuyTicket', `type=`+type +  `&id=` + data.id +  `&status=` + data.status + `&payer_email=` + data.payer.email_address  + `&payer_id=` + data.payer.payer_id  + `&create_time=` + data.create_time + `&update_time=` + data.update_time, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handle)
+    );
+  }
+
+  GetTicketForSale(type: string) : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/Ticket/SetTicketForSale', `type=`+type, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
     );
   }
@@ -24,6 +31,8 @@ export class BuyTicketService {
       catchError(this.handleError<any>('GetTicketPrice'))
     );
   }
+
+  
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -17,6 +17,14 @@ export class ControlTicketService {
     );
   }
 
+  
+  public GetUserToApprove() : Observable<any>
+  {
+   return this.http.get<any>('http://localhost:52295/api/CheckIn/GetUsersToApprove',{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handleError<any>('GetUsersToApprove'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

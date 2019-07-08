@@ -32,6 +32,8 @@ import { ControlerComponent } from './controler/controler.component';
 import { BusMapsComponent } from './bus-maps/bus-maps.component';
 import { AgmDirectionModule } from 'agm-direction';
 import { AgmCoreModule } from '@agm/core';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { BusLocationComponent } from './bus-location/bus-location.component';
 
 
 
@@ -59,6 +61,7 @@ import { AgmCoreModule } from '@agm/core';
     AdminStationComponent,
     ControlerComponent,
     BusMapsComponent,
+    BusLocationComponent,
   
 
   ],
@@ -70,6 +73,7 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     AgmDirectionModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
+    NgxPayPalModule,
   ],
 
   providers: [ 

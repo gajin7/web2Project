@@ -26,5 +26,7 @@ namespace WebApp.Persistence.UnitOfWork
         IStationRepository Stations { get; set; }
 
         ILocationRepository Locations { get; set; }
+
+        IPayPalInfoRepository PayPalInfos { get; set; }
     }
 }

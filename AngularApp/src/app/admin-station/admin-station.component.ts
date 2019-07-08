@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { AdminStationService } from './admin-station.service';
+import { MarkerInfo } from '../bus-maps/marker-info.model';
+import { GeoLocation } from '../bus-maps/geolocation';
+import { Polyline } from '../bus-maps/polyliner';
 
 @Component({
   selector: 'app-admin-station',
   templateUrl: './admin-station.component.html',
-  styleUrls: ['./admin-station.component.css']
+  styleUrls: ['./admin-station.component.css'],
+  styles: ['agm-map {height: 300px; width: 630px;}']
 })
 export class AdminStationComponent implements OnInit {
 
@@ -32,6 +36,8 @@ export class AdminStationComponent implements OnInit {
   changeMssg : string;
   ids: string[];
   id: string;
+  markerInfo: MarkerInfo;
+  selLine: Polyline;
 
   constructor(private fb: FormBuilder, private service: AdminStationService) { }
 
@@ -39,6 +45,10 @@ export class AdminStationComponent implements OnInit {
     this.service.GetStations().subscribe((data)=> {
       this.ids = data;
     });
+    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954), 
+    "assets/images/ftn.png",
+    "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+    this.selLine = new Polyline([], 'red', { url:"assets/images/autobus.png", scaledSize: {width: 50, height: 50}});
   }
 
   selected (event: any) {
@@ -53,6 +63,16 @@ export class AdminStationComponent implements OnInit {
       });
     })
 
+  }
+
+  MapClicked(event)
+  {
+    this.AddForm.setValue({
+      name : "",
+      address: "",
+      longitude: event.coords.lng,
+      latitude : event.coords.lat
+    });
   }
 
   AddStation()

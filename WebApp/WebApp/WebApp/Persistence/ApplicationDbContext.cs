@@ -23,6 +23,8 @@ namespace WebApp.Persistence
         public DbSet<Prices> Prices { get; set; }
         public DbSet<Depature> Depatures { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+
+        public DbSet<PayPalInfo> PayPalInfos { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

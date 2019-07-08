@@ -16,10 +16,12 @@ export class ControlTicketComponent implements OnInit {
    
   });
 
+  users : any = [];
   mssg: string;
   constructor(private service: ControlTicketService , private logServie : AuthService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.GetUsersToApprove();
   }
 
   Logout()
@@ -33,6 +35,11 @@ export class ControlTicketComponent implements OnInit {
   CheckIn()
   {
     this.service.ControlTicket(this.ticketForm.value.Id).subscribe((data)=>{this.mssg = data});
+  }
+
+  GetUsersToApprove()
+  {
+    this.users = this.service.GetUserToApprove();
   }
 
 }

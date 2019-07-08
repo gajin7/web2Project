@@ -647,7 +647,9 @@ C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebAp
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.dll
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.pdb
-C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csprojAssemblyReference.cache
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.AprovedUsrrAdded9.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.AprovedUsrrAdded10.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionAdded.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.PayPallInfoTable.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csprojAssemblyReference.cache
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.CheckedAddedToUser.resources

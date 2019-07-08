@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace WebApp.Models
 {
@@ -64,6 +65,44 @@ namespace WebApp.Models
         public string latitude { get; set; }
     }
 
+    public class TicketViewModel
+    {
+        public string id { get; set; }
+        public string mail { get; set; }
+
+        public string type { get; set; }
+        public string price { get; set; }
+
+        public string mssg { get; set; }
+    }
+
+    public class StationModel
+    {
+        public string name { get; set; }
+        public double longitude { get; set; }
+
+        public double latitude { get; set; }
+
+        public string address { get; set; }
+
+        public string lines { get; set; }
+    }
+
+    public class LineModel
+    {
+        public string LineNumber { get; set; }
+        public List<Stations> Stations { get; set; }
+
+        public string ColorLine { get; set; }
+    }
+
+    public class Stations
+    {
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
+    }
+
 
     public class LineViewModel
     {
@@ -71,5 +110,20 @@ namespace WebApp.Models
 
         public string stations { get; set; }
        
+    }
+
+    public class ControlInfoModel
+    {
+        public string Email { get; set; }
+
+        public string Type { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string DateOfBirth { get; set; }
+
+        public byte[] Image { get; set; }
     }
 }

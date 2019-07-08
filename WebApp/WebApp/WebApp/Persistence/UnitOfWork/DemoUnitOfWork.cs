@@ -43,6 +43,9 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public ILocationRepository Locations { get; set; }
 
+        [Dependency]
+        public IPayPalInfoRepository PayPalInfos { get; set; }
+
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

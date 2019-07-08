@@ -25,6 +25,7 @@ import { ControlerComponent } from './controler/controler.component';
 import { UserGuard } from './auth/user.guard';
 import { ControlorGuard } from './auth/controlor.guard';
 import { BusMapsComponent } from './bus-maps/bus-maps.component';
+import { BusLocationComponent } from './bus-location/bus-location.component';
 
 const appRoutes: Routes = [
   { 
@@ -117,6 +118,10 @@ const appRoutes: Routes = [
   {
     path: 'bus-maps',
     component: BusMapsComponent,
+  },
+  {
+    path: 'bus-location',
+    component: BusLocationComponent,
   },
   {
     path: '**',

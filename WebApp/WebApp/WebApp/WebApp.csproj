@@ -85,6 +85,7 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -256,6 +257,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BusStationsController.cs" />
     <Compile Include="Controllers\CheckInController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -445,12 +447,21 @@
     <Compile Include="Migrations\201906140044462_VersionAdded.Designer.cs">
       <DependentUpon>201906140044462_VersionAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907041341486_PayPallInfoTable.cs" />
+    <Compile Include="Migrations\201907041341486_PayPallInfoTable.Designer.cs">
+      <DependentUpon>201907041341486_PayPallInfoTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907080724230_CheckedAddedToUser.cs" />
+    <Compile Include="Migrations\201907080724230_CheckedAddedToUser.Designer.cs">
+      <DependentUpon>201907080724230_CheckedAddedToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Depature.cs" />
     <Compile Include="Models\Discounts.cs" />
+    <Compile Include="Models\PayPalInfo.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Prices.cs" />
     <Compile Include="Models\Ticket.cs" />
@@ -466,6 +477,7 @@
     <Compile Include="Persistence\Repository\DiscountRepository.cs" />
     <Compile Include="Persistence\Repository\IDepatureRepository.cs" />
     <Compile Include="Persistence\Repository\IDiscountRepository.cs" />
+    <Compile Include="Persistence\Repository\IPayPalInfoRepository.cs" />
     <Compile Include="Persistence\Repository\IPictureRepository.cs" />
     <Compile Include="Persistence\Repository\ILineRepository.cs" />
     <Compile Include="Persistence\Repository\ILocationRepository.cs" />
@@ -478,6 +490,7 @@
     <Compile Include="Persistence\Repository\IUserRepository.cs" />
     <Compile Include="Persistence\Repository\LineRepository.cs" />
     <Compile Include="Persistence\Repository\LocationRepository.cs" />
+    <Compile Include="Persistence\Repository\PayPalInfoRepository.cs" />
     <Compile Include="Persistence\Repository\PictureRepository.cs" />
     <Compile Include="Persistence\Repository\PricesRepository.cs" />
     <Compile Include="Persistence\Repository\ProductRepository.cs" />
@@ -723,6 +736,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906140044462_VersionAdded.resx">
       <DependentUpon>201906140044462_VersionAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907041341486_PayPallInfoTable.resx">
+      <DependentUpon>201907041341486_PayPallInfoTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907080724230_CheckedAddedToUser.resx">
+      <DependentUpon>201907080724230_CheckedAddedToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

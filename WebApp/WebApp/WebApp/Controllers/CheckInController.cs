@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -15,15 +17,35 @@ namespace WebApp.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private DbContext _context;
+        private ApplicationUserManager _userManager;
 
         public CheckInController()
         {
         }
 
+        public CheckInController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+         
+        }
+
+
         public CheckInController(IUnitOfWork unitOfWork, DbContext context)
         {
             _unitOfWork = unitOfWork;
             _context = context;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
 
@@ -85,6 +107,7 @@ namespace WebApp.Controllers
 
 
         [Authorize(Roles = "Controller")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPost]
         [System.Web.Http.Route("api/CheckIn/ControlTicket")]
         public IHttpActionResult ControlTicket()
@@ -170,6 +193,28 @@ namespace WebApp.Controllers
 
             return Ok(retVal);
 
+        }
+
+        [HttpGet]
+       // [Authorize(Roles = "Controller")]
+      //  [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/CheckIn/GetUsersToApprove")]
+        public List<ControlInfoModel> GetUsersToApprove()
+        {
+            var req = HttpContext.Current.Request;
+            var retVal = new List<ControlInfoModel>();
+
+            var users = _unitOfWork.Users.GetAll().Where((u) => u.UserType != Enums.UserType.regular && u.Approved == false && u.postedImage == true && u.Checked == false);
+
+            foreach (var item in users)
+            {
+                var email  = UserManager.Users.Where((u) => u.Id == item.AppUserId).Select((u) => u.Email).FirstOrDefault();
+                var pic = _unitOfWork.Pictures.GetAll().Where((u) => u.AppUserId == item.AppUserId).FirstOrDefault();
+                retVal.Add(new ControlInfoModel { Email = email, FirstName = item.FirstName, LastName = item.LastName, Type = item.UserType.ToString(), DateOfBirth = item.DateOfBirth.Date.ToShortDateString(), Image = pic.ImageSource });
+            }
+
+            return retVal;
+           
         }
     }
 }

@@ -147,7 +147,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+       [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/GetDepatures")]
         [Authorize(Roles = "Admin")]
         public IHttpActionResult GetDepatures()
@@ -155,10 +155,10 @@ namespace WebApp.Controllers
 
             var req = HttpContext.Current.Request;
 
-            if (req["line"] == "" || req["line"] == "undefined")
+            if (req["line"] == "" || req["line"] == "undefined" || req["line"] == null)
                 return BadRequest("Please select line");
 
-            if (req["type"] == "" || req["type"] == "undefined")
+            if (req["type"] == "" || req["type"] == "undefined" || req["type"] == null)
                 return BadRequest("Please select type");
 
 
@@ -175,7 +175,7 @@ namespace WebApp.Controllers
                 retVal += item + ", ";
             }
 
-            return Json(retVal);
+            return Json(depatures);
 
         }
 

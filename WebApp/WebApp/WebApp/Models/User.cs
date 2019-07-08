@@ -22,6 +22,8 @@ namespace WebApp.Models
 
         public bool Approved { get; set; }
 
+        public bool Checked { get; set; }
+
         public bool postedImage { get; set; }
 
 

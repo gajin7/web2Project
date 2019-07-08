@@ -425,6 +425,7 @@ namespace WebApp.Controllers
             DateTime.TryParse(model.Date, out tempDate);
             Enums.UserType type = new Enums.UserType();
             bool approved = false;
+            bool check = false;
             switch (model.TypeOfPerson)
             {
                 case "Student":
@@ -433,6 +434,7 @@ namespace WebApp.Controllers
                 case "Regular":
                     type = Enums.UserType.regular;
                     approved = true;
+                    check = true;
                     break;
                 case "Retiree":
                     type = Enums.UserType.retiree;
@@ -456,7 +458,7 @@ namespace WebApp.Controllers
            
           
 
-            var user = new User() { AppUserId = Appuser.Id, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type, Approved = approved, postedImage = false };
+            var user = new User() { AppUserId = Appuser.Id, FirstName = model.FirstName, LastName = model.LastName, DateOfBirth = tempDate, Address = model.City + "," + model.Street + "," + model.Number, UserType = type, Approved = approved, postedImage = false, Checked = check };
             _unitOfWork.Users.Add(user);
             _unitOfWork.Complete();
 

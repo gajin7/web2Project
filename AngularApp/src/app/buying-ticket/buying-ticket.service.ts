@@ -9,14 +9,18 @@ import { Validators } from '@angular/forms';
 })
 export class BuyingTicketService {
 
-
-
-
   constructor(private http: HttpClient) { }
 
-  BuyTimeTicket(lineType : string, mail: string) : Observable<any>
+  SetTimeTicketForSale(lineType : string, mail: string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Ticket/ByTimeTicket', `lineType=` + lineType + `&email=`+mail, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Ticket/SetTimeTicketForSale', `lineType=` + lineType + `&email=`+mail, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handle)
+    );
+  }
+
+  BuyTimeTicket(data : any, mail: string) : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/Ticket/BuyTimeTicket', `email=`+mail + `&id=` + data.id +  `&status=` + data.status + `&payer_email=` + data.payer.email_address  + `&payer_id=` + data.payer.payer_id  + `&create_time=` + data.create_time + `&update_time=` + data.update_time  , { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
     );
   }
