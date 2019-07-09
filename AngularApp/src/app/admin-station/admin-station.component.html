@@ -115,7 +115,7 @@
                             <div class="col-md-6 mb-2 input">
                                     <select class="custom-select" (change)="deleteSelected($event)" required>
                                             <option></option>
-                                            <option *ngFor="let obj of ids" [value]="obj.Station">{{obj.Station}}</option>
+                                            <option *ngFor="let obj of ids" [value]="obj.Station">{{obj.Station}} - {{obj.Name}}</option>
                                         </select>
                                 <div class="invalid-feedback">
                                     Please enter valid address.

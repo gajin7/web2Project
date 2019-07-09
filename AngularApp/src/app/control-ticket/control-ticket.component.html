@@ -5,11 +5,11 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Gradski saobracajni prevoz</a>
+    <label class="navbar-brand">Public transportation</label>
     <a class="nav-item nav-link active" (click)="Logout()" routerLinkActive="active">Log out</a>
 </nav>
 
-<form [formGroup]="ticketForm" class="needs-validation" (ngSubmit)="CheckIn()" novalidate>
+<form [formGroup]="ticketForm" class="needs-validation"  (ngSubmit)="CheckIn()" novalidate>
     <div class="poruka">
         This is a place where you check your card.
     </div>
@@ -20,14 +20,13 @@
     
             </div>
             <div class="col-md-4 mb-2 input">
-                <input type="text" class="form-control" formControlName="Id" id="validationCustom04"  required>
+                <input  id="enter-id" type="text" class="form-control" formControlName="Id"   required>
                 <div class="invalid-feedback">
                     Please enter valid id.
                 </div>
             </div>
             <div class="col-md-4 mb-2 id">
-              <button class="btn btn-primary" type="submit">Check in</button>
-    
+              <button class="btn btn-primary"  type="submit">Check in</button>
             </div>
     
     
@@ -53,7 +52,7 @@
         
  
 </form>          
-        <table border="1">
+        <table border="1" id="tabela">
              <tr >
                  <th>Email</th>
                  <th>FirstName</th>

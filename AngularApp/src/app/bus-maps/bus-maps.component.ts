@@ -5,6 +5,7 @@ import { Polyline } from './polyliner';
 import { BusMapsService } from './bus-maps.service';
 import { LineModel } from './lineModel';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class BusMapsComponent implements OnInit {
   myGroup: FormGroup;
   show: boolean = false;
   iconPath : any = { url:"assets/images/autobus.png", scaledSize: {width: 35, height: 35}}
-  constructor(public service : BusMapsService, private formBuilder: FormBuilder) { }
+  constructor(public service : BusMapsService, private formBuilder: FormBuilder, private route: Router) { }
 
   ngOnInit() {
     this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954), 
@@ -46,6 +47,8 @@ export class BusMapsComponent implements OnInit {
         this.allLines = data;
     });
   }
+
+  
 
 
   ShowStationsSelectionChanged()
@@ -121,5 +124,18 @@ export class BusMapsComponent implements OnInit {
     });
     const index : number = this.showLines.indexOf(a);
     this.showLines.splice(index,1);
+  }
+
+  Navigate()
+  {
+    if(localStorage.role == "AppUser")
+    {
+      this.route.navigate(['app-user-home']);
+    }
+    else
+    {
+      this.route.navigate(['home']);
+    }
+    
   }
 }

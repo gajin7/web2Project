@@ -27,14 +27,17 @@ namespace WebApp.Hubs
 
         public void TimeServerUpdates()
         {
-            //if (!timer.Enabled)
-            //{
-            timer.Interval = 4000;
-            //timer.Start();
-            timer.Elapsed += OnTimedEvent;
+            
+            if(timer.Interval !=4000)
+            {
+                timer.Interval = 4000;
+                //timer.Start();
+                timer.Elapsed += OnTimedEvent;
 
+              
+            }
             timer.Enabled = true;
-            //}
+
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -43,8 +46,9 @@ namespace WebApp.Hubs
             (source as Timer).Enabled = false;
 #endif
             //GetTime();
-            if (stations.Count > 0)
+            if (stations != null)
             {
+
                 if (cnt >= stations.Count)
                 {
                     cnt = 0;
@@ -53,6 +57,11 @@ namespace WebApp.Hubs
                 Clients.All.setRealTime(niz);
                 cnt++;
             }
+            else
+            {
+                double[] niz = { 0, 0 };
+            }
+         
 #if DEBUG
             (source as Timer).Enabled = true;
 #endif
@@ -67,7 +76,7 @@ namespace WebApp.Hubs
                     cnt = 0;
                 }
                 double[] niz = { stations[cnt].latitude, stations[cnt].longitude };
-                Clients.All.setRealTime(niz);
+                //Clients.All.setRealTime(niz);
                 cnt++;
             }
         }
@@ -75,10 +84,12 @@ namespace WebApp.Hubs
         public void StopTimeServerUpdates()
         {
             timer.Stop();
+            stations = null;
         }
 
         public void AddStations(List<StationModel> stationsBM)
         {
+            stations = new List<StationModel>();
             stations = stationsBM;
         }
     }

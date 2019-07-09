@@ -8,6 +8,7 @@ import { StationModel } from '../bus-maps/stationModel';
 import { MapsAPILoader } from '@agm/core';
 import { NotificationsForBusLocService } from './notification-for-bus-loc.service';
 import { ForBusLocationService } from './for-bus-location.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bus-location',
@@ -49,13 +50,12 @@ export class BusLocationComponent implements OnInit {
   longitude : number;
   marker: MarkerInfo = new MarkerInfo(new GeoLocation(this.startLat,this.startLon),"","","","");
 
-  constructor(public service : BusMapsService, private formBuilder: FormBuilder,private mapsApiLoader : MapsAPILoader,private notifForBL : NotificationsForBusLocService, private ngZone: NgZone, private clickService : ForBusLocationService) {
+  constructor(public service : BusMapsService,  private route: Router, private formBuilder: FormBuilder,private mapsApiLoader : MapsAPILoader,private notifForBL : NotificationsForBusLocService, private ngZone: NgZone, private clickService : ForBusLocationService) {
     this.isConnected = false;
     this.notifications = [];
    }
 
   ngOnInit() {
-    
     this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954), 
     "assets/images/ftn.png",
     "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
@@ -77,7 +77,6 @@ export class BusLocationComponent implements OnInit {
     this.checkConnection();
     this.subscribeForTime();
     this.stations = [];
-    
   }
 
   GetAllStations()
@@ -118,9 +117,10 @@ export class BusLocationComponent implements OnInit {
       this.isChanged = false;
       this.stations = [];
       this.polyline.path = [];
-     // this.stopTimer();
+      this.stopTimer();
     }else
     {
+      this.stopTimer();
       this.getStationsByLineNumber(event.target.value);   
     
     //  this.notifForBL.StartTimer(); 
@@ -137,7 +137,10 @@ export class BusLocationComponent implements OnInit {
           this.polyline.addLocation(new GeoLocation(this.stations[i].Latitude, this.stations[i].Longitude));
         }
         console.log(this.stations);
-        this.clickService.click(this.stations).subscribe();
+        this.clickService.click(this.stations).subscribe(data =>
+          {
+            this.startTimer();
+          });
       }
     });
   }
@@ -146,7 +149,7 @@ export class BusLocationComponent implements OnInit {
     this.notifForBL.startConnection().subscribe(e => {
       this.isConnected = e; 
        
-       this.notifForBL.StartTimer();
+      // this.notifForBL.StartTimer();
         
     });
   }  
@@ -176,6 +179,19 @@ export class BusLocationComponent implements OnInit {
   public stopTimer() {
     this.notifForBL.StopTimer();
     this.time = null;
+  }
+
+  Navigate()
+  {
+    if(localStorage.role == "AppUser")
+    {
+      this.route.navigate(['app-user-home']);
+    }
+    else
+    {
+      this.route.navigate(['home']);
+    }
+    
   }
 
 
