@@ -20,7 +20,21 @@ export class ControlTicketService {
   
   public GetUserToApprove() : Observable<any>
   {
-   return this.http.get<any>('http://localhost:52295/api/CheckIn/GetUsersToApprove',{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/CheckIn/GetUsersToApprove',{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handleError<any>('GetUsersToApprove'))
+    );
+  }
+
+  public AproveUser(email: string) : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/CheckIn/ApproveUser',`email=`+email,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handleError<any>('GetUsersToApprove'))
+    );
+  }
+
+  public DeclineUser(email: string) : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/CheckIn/DeclineUser',`email=`+email,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handleError<any>('GetUsersToApprove'))
     );
   }

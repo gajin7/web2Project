@@ -653,3 +653,10 @@ C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebAp
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.PayPallInfoTable.resources
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.csprojAssemblyReference.cache
 C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.CheckedAddedToUser.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionChange.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionChange1.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionChange2.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionChange3.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionChange4.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionChange5.resources
+C:\Users\Gajin\Documents\GitHub\web2Project\WebApp\WebApp\WebApp\obj\Debug\WebApp.Migrations.VersionChange6.resources

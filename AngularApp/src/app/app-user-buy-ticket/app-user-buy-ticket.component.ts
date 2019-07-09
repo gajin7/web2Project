@@ -6,6 +6,7 @@ import {
   IPayPalConfig,
   ICreateOrderRequest 
 } from 'ngx-paypal';
+import { EditProfileService } from '../edit-profile/edit-profile.service';
 
 @Component({
   selector: 'app-buying-ticket',
@@ -17,7 +18,7 @@ export class AppUserBuyTicketComponent implements OnInit {
 
  
 
-  constructor(public service: BuyTicketService, private route: Router,private fb: FormBuilder) { }
+  constructor(public service: BuyTicketService, public profileService: EditProfileService,  private route: Router,private fb: FormBuilder) { }
 
   public payPalConfig?: IPayPalConfig;
   ticketType : string = '';
@@ -25,6 +26,7 @@ export class AppUserBuyTicketComponent implements OnInit {
   message : string = '';
   price : string = '';
   types : string[];
+  status: string;
   
 
 
@@ -32,17 +34,26 @@ export class AppUserBuyTicketComponent implements OnInit {
     //update the ui
     this.lineType = event.target.value;
     this.service.GetTicketPrice(this.ticketType,this.lineType).subscribe((data) => {
-      this.price = "Your ticket price is: " + data + " RSD";});
+      this.price = "Your ticket price is: " + data + " USD";});
   }
   
   selected (event: any) {
     //update the ui
     this.ticketType = event.target.value;
     this.service.GetTicketPrice(this.ticketType,this.lineType).subscribe((data) => {
-    this.price = "Your ticket price is: " + data + " RSD";});
+    this.price = "Your ticket price is: " + data + " USD";});
   }
   
   ngOnInit() {
+    this.profileService.GetUserInfo().subscribe((data)=>{
+      this.status = data.Status;
+
+      if(this.status != "Approved")
+      {
+           window.alert("You can't buy ticket, because your account isn't approved by controlor. Current status: " + this.status + " . Please try again later");
+           this.route.navigate(['app-user-home']);
+      }
+    });
   }
 
   buyTicket(data: any)

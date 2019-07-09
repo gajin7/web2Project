@@ -77,16 +77,19 @@ namespace WebApp.Controllers
             var userId = User.Identity.GetUserId();
             User usr = _unitOfWork.Users.GetAll().Where(u => u.AppUserId == userId).FirstOrDefault();
 
+            string date = usr.DateOfBirth.ToUniversalTime().Date.ToString().Split(' ')[0];
+
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 FirstName = usr.FirstName,
                 LastName = usr.LastName,
-                Date = usr.DateOfBirth.Date.ToString().Split(' ')[0],
+                Date = date,
                 City = usr.Address.Split(',')[0],
                 Street = usr.Address.Split(',')[1],
                 Number = usr.Address.Split(',')[2],
-                Type = usr.UserType.ToString()
+                Type = usr.UserType.ToString(),
+                Status = GetProfileStatus(User.Identity.GetUserId())
 
 
 
@@ -127,20 +130,20 @@ namespace WebApp.Controllers
 
             switch (model.TypeOfPerson)
             {
-                case "Regular":
+                case "regular":
                     usr.UserType = Enums.UserType.regular;
-                    usr.postedImage = false;
                     usr.Approved = true;
+                    usr.Checked = true;
                     break;
-                case "Student":
+                case "student":
                     usr.UserType = Enums.UserType.student;
-                    usr.postedImage = false;
                     usr.Approved = false;
+                    usr.Checked = false;
                     break;
-                case "Retiree":
+                case "retiree":
                     usr.UserType = Enums.UserType.retiree;
-                    usr.postedImage = false;
                     usr.Approved = false;
+                    usr.Checked = false;
                     break;
                 default:
                     break;
@@ -153,6 +156,28 @@ namespace WebApp.Controllers
             return Ok("Changes saved");
 
         }
+
+       
+        public string GetProfileStatus(string appUserId)
+        {
+           
+            var usr = _unitOfWork.Users.GetAll().Where((u) => u.AppUserId == appUserId).FirstOrDefault();
+
+            string retVal = "";
+
+            if (usr.Checked == false && usr.postedImage == false)
+                retVal = "Picture missing";
+            else if (usr.Checked == false)
+                retVal = "Proccesing";
+            else if (usr.Checked == true && usr.Approved == true)
+                retVal = "Approved";
+            else if (usr.Checked == true && usr.Approved == false)
+                retVal = "Decline";
+
+            return retVal;
+
+        }
+
 
         // POST api/Account/Logout
         [Route("Logout")]
@@ -507,6 +532,8 @@ namespace WebApp.Controllers
                         if(tempUser.UserType != Enums.UserType.retiree && tempUser.UserType != Enums.UserType.student)
                             return BadRequest("You can't add image for regular user!");
                         tempUser.postedImage = true;
+                        tempUser.Approved = false;
+                        tempUser.Checked = false;
                         _unitOfWork.Users.Update(tempUser);
                         _unitOfWork.Complete();
 

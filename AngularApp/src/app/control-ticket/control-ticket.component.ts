@@ -39,7 +39,25 @@ export class ControlTicketComponent implements OnInit {
 
   GetUsersToApprove()
   {
-    this.users = this.service.GetUserToApprove();
+   this.service.GetUserToApprove().subscribe((data)=>{
+     
+    this.users = data;
+    });
   }
+
+  Approve(Email : any)
+  {
+   this.service.AproveUser(Email).subscribe((data)=> {
+    this.GetUsersToApprove();
+   });
+  }
+
+  Decline(Email : any)
+  {
+    this.service.DeclineUser(Email).subscribe((data)=> {
+      this.GetUsersToApprove();
+    });
+  }
+
 
 }

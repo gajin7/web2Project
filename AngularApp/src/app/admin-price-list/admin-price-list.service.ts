@@ -10,16 +10,30 @@ export class AdminPriceListService {
 
   constructor(private http: HttpClient) { }
 
-  public ChangeTicket(type : string, price: string) : Observable<any>
+  public ChangeTicket(type : string, price: string,version :string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/ChangePrice', `type=` + type + `&price=` + price,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Admin/ChangePrice', `type=` + type + `&price=` + price + "&version="+ version,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
     );
   }
 
-  public ChangeDiscount(type : string, discount: string) : Observable<any>
+  public ChangeDiscount(type : string, discount: string,version :string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/ChangeDiscount', `type=` + type + `&discount=` + discount,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Admin/ChangeDiscount', `type=` + type + `&discount=` + discount + "&version="+ version,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handle)
+    );
+  }
+
+  public GetPriceListVersions() : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/Admin/GetPriceListVersions', { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+      catchError(this.handle)
+    );
+  }
+
+  public GetDiscountsVersions() : Observable<any>
+  {
+   return this.http.post<any>('http://localhost:52295/api/Admin/GetDiscountsVersions', { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
     );
   }

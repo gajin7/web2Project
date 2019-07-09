@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApp.Hubs;
 using WebApp.Models;
 using WebApp.Persistence.UnitOfWork;
 using static WebApp.Models.Enums;
@@ -16,9 +17,16 @@ namespace WebApp.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private DbContext _context;
+        private BusLocationHub hub;
 
         public BusStationsController()
         {
+        }
+
+        public BusStationsController(IUnitOfWork uw, BusLocationHub hubb)
+        {
+            _unitOfWork = uw;
+            hub = hubb;
         }
 
         public BusStationsController(IUnitOfWork unitOfWork, DbContext context)
@@ -78,7 +86,36 @@ namespace WebApp.Controllers
 
         }
 
-        
+        [HttpGet]
+        [System.Web.Http.Route("api/BusStations/GetLinesForLocation")]
+        public IHttpActionResult GetLinesForLocation()
+        {
+            var AllLines = _unitOfWork.Lines.GetAll();
+            List<LineModel> lines = new List<LineModel>();
+
+
+            foreach (var item in AllLines)
+            {
+                List<Stations> stations = new List<Stations>();
+                foreach (var i in item.Stations)
+                {
+                    var loc = _unitOfWork.Locations.Get(i.LocationId);
+                    stations.Add(new Stations { Latitude = loc.Lat, Longitude = loc.Lon });
+                }
+
+                lines.Add(new LineModel { LineNumber = item.Name, Stations = stations});
+            }
+            return Json(lines);
+
+        }
+
+        [HttpPost]
+        [System.Web.Http.Route("api/BusStations/SendStationsToHub")]
+        public IHttpActionResult SendStationsToHub(List<StationModel> list)
+        {
+            hub.AddStations(list);
+            return Ok();
+        }
 
     }
 }

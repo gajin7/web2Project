@@ -18,9 +18,9 @@ export class AdminStationService {
     );
   }
 
-  DeleteStation(id: string) : Observable<any>
+  DeleteStation(station: any) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/DeleteStation',`id=`+id,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Admin/DeleteStation',`id=`+station.Station + `&version=`+station.Version,{ 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
     );
   }
@@ -32,9 +32,9 @@ export class AdminStationService {
     );
   }
 
-  ChangeStation(id :string, station: Station) : Observable<any>
+  ChangeStation(id :string, station: Station, version:string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/ChangeStation', `id= ` + id + `&name=`+station.name + `&address=`+station.address + `&longitude=`+station.longitude + `&latitude=`+station.latitude, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Admin/ChangeStation', `id= ` + id + `&name=`+station.name + `&address=`+station.address + `&longitude=`+station.longitude + `&latitude=`+station.latitude +`&version=` + version, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
     catchError(this.handle)
     );
   }

@@ -73,29 +73,33 @@ namespace WebApp.Migrations
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Controller");
             }
-
+            
 
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.TimeTicket))
             {
-                var price = new Prices() { price = 179, ticketType = Enums.TicketType.TimeTicket };
+                var price = new Prices() { price = 2, ticketType = Enums.TicketType.TimeTicket };
+                price.Version = 0;
                 context.Prices.Add(price);
             }
            
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.MonthlyTicket))
             {
-                var price = new Prices() { price = 2990, ticketType = Enums.TicketType.MonthlyTicket };
+                var price = new Prices() { price = 79, ticketType = Enums.TicketType.MonthlyTicket };
+                price.Version = 0;
                 context.Prices.Add(price);
             }
            
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.AnnualTicket))
             {
-                var price = new Prices() { price = 25502, ticketType = Enums.TicketType.AnnualTicket};
+                var price = new Prices() { price = 750, ticketType = Enums.TicketType.AnnualTicket};
+                price.Version = 0;
                 context.Prices.Add(price);
             }
            
             if (!context.Prices.Any(u => u.ticketType == Enums.TicketType.DailyTicket))
             {
-                var price = new Prices() { price = 499, ticketType = Enums.TicketType.DailyTicket };
+                var price = new Prices() { price = 5, ticketType = Enums.TicketType.DailyTicket };
+                price.Version = 0;
                 context.Prices.Add(price);
             }
        
@@ -103,16 +107,19 @@ namespace WebApp.Migrations
             if (!context.Discounts.Any(u => u.Type == Enums.UserType.regular))
             {
                 var discount = new Discounts() { Type = Enums.UserType.regular, Discount = 0 };
+                discount.Version = 0;
                 context.Discounts.Add(discount);
             }
             if (!context.Discounts.Any(u => u.Type == Enums.UserType.retiree))
             {
                 var discount = new Discounts() { Type = Enums.UserType.retiree, Discount = 0.2 };
+                discount.Version = 0;
                 context.Discounts.Add(discount);
             }
             if (!context.Discounts.Any(u => u.Type == Enums.UserType.student))
             {
                 var discount = new Discounts() { Type = Enums.UserType.student, Discount = 0.5 };
+                discount.Version = 0;
                 context.Discounts.Add(discount);
             }
 
@@ -160,7 +167,7 @@ namespace WebApp.Migrations
                 var schedule = new Schedule() { Day = Day.Sunday, LineId = context.Lines.Where(u => u.Name == "4").Select(u => u.Id).First(), Duration = TimeSpan.FromMinutes(58), Depatures = new System.Collections.Generic.List<Depature>() { new Depature() { DepatureTime = "17:01" }, new Depature() { DepatureTime = "19:01" }, new Depature() { DepatureTime = "21:01" }, new Depature() { DepatureTime = "23:01" }, new Depature() { DepatureTime = "01:01" } } };
                 context.Schedules.Add(schedule);
             }
-
+            
 
 
         }

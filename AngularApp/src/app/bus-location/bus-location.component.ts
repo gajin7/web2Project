@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { MarkerInfo } from '../bus-maps/marker-info.model';
 import { Polyline } from '../bus-maps/polyliner';
 import { BusMapsService } from '../bus-maps/bus-maps.service';
 import { GeoLocation } from '../bus-maps/geolocation';
-import { LineModel } from '../bus-maps/lineModel';
+import { StationModel } from '../bus-maps/stationModel';
+import { MapsAPILoader } from '@agm/core';
+import { NotificationsForBusLocService } from './notification-for-bus-loc.service';
+import { ForBusLocationService } from './for-bus-location.service';
 
 @Component({
   selector: 'app-bus-location',
@@ -20,17 +23,61 @@ export class BusLocationComponent implements OnInit {
   showLines: any =[];
   allLines: any = [];
   showStations  = false;
+
   myGroup: FormGroup;
+  isChanged : boolean = false;
   show: boolean = false;
   iconPath : any = { url:"assets/images/autobus.png", scaledSize: {width: 35, height: 35}}
-  constructor(public service : BusMapsService, private formBuilder: FormBuilder) { }
+  public polyline: Polyline;
+  public polylineRT: Polyline;  
+  public zoom: number = 15;
+  startLat : number = 45.242268;
+  startLon : number = 19.842954;
+
+  options : string[];
+  options1: any;
+  stations : StationModel[] = [];
+  buses : any[];
+  busImgIcon : any = {url:"assets/images/autobus.png", scaledSize: {width: 50, height: 50}};
+  autobusImgIcon : any = {url:"assets/images/busicon.png", scaledSize: {width: 50, height: 50}};
+
+  isConnected: boolean;
+  notifications: string[];
+  time: number[] = [];
+
+  latitude : number ;
+  longitude : number;
+  marker: MarkerInfo = new MarkerInfo(new GeoLocation(this.startLat,this.startLon),"","","","");
+
+  constructor(public service : BusMapsService, private formBuilder: FormBuilder,private mapsApiLoader : MapsAPILoader,private notifForBL : NotificationsForBusLocService, private ngZone: NgZone, private clickService : ForBusLocationService) {
+    this.isConnected = false;
+    this.notifications = [];
+   }
 
   ngOnInit() {
+    
     this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954), 
     "assets/images/ftn.png",
     "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
-    this.selLine = new Polyline([], 'red', { url:"assets/images/autobus.png", scaledSize: {width: 50, height: 50}});
+    this.selLine = new Polyline([], 'red', { url:"assets/images/busicon.png", scaledSize: {width: 50, height: 50}});
     this.GetAllLines();
+    this.isChanged = false;
+    //za combobox izlistaj sve linije
+    this.clickService.getAllLines().subscribe(
+      data =>{
+        this.options = [];
+        this.options1 = data;
+        this.options1.forEach(element => {
+          this.options.push(element.LineNumber);
+        });
+      });
+    //inicijalizacija polyline
+    this.polyline = new Polyline([], 'blue', { url:"assets/images/autobus.png", scaledSize: {width: 50, height: 50}});
+
+    this.checkConnection();
+    this.subscribeForTime();
+    this.stations = [];
+    
   }
 
   GetAllStations()
@@ -62,65 +109,75 @@ export class BusLocationComponent implements OnInit {
     }
   }
 
+  onSelectionChangeNumber(event){
+    this.isChanged = true;
+    this.stations = [];
+    this.polyline.path = [];
+    if(event.target.value == "")
+    {
+      this.isChanged = false;
+      this.stations = [];
+      this.polyline.path = [];
+     // this.stopTimer();
+    }else
+    {
+      this.getStationsByLineNumber(event.target.value);   
+    
+    //  this.notifForBL.StartTimer(); 
+    }
+    
+  }
 
-  AddLineToShowLines(lNum: any)
-  {
-    this.allLines.forEach(element => {
-      if(element.LineNumber == lNum)
+  getStationsByLineNumber(lineNumber : string){
+    this.options1.forEach(element => {
+      if(element.LineNumber == lineNumber)
       {
-        this.showLines.push(element);
+        this.stations = element.Stations;
+        for(var i=0; i<this.stations.length; ++i){
+          this.polyline.addLocation(new GeoLocation(this.stations[i].Latitude, this.stations[i].Longitude));
+        }
+        console.log(this.stations);
+        this.clickService.click(this.stations).subscribe();
       }
-      
-    });
-  }
-
-
-  showCheckBoxes(){
-    console.log("sssss");
-    this.myGroup = this.formBuilder.group({
-      allLines: new FormArray([]) //new FormArray(formControls)
-    });
-
-    this.addCheckBoxes();
-    this.show = true;
-  }
-
-  private addCheckBoxes(){
-    this.allLines.map((o,i)=> {
-      const control = new FormControl(false);
-      (this.myGroup.controls.allLines as FormArray).push(control);
     });
   }
   
-  FieldsChange(event){
-    let ln = event.currentTarget.checked;
-    console.log(ln);
-    console.log(event.currentTarget.value);
-    let lNum = event.currentTarget.value;
-    if(ln)
-    {
-      this.AddLineToShowLines(lNum);
-      console.log(this.showLines);
-    }
-    else{
-      this.RemoveLineFromShowLines(lNum);
-      console.log(this.showLines);
-    }
-    
+  private checkConnection(){
+    this.notifForBL.startConnection().subscribe(e => {
+      this.isConnected = e; 
+       
+       this.notifForBL.StartTimer();
+        
+    });
+  }  
+
+ public subscribeForTime() {
+    this.notifForBL.registerForTimerEvents().subscribe(e => this.onTimeEvent(e));
   }
 
-  RemoveLineFromShowLines(lNum: string)
-  {
-    let a : LineModel;
-    
-    this.showLines.forEach(element => {
-      if(element.LineNumber == lNum)
-      {
-        a = element;
-      }
-    });
-    const index : number = this.showLines.indexOf(a);
-    this.showLines.splice(index,1);
+  public onTimeEvent(pos: number[]){
+    this.ngZone.run(() => { 
+       this.time = pos; 
+       if(this.isChanged){
+         this.latitude = pos[0];
+          this.longitude = pos[1];
+
+       }else{
+          this.latitude = 0;
+          this.longitude = 0;
+       }
+    });      
+  }  
+
+  public startTimer() {    
+    this.notifForBL.StartTimer();
   }
+
+  public stopTimer() {
+    this.notifForBL.StopTimer();
+    this.time = null;
+  }
+
+
 }
 

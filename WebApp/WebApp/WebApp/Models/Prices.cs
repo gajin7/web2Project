@@ -15,5 +15,7 @@ namespace WebApp.Models
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
+
+        public double Version { get; set; }
     }
 }

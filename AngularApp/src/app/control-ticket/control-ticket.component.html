@@ -41,11 +41,62 @@
             <div class="col-md-2 mb-2 input">
                 <textarea class="message" for=""> {{mssg}}</textarea>
             </div>
-    
-    
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
+ 
+</form>          
+        <table border="1">
+             <tr >
+                 <th>Email</th>
+                 <th>FirstName</th>
+                 <th>LastName</th>
+                 <th>DateOfBirth</th>
+                 <th>Type</th>
+                 <th>Image</th>
+                 <th  colspan="2">Approve/Decline</th>
+             </tr>
+             <tr *ngFor="let user of users; let i = index">
+                <td >
+                    {{users[i].Email}}
+                 </td>
+                 <td >
+                     {{users[i].FirstName}}
+                </td>
+                 <td >
+                     {{users[i].LastName}}
+                 </td>
+                 <td >
+                    {{users[i].DateOfBirth}}
+                 </td>
+                 <td >
+                     {{users[i].Type}}
+                 </td>
+                <!-- <td >
+                    {{users[i].Image}}
+                 </td>-->
+                 <td>
+                    <img id="image" [src]="users[i].Image" >
+                 </td>
+                 <td >
+                    <input type="submit" (click)="Approve(users[i].Email)" id="Approve"  value="Aprove"/>
+                </td>
+                <td >
+                    <input type="button" (click)="Decline(users[i].Email)" value="Decline"/>
+                </td>
+             </tr>
+        </table>
+            
+    
+        
     
 
 
-</form>
 

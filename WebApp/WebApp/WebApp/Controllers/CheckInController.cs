@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -195,26 +197,71 @@ namespace WebApp.Controllers
 
         }
 
-        [HttpGet]
-       // [Authorize(Roles = "Controller")]
-      //  [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [HttpPost]
+        [Authorize(Roles = "Controller")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/CheckIn/GetUsersToApprove")]
         public List<ControlInfoModel> GetUsersToApprove()
         {
-            var req = HttpContext.Current.Request;
+
             var retVal = new List<ControlInfoModel>();
 
             var users = _unitOfWork.Users.GetAll().Where((u) => u.UserType != Enums.UserType.regular && u.Approved == false && u.postedImage == true && u.Checked == false);
 
             foreach (var item in users)
             {
-                var email  = UserManager.Users.Where((u) => u.Id == item.AppUserId).Select((u) => u.Email).FirstOrDefault();
+                var email = UserManager.Users.Where((u) => u.Id == item.AppUserId).Select((u) => u.Email).FirstOrDefault();
                 var pic = _unitOfWork.Pictures.GetAll().Where((u) => u.AppUserId == item.AppUserId).FirstOrDefault();
                 retVal.Add(new ControlInfoModel { Email = email, FirstName = item.FirstName, LastName = item.LastName, Type = item.UserType.ToString(), DateOfBirth = item.DateOfBirth.Date.ToShortDateString(), Image = pic.ImageSource });
             }
 
             return retVal;
-           
+
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Controller")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/CheckIn/ApproveUser")]
+        public IHttpActionResult ApproveUser()
+        {
+            var req = HttpContext.Current.Request;
+            var email = req["email"].Trim();
+
+            var appUsrID = UserManager.Users.Where((u) => u.Email == email).Select((u) => u.Id).FirstOrDefault();
+
+            User user = _unitOfWork.Users.GetAll().Where((u) => u.AppUserId == appUsrID).FirstOrDefault();
+            user.Approved = true;
+            user.Checked = true;
+
+            _unitOfWork.Users.Update(user);
+            _unitOfWork.Complete();
+
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Controller")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/CheckIn/DeclineUser")]
+        public IHttpActionResult DeclineUser()
+        {
+            var req = HttpContext.Current.Request;
+            var email = req["email"].Trim();
+
+            var appUsrID = UserManager.Users.Where((u) => u.Email == email).Select((u) => u.Id).FirstOrDefault();
+
+            User user = _unitOfWork.Users.GetAll().Where((u) => u.AppUserId == appUsrID).FirstOrDefault();
+            user.Approved = false;
+            user.Checked = true;
+
+            _unitOfWork.Users.Update(user);
+            _unitOfWork.Complete();
+
+            return Ok();
+
         }
     }
 }

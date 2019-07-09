@@ -18,6 +18,8 @@ namespace WebApp.Models
         public virtual List<Depature> Depatures { get; set; } 
         public TimeSpan Duration { get; set; }
 
+        public double Version { get; set; }
+
 
     }
 }

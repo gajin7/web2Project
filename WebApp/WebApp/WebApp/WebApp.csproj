@@ -267,6 +267,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\BusLocationHub.cs" />
+    <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Migrations\201906101516282_Create.cs" />
     <Compile Include="Migrations\201906101516282_Create.Designer.cs">
       <DependentUpon>201906101516282_Create.cs</DependentUpon>
@@ -454,6 +456,34 @@
     <Compile Include="Migrations\201907080724230_CheckedAddedToUser.cs" />
     <Compile Include="Migrations\201907080724230_CheckedAddedToUser.Designer.cs">
       <DependentUpon>201907080724230_CheckedAddedToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081322437_VersionChange.cs" />
+    <Compile Include="Migrations\201907081322437_VersionChange.Designer.cs">
+      <DependentUpon>201907081322437_VersionChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081456048_VersionChange1.cs" />
+    <Compile Include="Migrations\201907081456048_VersionChange1.Designer.cs">
+      <DependentUpon>201907081456048_VersionChange1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081605159_VersionChange2.cs" />
+    <Compile Include="Migrations\201907081605159_VersionChange2.Designer.cs">
+      <DependentUpon>201907081605159_VersionChange2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081705512_VersionChange3.cs" />
+    <Compile Include="Migrations\201907081705512_VersionChange3.Designer.cs">
+      <DependentUpon>201907081705512_VersionChange3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081708268_VersionChange4.cs" />
+    <Compile Include="Migrations\201907081708268_VersionChange4.Designer.cs">
+      <DependentUpon>201907081708268_VersionChange4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081710372_VersionChange5.cs" />
+    <Compile Include="Migrations\201907081710372_VersionChange5.Designer.cs">
+      <DependentUpon>201907081710372_VersionChange5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907081711478_VersionChange6.cs" />
+    <Compile Include="Migrations\201907081711478_VersionChange6.Designer.cs">
+      <DependentUpon>201907081711478_VersionChange6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -742,6 +772,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907080724230_CheckedAddedToUser.resx">
       <DependentUpon>201907080724230_CheckedAddedToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081322437_VersionChange.resx">
+      <DependentUpon>201907081322437_VersionChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081456048_VersionChange1.resx">
+      <DependentUpon>201907081456048_VersionChange1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081605159_VersionChange2.resx">
+      <DependentUpon>201907081605159_VersionChange2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081705512_VersionChange3.resx">
+      <DependentUpon>201907081705512_VersionChange3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081708268_VersionChange4.resx">
+      <DependentUpon>201907081708268_VersionChange4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081710372_VersionChange5.resx">
+      <DependentUpon>201907081710372_VersionChange5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907081711478_VersionChange6.resx">
+      <DependentUpon>201907081711478_VersionChange6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

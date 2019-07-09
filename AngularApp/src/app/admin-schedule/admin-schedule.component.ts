@@ -13,6 +13,8 @@ export class AdminScheduleComponent implements OnInit {
   line: string;
   type: string;
   mssg : string;
+  poruka :string;
+  version :string;
 
   Form = this.fb.group({
     deps: ['',Validators.required],
@@ -48,32 +50,70 @@ export class AdminScheduleComponent implements OnInit {
 
   Show()
   {
-    this.service.GetDepatures(this.type,this.line).subscribe((data) => { 
+    this.service.GetDepatures(this.type,this.line).subscribe((data) => {
+      this.poruka = data; 
+      if(this.poruka != "Please select line" &&  this.poruka != "Please select type" && this.poruka != "Input in wrong format" && this.poruka != "Schedule has changed by someone else. Please reload to get new version" && this.poruka != "Defined depature allredy excist" && this.poruka != "Changes Saved" && this.poruka != "Defined depature not excist")
+      {
+          this.Form.setValue({
+
+              deps : data.Depatures,
+          });
+          this.version = data.Version;
+    } else
+    {
       this.Form.setValue({
+
         deps : data,
-      });
+    });
+    }
        });
   }
 
   Add()
   {
-    this.service.AddDepature(this.type,this.line,this.AddForm.value.dep).subscribe((data)=> {
+    this.service.AddDepature(this.type,this.line,this.AddForm.value.dep,this.version).subscribe((data)=> {
         this.mssg = data;
-        this.service.GetDepatures(this.type,this.line).subscribe((data) => { 
+        this.service.GetDepatures(this.type,this.line).subscribe((data) => {
+          this.poruka = data; 
+          if(this.poruka != "Please select line" &&  this.poruka != "Please select type" && this.poruka != "Input in wrong format" && this.poruka != "Schedule has changed by someone else. Please reload to get new version" && this.poruka != "Defined depature allredy excist" && this.poruka != "Changes Saved" && this.poruka != "Defined depature not excist")
+          {
+              this.Form.setValue({
+    
+                  deps : data.Depatures,
+              });
+              this.version = data.Version;
+        } else
+        {
           this.Form.setValue({
-            deps : data,});
-          });
+    
+            deps : data,
+        });
+        }
+           });
     });
   }
 
   Remove()
   {
-    this.service.RemoveDepature(this.type,this.line,this.RemoveForm.value.dep).subscribe((data)=> {
+    this.service.RemoveDepature(this.type,this.line,this.RemoveForm.value.dep,this.version).subscribe((data)=> {
         this.mssg = data;
-        this.service.GetDepatures(this.type,this.line).subscribe((data) => { 
+        this.service.GetDepatures(this.type,this.line).subscribe((data) => {
+          this.poruka = data; 
+          if(this.poruka != "Please select line" &&  this.poruka != "Please select type" && this.poruka != "Input in wrong format" && this.poruka != "Schedule has changed by someone else. Please reload to get new version" && this.poruka != "Defined depature allredy excist" && this.poruka != "Changes Saved" && this.poruka != "Defined depature not excist")
+          {
+              this.Form.setValue({
+    
+                  deps : data.Depatures,
+              });
+              this.version = data.Version;
+        } else
+        {
           this.Form.setValue({
-            deps : data,});
-          });
+    
+            deps : data,
+        });
+        }
+           });
     });
   }
 

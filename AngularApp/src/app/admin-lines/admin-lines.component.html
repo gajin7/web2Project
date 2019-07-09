@@ -84,7 +84,7 @@
                     <label>Stations</label>
                     <select class="custom-select" (change)="selectedStation($event)" required>
                             <option></option>
-                            <option *ngFor="let obj of stations" [value]="obj">{{obj}}</option>
+                            <option *ngFor="let obj of stations" [value]="obj.Station">{{obj.Station}} - {{obj.Name}}</option>
                         </select>
                     </div>
                 </form>
@@ -109,7 +109,7 @@
                                 <div class="col-md-6 mb-2 input">
                                         <select class="custom-select" (change)="selectDelete($event)" required>
                                                 <option></option>
-                                                <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
+                                                <option *ngFor="let obj of lines" [value]="obj.Line">{{obj.Line}}</option>
                                             </select>
                                     <div class="invalid-feedback">
                                         Please enter valid id.
@@ -143,10 +143,10 @@
                                 Line:
 
                             </div>
-                            <div class="col-md-6 mb-2 input">
+                            <div class="col-md-6 mb-2 input" >
                                     <select class="custom-select" (change)="selectDelete($event)" required>
                                             <option></option>
-                                            <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
+                                            <option *ngFor="let obj of lines"  [value]="obj.Line">{{obj.Line}}</option>
                                         </select>
                             </div>
                             
@@ -186,7 +186,7 @@
                                             <div class="col-md-4 mb-2 input">
                                                     <select class="custom-select" (change)="selectedStationAdd($event)" required>
                                                             <option></option>
-                                                            <option *ngFor="let obj of stations" [value]="obj">{{obj}}</option>
+                                                            <option *ngFor="let obj of stations" [value]="obj.Station">{{obj.Station}}</option>
                                                  </select>
                                             </div>
             

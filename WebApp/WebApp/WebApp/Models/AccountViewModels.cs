@@ -44,9 +44,38 @@ namespace WebApp.Models
 
         public string Type { get; set; }
 
+        public string Status { get; set; }
+
        // public bool HasRegistered { get; set; }
 
        // public string LoginProvider { get; set; }
+    }
+
+    public class LinesModel
+    {
+        public string Line { get; set; }
+
+        public string Version { get; set; }
+        
+    }
+
+    public class ScheduleModel
+    {
+        public string Depatures { get; set; }
+
+        public string Message { get; set; }
+
+        public string Version { get; set; }
+
+    }
+
+    public class StationsModel
+    {
+        public string Station { get; set; }
+
+        public string Name { get; set; }
+
+        public string Version { get; set; }
     }
 
     public class UserLoginInfoViewModel

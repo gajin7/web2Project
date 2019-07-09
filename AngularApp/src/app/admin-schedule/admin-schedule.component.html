@@ -43,7 +43,7 @@
                             <div class="col-md-6 mb-2 input">
                                 <select class="custom-select" (change)="selectedLine($event)" required>
                                     <option></option>
-                                    <option *ngFor="let obj of lines" [value]="obj">{{obj}}</option>
+                                    <option *ngFor="let obj of lines" [value]="obj.Line">{{obj.Line}}</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Please enter valid line.

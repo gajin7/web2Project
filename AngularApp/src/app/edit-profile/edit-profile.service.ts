@@ -28,6 +28,8 @@ export class EditProfileService {
     catchError(this.handle));
   }
 
+  
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       return of(result as T);

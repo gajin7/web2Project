@@ -12,12 +12,9 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" routerLink="/app-user-home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
-
-
-
-
         </div>
     </div>
+    <label>Status:{{status}}</label>
 </nav>
 
 <form [formGroup]="Form" (submit)="EditProfile()" class="needs-validation" novalidate>
@@ -66,8 +63,9 @@
     <div class="form-group">
         <label for="birthDate" class="control-label">Date of Birth</label>
         <div class="">
-            <input type="date" formControlName="Date" id="birthDate" class="form-control">
+            <input  formControlName="Date" id="birthDate" class="form-control">
         </div>
+       
     </div>
 
     <div class="form-row">
@@ -99,9 +97,9 @@
         <select class="custom-select" formControlName="TypeOfPerson" required>
 
       <option value=""> </option>
-      <option value="Regular">Regular</option>
-      <option value="Student">Student</option>
-      <option value="Retiree">Retiree</option>
+      <option value="regular">Regular</option>
+      <option value="student">Student</option>
+      <option value="retiree">Retiree</option>
     </select>
         <div class="invalid-feedback">You must select type of pearson</div>
     </div>

@@ -70,28 +70,49 @@ namespace WebApp.Controllers
                 return BadRequest("Please enter valid price value");
 
             Prices price = _unitOfWork.Prices.GetAll().Where((u) => u.ticketType.ToString().Equals(req["type"].Trim())).FirstOrDefault();
+            var aaa = req["version"];
+            if (price.Version.ToString() != req["version"].Trim())
+            {
+                return BadRequest("Disounts allredy changed by someone else. Reload to get new version");
+            }
 
-
+            price.Version += 0.1;
 
             price.price = tmp;
 
-            try
-            {
-                _unitOfWork.Prices.Update(price);
-                _unitOfWork.Complete();
-            }
-            catch (ChangeConflictException)
-            {
-
-                return BadRequest("You have old version of files. Please reload page.");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Error.Please reload and try again.");
-            }
+            _unitOfWork.Prices.Update(price);
+             _unitOfWork.Complete();
+            
+           
 
 
             return Ok("Price successfully changed");
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/GetPriceListVersions")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult GetPriceListVersions()
+        {
+            List<string> versions = new List<string>();
+
+           List<string> prices = _unitOfWork.Prices.GetAll().Select(u => u.Version.ToString()).ToList();
+
+            return Json(prices);
+        }
+
+        [HttpPost]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("api/Admin/GetDiscountsVersions")]
+        [Authorize(Roles = "Admin")]
+        public IHttpActionResult GetDiscountsVersions()
+        {
+            List<string> versions = new List<string>();
+
+            List<string> disc = _unitOfWork.Discounts.GetAll().Select(u => u.Version.ToString()).ToList();
+
+            return Json(disc);
         }
 
         [HttpPost]
@@ -111,22 +132,18 @@ namespace WebApp.Controllers
             Discounts discount = _unitOfWork.Discounts.GetAll().Where((u) => u.Type.ToString().Equals(req["type"].Trim())).FirstOrDefault();
             discount.Discount = tmp / 100;
 
-
-            try
+            if(discount.Version.ToString() != req["version"].Trim())
             {
+                return BadRequest("Disounts allredy changed by someone else. Reload to get new version");
+            }
+
+            discount.Version += 0.1;
+
+           
                 _unitOfWork.Discounts.Update(discount);
                 _unitOfWork.Complete();
-            }
-            catch (ChangeConflictException)
-            {
-
-                return BadRequest("You have old version of files. Please reload page.");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Error.Please reload and try again.");
-            }
-
+            
+         
 
             return Ok("Discount successfully updated");
         }
@@ -135,14 +152,15 @@ namespace WebApp.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/GetLines")]
         [Authorize(Roles = "Admin")]
-        public IHttpActionResult GetLines()
+        public List<LinesModel> GetLines()
         {
-
-
-            var lines = _unitOfWork.Lines.GetAll().Select(u => u.Name);
-
-
-            return Json(lines);
+            List<LinesModel> lines = new List<LinesModel>();
+            foreach (var item in _unitOfWork.Lines.GetAll())
+            {
+                lines.Add(new LinesModel { Line = item.Name, Version = item.Version.ToString() });
+            }
+          
+            return lines;
 
         }
 
@@ -152,19 +170,21 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         public IHttpActionResult GetDepatures()
         {
-
+            string mssg = "";
             var req = HttpContext.Current.Request;
 
             if (req["line"] == "" || req["line"] == "undefined" || req["line"] == null)
-                return BadRequest("Please select line");
+              return BadRequest("Please select line");
 
             if (req["type"] == "" || req["type"] == "undefined" || req["type"] == null)
-                return BadRequest("Please select type");
+               return BadRequest("Please select type");
 
 
             var lineId = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["line"].Trim()).Select((u) => u.Id).FirstOrDefault();
 
             var scheduleId = _unitOfWork.Schedules.GetAll().Where((u) => u.Day.ToString() == req["type"].Trim() && u.LineId == lineId).Select((u) => u.Id).FirstOrDefault();
+
+            var version = _unitOfWork.Schedules.Get(scheduleId).Version.ToString();
 
             var depatures = _unitOfWork.Depatures.GetAll().Where((u) => u.ScheduleId == scheduleId).Select((u) => u.DepatureTime);
 
@@ -175,7 +195,7 @@ namespace WebApp.Controllers
                 retVal += item + ", ";
             }
 
-            return Json(depatures);
+            return Json(new ScheduleModel { Depatures = retVal, Message = mssg, Version = version });
 
         }
 
@@ -190,6 +210,7 @@ namespace WebApp.Controllers
 
             var r = new Regex("^(\\d\\d:\\d\\d)$");
 
+
             if (req["line"] == "" || req["line"] == "undefined")
                 return BadRequest("Please select line");
 
@@ -202,12 +223,26 @@ namespace WebApp.Controllers
             var lineId = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["line"].Trim()).Select((u) => u.Id).FirstOrDefault();
             var scheduleId = _unitOfWork.Schedules.GetAll().Where((u) => u.LineId == lineId && u.Day.ToString() == req["type"].Trim()).Select((u) => u.Id).FirstOrDefault();
 
+            var schedule = _unitOfWork.Schedules.Get(scheduleId);
+            var aa = req["version"].Trim();
+            if (schedule.Version.ToString() != req["version"].Trim())
+            {
+                return BadRequest("Schedule has changed by someone else. Please reload to get new version");
+            }
+
+            schedule.Version += 0.1;
+
             var depatures = _unitOfWork.Depatures.GetAll();
 
             if (depatures.Where((u) => u.ScheduleId == scheduleId && u.DepatureTime == req["depature"].Trim()).FirstOrDefault() != null)
             {
                 return BadRequest("Defined depature allredy excist");
             }
+
+            
+
+            _unitOfWork.Schedules.Update(schedule);
+            _unitOfWork.Complete();
 
             Depature dep = new Depature() { ScheduleId = scheduleId, DepatureTime = req["depature"].Trim() };
 
@@ -240,6 +275,15 @@ namespace WebApp.Controllers
 
             var lineId = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["line"].Trim()).Select((u) => u.Id).FirstOrDefault();
             var scheduleId = _unitOfWork.Schedules.GetAll().Where((u) => u.LineId == lineId && u.Day.ToString() == req["type"].Trim()).Select((u) => u.Id).FirstOrDefault();
+
+            var schedule = _unitOfWork.Schedules.Get(scheduleId);
+            if (schedule.Version.ToString() != req["version"].Trim())
+            {
+                return BadRequest("Schedule has changed by someone else. Please reload to get new version");
+            }
+            
+
+            schedule.Version += 0.1;
 
             var depatures = _unitOfWork.Depatures.GetAll();
 
@@ -285,6 +329,7 @@ namespace WebApp.Controllers
 
 
             Station station = new Station() { Name = model.name.Trim(), Location = new Location() { Lat = lat, Lon = lon }, Address = model.address };
+            station.Version = 0;
             _unitOfWork.Stations.Add(station);
             _unitOfWork.Complete();
 
@@ -312,6 +357,11 @@ namespace WebApp.Controllers
 
 
             var station = _unitOfWork.Stations.Get(id);
+            
+            if (station.Version.ToString() != req["version"].Trim())
+            {
+                return BadRequest("station changed by somebody else, please reload to get new version");
+            }
             if (station == null)
             {
                 return BadRequest("There is no station with entered number");
@@ -334,14 +384,16 @@ namespace WebApp.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [System.Web.Http.Route("api/Admin/GetStations")]
         [Authorize(Roles = "Admin")]
-        public IHttpActionResult GetStations()
+        public List<StationsModel> GetStations()
         {
+            List<StationsModel> stations = new List<StationsModel>();
 
+            foreach (var item in _unitOfWork.Stations.GetAll())
+            {
+                stations.Add(new StationsModel { Station = item.StationNum.ToString(), Name = item.Name, Version = item.Version.ToString() });
+            }
 
-            var stations = _unitOfWork.Stations.GetAll().Select(u => u.StationNum);
-
-
-            return Json(stations);
+            return stations;
 
         }
 
@@ -404,32 +456,24 @@ namespace WebApp.Controllers
 
 
             Station station = _unitOfWork.Stations.GetAll().Where(u => u.StationNum.ToString() == model.id.Trim()).FirstOrDefault();
+            if (station.Version.ToString() != model.version.Trim())
+            {
+                return BadRequest("station changed by somebody else, please reload to get new version");
+            }
+
             station.Name = model.name;
             station.Address = model.address;
+            station.Version += 0.1;
 
+            _unitOfWork.Stations.Update(station);
+            var location = _unitOfWork.Locations.Get(station.LocationId);
 
-            try
-            {
-                _unitOfWork.Stations.Update(station);
-                var location = _unitOfWork.Locations.Get(station.LocationId);
+            location.Lat = lat;
+            location.Lon = lon;
 
-                location.Lat = lat;
-                location.Lon = lon;
-
-                _unitOfWork.Locations.Update(location);
-                _unitOfWork.Complete();
-            }
-             catch (ChangeConflictException)
-            {
-
-                return BadRequest("You have old version of files. Please reload page.");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Error.Please reload and try again.");
-            }
-
-
+            _unitOfWork.Locations.Update(location);
+            _unitOfWork.Complete();
+          
 
             return Ok("Changes saved");
 
@@ -473,6 +517,7 @@ namespace WebApp.Controllers
             }
 
             line.Stations = stats;
+            line.Version = 0;
 
 
             _unitOfWork.Lines.Add(line);
@@ -500,6 +545,11 @@ namespace WebApp.Controllers
             }
 
             Line line = _unitOfWork.Lines.GetAll().Where((u) => u.Name == (req["id"].Trim())).FirstOrDefault();
+
+            if (line.Version.ToString() != req["version"].Trim())
+            {
+                return BadRequest("Line changed by sombody else, please reload to get new version");
+            }
             _unitOfWork.Lines.Remove(line);
             _unitOfWork.Complete();
 
@@ -599,13 +649,19 @@ namespace WebApp.Controllers
                 return BadRequest("Please select line");
             };
 
+
             Line line = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["id"].Trim()).FirstOrDefault();
+            if (line.Version.ToString() != req["version"].Trim())
+            {
+                return BadRequest("Line changed by sombody else, please reload to get new version");
+            }
+            
             if (line.Stations.Contains(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault()))
             {
                 return BadRequest("There is allredy station " + req["station"] + "in line " + req["id"]);
             }
 
-
+            line.Version += 0.1;
 
             line.Stations.Add(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault());
 
@@ -650,15 +706,21 @@ namespace WebApp.Controllers
             {
                 return BadRequest("Please select line");
             };
-
+            
 
 
             Line line = _unitOfWork.Lines.GetAll().Where((u) => u.Name == req["id"].Trim()).FirstOrDefault();
+            if (line.Version.ToString() != req["version"].Trim())
+            {
+                return BadRequest("Line changed by sombody else, please reload to get new version");
+            }
+
+
             if (!line.Stations.Contains(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault()))
             {
                 return BadRequest("There is no station " + req["station"] + "in line " + req["id"]);
             }
-
+            line.Version += 0.1;
 
 
             line.Stations.Remove(_unitOfWork.Stations.GetAll().Where((u) => u.StationNum.ToString() == req["station"].Trim()).FirstOrDefault());
@@ -731,6 +793,7 @@ namespace WebApp.Controllers
             }
 
             line.Stations = stats;
+            line.Version += 0.1;
 
 
             _unitOfWork.Lines.Add(line);

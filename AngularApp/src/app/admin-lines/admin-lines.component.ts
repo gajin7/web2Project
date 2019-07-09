@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { AdminLinesService } from './admin-lines.service';
 import { from } from 'rxjs';
+import { TouchSequence } from 'selenium-webdriver';
 
 
 @Component({
@@ -17,8 +18,9 @@ export class AdminLinesComponent implements OnInit {
   deleteMssg : string;
   stationMssg : string;
   type : string = "";
-  lines: string[];
-  deleteLine: string;
+  lines: any = [];
+  deleteLine: any = [];
+  selectedLine: string;
   showStations: string;
   addStation: string;
 
@@ -41,6 +43,13 @@ export class AdminLinesComponent implements OnInit {
   selectDelete(event : any)
   {
     this.deleteLine = event.target.value;
+    this.lines.forEach(element => {
+      if(element.Line == this.deleteLine)
+      {
+        this.deleteLine = element;
+        
+      }
+    });
   }
   
  
@@ -49,8 +58,8 @@ export class AdminLinesComponent implements OnInit {
       this.stations = data;
     });
     this.service.GetLines().subscribe((data)=> {
-      this.lines = data;
-    });
+     this.lines = data;   
+     });
   }
 
 
@@ -83,6 +92,7 @@ AddLine()
 
 Delete()
 {
+  
   this.service.RemoveLine(this.deleteLine).subscribe((data)=>{
     this.deleteMssg = data;
     this.service.GetLines().subscribe((data)=> {
@@ -93,7 +103,7 @@ Delete()
 
 Show()
 {
-  this.service.ShowLine(this.deleteLine).subscribe((data)=>{
+  this.service.ShowLine(this.deleteLine.Line).subscribe((data)=>{
     this.showStations = data;
     
   });

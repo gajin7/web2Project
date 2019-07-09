@@ -34,10 +34,12 @@ export class AdminStationComponent implements OnInit {
   addMssg : string;
   deleteMssg : string;
   changeMssg : string;
-  ids: string[];
+  ids: any = [];
   id: string;
   markerInfo: MarkerInfo;
   selLine: Polyline;
+  deleteStation : any = [];
+  version :string;
 
   constructor(private fb: FormBuilder, private service: AdminStationService) { }
 
@@ -65,6 +67,24 @@ export class AdminStationComponent implements OnInit {
 
   }
 
+  deleteSelected(event :any)
+  {
+    this.deleteForm.setValue(
+      {
+        id:event.target.value
+      }
+    );
+
+    this.deleteStation= event.target.value;
+    this.ids.forEach(element => {
+      if(element.Station == this.deleteStation)
+      {
+        this.deleteStation = element;
+        
+      }
+    });
+  }
+
   MapClicked(event)
   {
     this.AddForm.setValue({
@@ -87,15 +107,31 @@ export class AdminStationComponent implements OnInit {
 
   DeleteStation()
   {
-    this.service.DeleteStation(this.deleteForm.value.id).subscribe((data)=>{
+    this.service.DeleteStation(this.deleteStation).subscribe((data)=>{
       this.deleteMssg = data;
+      this.service.GetStations().subscribe((data)=> {
+        this.ids = data;
+      });
+      this.service.GetStations().subscribe((data)=> {
+        this.ids = data;
+      });
     });
   }
 
   Change()
   {
-    this.service.ChangeStation(this.id,this.changeForm.value).subscribe((data)=>{
+    this.ids.forEach(element => {
+      if(element.Station == this.id)
+      {
+        this.version = element.Version;
+      }
+
+    });
+    this.service.ChangeStation(this.id,this.changeForm.value,this.version).subscribe((data)=>{
       this.changeMssg = data;
+      this.service.GetStations().subscribe((data)=> {
+        this.ids = data;
+      });
     });
   }
 

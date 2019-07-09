@@ -14,6 +14,9 @@ export class AdminPriceListComponent implements OnInit {
   UserType : string;
   mssgDiscount : string;
   mssgPrice : string;
+  priceListVersions : any = [];
+  discountVersions : any = [];
+  version : string;
 
   ticketForm = this.fb.group({
     newPrice: ['', Validators.required],
@@ -26,6 +29,12 @@ export class AdminPriceListComponent implements OnInit {
 
   ngOnInit() {
     this.getPricelist();
+    this.service.GetPriceListVersions().subscribe((data)=>{
+      this.priceListVersions = data;
+    });
+    this.service.GetDiscountsVersions().subscribe((data)=>{
+      this.discountVersions = data;
+    });
   }
 
   public getPricelist()
@@ -46,19 +55,55 @@ export class AdminPriceListComponent implements OnInit {
 
   ChangePrice()
   {
-    this.service.ChangeTicket(this.TicketType,this.ticketForm.value.newPrice).subscribe((d)=>{
+    if(this.TicketType == "TimeTicket")
+    {
+      this.version = this.priceListVersions[0];
+    }
+    else if(this.TicketType == "DailyTicket")
+    {
+      this.version = this.priceListVersions[3];
+    }
+    else if(this.TicketType == "MonthlyTicket")
+    {
+      this.version = this.priceListVersions[1];
+    }
+    else if(this.TicketType == "AnnualTicket")
+    {
+      this.version = this.priceListVersions[2];
+    }
+    this.service.ChangeTicket(this.TicketType,this.ticketForm.value.newPrice,this.version).subscribe((d)=>{
       this.mssgPrice = d;
       this.GetPriceListservice.GetPricelist().subscribe((data) => {
         this.prices = data});
+        this.service.GetPriceListVersions().subscribe((data)=>{
+          this.priceListVersions = data;
+        });
+        this.service.GetDiscountsVersions().subscribe((data)=>{
+          this.discountVersions = data;
+        });
     });
   }
 
   ChangeDiscount()
   {
-    this.service.ChangeDiscount(this.UserType,this.ticketForm.value.newDiscount).subscribe((d)=>{
+    if(this.UserType == "student")
+    {
+      this.version = this.discountVersions[2];
+    }
+    else if(this.UserType == "retiree")
+    {
+      this.version = this.discountVersions[1];
+    }
+    this.service.ChangeDiscount(this.UserType,this.ticketForm.value.newDiscount,this.version).subscribe((d)=>{
       this.mssgDiscount = d;
-      this.GetPriceListservice.GetPricelist().subscribe((data) => {
+    this.GetPriceListservice.GetPricelist().subscribe((data) => {
         this.prices = data});
+        this.service.GetPriceListVersions().subscribe((data)=>{
+          this.priceListVersions = data;
+        });
+      this.service.GetDiscountsVersions().subscribe((data)=>{
+      this.discountVersions = data;
+        });
     });
   }
   

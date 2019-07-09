@@ -191,5 +191,9 @@ namespace WebApp.Models
         [Required]
         [Display(Name = "latitude")]
         public string latitude { get; set; }
+
+        [Required]
+        [Display(Name = "version")]
+       public string version { get; set; }
     }
 }

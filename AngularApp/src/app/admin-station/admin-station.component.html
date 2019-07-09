@@ -113,9 +113,12 @@
 
                             </div>
                             <div class="col-md-6 mb-2 input">
-                                <input type="text" formControlName="id" class="form-control" id="validationCustom04" required>
+                                    <select class="custom-select" (change)="deleteSelected($event)" required>
+                                            <option></option>
+                                            <option *ngFor="let obj of ids" [value]="obj.Station">{{obj.Station}}</option>
+                                        </select>
                                 <div class="invalid-feedback">
-                                    Please enter valid number.
+                                    Please enter valid address.
                                 </div>
                             </div>
 
@@ -147,7 +150,7 @@
                                         <div class="col-md-6 mb-2 input">
                                                 <select class="custom-select" (change)="selected($event)" required>
                                                         <option></option>
-                                                        <option *ngFor="let obj of ids" [value]="obj">{{obj}}</option>
+                                                        <option *ngFor="let obj of ids" [value]="obj.Station">{{obj.Station}}</option>
                                                     </select>
                                             <div class="invalid-feedback">
                                                 Please enter valid address.

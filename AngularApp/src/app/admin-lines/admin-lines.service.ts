@@ -31,9 +31,9 @@ export class AdminLinesService {
     );
   }
 
-  RemoveLine(id:string) : Observable<any>
+  RemoveLine(line:any) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/DeleteLine',`id=`+id, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Admin/DeleteLine',`id=`+line.Line + `&version=`+line.Version, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
     );
   }
@@ -45,16 +45,16 @@ export class AdminLinesService {
     );
   }
 
-  AddStation(id:string, station:string) : Observable<any>
+  AddStation(line:any, station:string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/AddStationToLine',`id=`+id + `&station=`+station, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Admin/AddStationToLine',`id=`+line.Line +`&version=` + line.Version + `&station=`+station, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
-    );
+    ); 
   }
 
-  DeleteStation(id:string, station:string) : Observable<any>
+  DeleteStation(line:any, station:string) : Observable<any>
   {
-   return this.http.post<any>('http://localhost:52295/api/Admin/DeleteStationToLine',`id=`+id + `&station=`+station, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
+   return this.http.post<any>('http://localhost:52295/api/Admin/DeleteStationToLine',`id=`+line.Line +`&version=` + line.Version +  `&station=`+station, { 'headers': { 'Content-type': 'application/x-www-form-urlencoded' } }).pipe(
       catchError(this.handle)
     );
   }

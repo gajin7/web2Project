@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EditProfileService } from './edit-profile.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-edit-profile',
@@ -31,6 +32,7 @@ export class EditProfileComponent implements OnInit {
   selectedImage: any;
   mssg : string;
   mssgEdit : string;
+  status : string;
   constructor( private fb: FormBuilder,public Service: EditProfileService,public router: Router) { }
 
 
@@ -44,16 +46,32 @@ export class EditProfileComponent implements OnInit {
         City: data.City,
         Street : data.Street,
         Number : data.Number,
-        TypeOfPerson : "",
+        TypeOfPerson : data.Type,
       });
-      
+      this.status = data.Status
+
       });
+     
   }
 
   EditProfile()
   {
     this.Service.EditProfile(this.Form.value).subscribe((data) =>{
       this.mssgEdit = data;
+      this.Service.GetUserInfo().subscribe((data) => {
+        this.Form.setValue({
+          FirstName: data.FirstName, 
+          LastName: data.LastName,
+          Email: data.Email,
+          Date: data.Date,
+          City: data.City,
+          Street : data.Street,
+          Number : data.Number,
+          TypeOfPerson : data.Type,
+        });
+        this.status = data.Status
+  
+        });
     });
   }
 
