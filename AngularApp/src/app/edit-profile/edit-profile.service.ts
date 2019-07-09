@@ -22,6 +22,17 @@ export class EditProfileService {
     catchError(this.handle));
   }
 
+   EditImage(selectedFiles: File[], Email: string)
+  {
+    const sendImage = new FormData();
+    for (let selectedFile of selectedFiles){
+      sendImage.append(selectedFile.name, selectedFile)
+    }    
+    return this.http.post<any>("http://localhost:52295/api/Account/EditImage?Email="+Email ,sendImage).pipe(
+      catchError(this.handle)
+      );
+  }  
+
   ChangePassword(pass : any) : Observable<any>
   {
    return this.http.post('http://localhost:52295/api/Account/ChangePassword',pass).pipe(

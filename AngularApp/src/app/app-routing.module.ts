@@ -26,6 +26,7 @@ import { UserGuard } from './auth/user.guard';
 import { ControlorGuard } from './auth/controlor.guard';
 import { BusMapsComponent } from './bus-maps/bus-maps.component';
 import { BusLocationComponent } from './bus-location/bus-location.component';
+import { LoginGuard } from './auth/login.guard';
 
 const appRoutes: Routes = [
   { 
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
   { 
     path: 'login', 
     component: LoginComponent, 
+    canActivate: [LoginGuard]
   },
   { 
     path: 'register', 

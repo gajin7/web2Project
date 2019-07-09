@@ -20,6 +20,8 @@ export class LoginComponent {
     this.setMessage();
   }
 
+
+
   setMessage() {
     this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
   }

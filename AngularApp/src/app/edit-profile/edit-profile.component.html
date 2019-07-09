@@ -5,7 +5,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Gradski saobracajni prevoz</a>
+    <label class="navbar-brand" href="#">Public transportation</label>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -105,12 +105,9 @@
     </div>
 
 
-    <div class="form-group ">
+    <div class="form-group">
         <label for="exampleFormControlFile1">Input a picture (index for student, check for retieree)</label>
-        <div class="picture">
-            <input type="file" class="form-control-file " id="exampleFormControlFile1">
-        </div>
-
+        <input type="file" formControlName="Picture" (change)="onFileSelected($event)" class="form-control-file" id="exampleFormControlFile1">
     </div>
 
 

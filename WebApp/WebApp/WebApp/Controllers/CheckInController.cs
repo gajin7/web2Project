@@ -212,7 +212,9 @@ namespace WebApp.Controllers
             {
                 var email = UserManager.Users.Where((u) => u.Id == item.AppUserId).Select((u) => u.Email).FirstOrDefault();
                 var pic = _unitOfWork.Pictures.GetAll().Where((u) => u.AppUserId == item.AppUserId).FirstOrDefault();
-                retVal.Add(new ControlInfoModel { Email = email, FirstName = item.FirstName, LastName = item.LastName, Type = item.UserType.ToString(), DateOfBirth = item.DateOfBirth.Date.ToShortDateString(), Image = pic.ImageSource });
+               
+                string imgSource = System.Convert.ToBase64String(pic.ImageSource);
+                retVal.Add(new ControlInfoModel { Email = email, FirstName = item.FirstName, LastName = item.LastName, Type = item.UserType.ToString(), DateOfBirth = item.DateOfBirth.Date.ToShortDateString(), Image = imgSource });
             }
 
             return retVal;
@@ -238,6 +240,8 @@ namespace WebApp.Controllers
             _unitOfWork.Users.Update(user);
             _unitOfWork.Complete();
 
+            EmailHelper.SendEmail(req.Form["email"], "ACCOUNT APORVEDD", "Your account just have been aprroved by controler");
+
             return Ok();
 
         }
@@ -259,6 +263,8 @@ namespace WebApp.Controllers
 
             _unitOfWork.Users.Update(user);
             _unitOfWork.Complete();
+
+            EmailHelper.SendEmail(req.Form["email"], "ACCOUNT DECLINED", "Your account just have been declined by controler");
 
             return Ok();
 

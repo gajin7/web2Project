@@ -4,6 +4,7 @@ import { ControlTicketService } from './control-ticket.service';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-control-ticket',
   templateUrl: './control-ticket.component.html',
@@ -15,7 +16,8 @@ export class ControlTicketComponent implements OnInit {
     Id: ['', Validators.required],
    
   });
-
+  image: any;
+  imageSrc: any;
   users : any = [];
   mssg: string;
   constructor(private service: ControlTicketService , private logServie : AuthService, private fb: FormBuilder, private router: Router) { }
@@ -42,6 +44,11 @@ export class ControlTicketComponent implements OnInit {
    this.service.GetUserToApprove().subscribe((data)=>{
      
     this.users = data;
+    this.users.forEach(element => {
+      element.ImageSrc = 'data:image/jpeg;base64,' + element.Image;
+      console.log(element.ImageSrc);
+    });
+    
     });
   }
 

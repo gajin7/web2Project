@@ -35,7 +35,7 @@ export class EditProfileComponent implements OnInit {
   status : string;
   constructor( private fb: FormBuilder,public Service: EditProfileService,public router: Router) { }
 
-
+  
   ngOnInit() {
     this.Service.GetUserInfo().subscribe((data) => {
       this.Form.setValue({
@@ -54,10 +54,21 @@ export class EditProfileComponent implements OnInit {
      
   }
 
+  onFileSelected(event){
+    this.selectedImage = event.target.files;
+   
+  }
+
+
   EditProfile()
   {
     this.Service.EditProfile(this.Form.value).subscribe((data) =>{
       this.mssgEdit = data;
+      if (this.selectedImage != undefined){
+        this.Service.EditImage(this.selectedImage, this.Form.value.Email).subscribe((data) =>{
+        this.mssg += data;
+     });
+    }
       this.Service.GetUserInfo().subscribe((data) => {
         this.Form.setValue({
           FirstName: data.FirstName, 

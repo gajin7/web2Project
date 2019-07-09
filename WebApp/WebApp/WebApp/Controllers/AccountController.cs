@@ -553,6 +553,75 @@ namespace WebApp.Controllers
 
         }
 
+        [AllowAnonymous]
+        [Route("EditImage")]
+        public async Task<IHttpActionResult> EditImage()
+        {
+            var req = HttpContext.Current.Request;
+
+            string email = req.Url.ToString().Split('=')[1];
+            foreach (string file in req.Files)
+            {
+
+                var postedFile = req.Files[file];
+                if (postedFile != null && postedFile.ContentLength > 0)
+                {
+                    int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
+
+                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".img", ".jpeg" };
+                    var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                    var temp = postedFile.FileName;
+                    var extension = ext.ToLower();
+                    if (!AllowedFileExtensions.Contains(extension))
+                    {
+
+                        var message = string.Format("Please Upload image of type .jpg,.gif,.png,.img,.jpeg.");
+
+                        return BadRequest(message);
+                    }
+                    else if (postedFile.ContentLength > MaxContentLength)
+                    {
+                        var message = string.Format("Please Upload a file upto 1 mb.");
+
+                        return BadRequest(message);
+                    }
+                    else
+                    {
+                        var userId = UserManager.Users.Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
+
+                        var tempUser = _unitOfWork.Users.GetAll().Where((u) => u.AppUserId == userId).FirstOrDefault();
+                        if (tempUser.UserType != Enums.UserType.retiree && tempUser.UserType != Enums.UserType.student)
+                            return BadRequest("You can't add image for regular user!");
+                        if (tempUser.postedImage == true)
+                        {
+                           
+                            var picToDelete = _unitOfWork.Pictures.GetAll().Where((u) => u.AppUserId == tempUser.AppUserId).FirstOrDefault();
+                            _unitOfWork.Pictures.Remove(picToDelete);
+                            _unitOfWork.Complete();
+                        }
+                       
+                            tempUser.postedImage = true;
+                            tempUser.Approved = false;
+                            tempUser.Checked = false;
+                            _unitOfWork.Users.Update(tempUser);
+                            _unitOfWork.Complete();
+
+                            Bitmap bmp = new Bitmap(postedFile.InputStream);
+                            System.Drawing.Image img = (System.Drawing.Image)bmp;
+                            byte[] imagebytes = ImageToByteArray(img);
+
+
+                            _unitOfWork.Pictures.Add(new Picture() { ImageSource = imagebytes, AppUserId = userId });
+                            _unitOfWork.Complete();
+
+                        
+                    }
+                }
+            }
+            return Ok();
+
+        }
+
         public byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
             using (var ms = new MemoryStream())
