@@ -16,3 +16,8 @@
     left: 30%;
     border-style: solid;
 }
+
+#btn
+{
+    background-color: #4CAF50; /* Green */
+}

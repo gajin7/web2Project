@@ -58,7 +58,7 @@ export class AdminScheduleComponent implements OnInit {
 
               deps : data.Depatures,
           });
-          this.version = data.Version;
+         
     } else
     {
       this.Form.setValue({
@@ -66,11 +66,13 @@ export class AdminScheduleComponent implements OnInit {
         deps : data,
     });
     }
+    this.version = data.Version;
        });
   }
 
   Add()
   {
+    
     this.service.AddDepature(this.type,this.line,this.AddForm.value.dep,this.version).subscribe((data)=> {
         this.mssg = data;
         this.service.GetDepatures(this.type,this.line).subscribe((data) => {

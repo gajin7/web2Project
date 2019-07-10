@@ -79,6 +79,11 @@ namespace WebApp.Controllers
 
             string date = usr.DateOfBirth.ToUniversalTime().Date.ToString().Split(' ')[0];
 
+            var pic = _unitOfWork.Pictures.GetAll().Where((u) => u.AppUserId == userId).FirstOrDefault();
+            string imgSource = "";
+            if (pic != null)
+                imgSource = System.Convert.ToBase64String(pic.ImageSource);
+
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
@@ -89,8 +94,8 @@ namespace WebApp.Controllers
                 Street = usr.Address.Split(',')[1],
                 Number = usr.Address.Split(',')[2],
                 Type = usr.UserType.ToString(),
-                Status = GetProfileStatus(User.Identity.GetUserId())
-
+                Status = GetProfileStatus(User.Identity.GetUserId()),
+                Image = imgSource
 
 
                 // HasRegistered = externalLogin == null,

@@ -11,7 +11,7 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" routerLink="/app-user-home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" id="btn" routerLink="/app-user-home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
         </div>
     </div>
     <label>Status:{{status}}</label>
@@ -105,17 +105,17 @@
     </div>
 
 
-    <div class="form-group">
-        <label for="exampleFormControlFile1">Input a picture (index for student, check for retieree)</label>
-        <input type="file" formControlName="Picture" (change)="onFileSelected($event)" class="form-control-file" id="exampleFormControlFile1">
+    <div class="form-group" style="position: relative; left: 547px; top: -520px; transition: none 0s ease 0s;">
+        <label for="exampleFormControlFile1">Change/Add  a picture (index for student, check for retieree)</label>
+        <input type="file"  (change)="onFileSelected($event)" class="form-control-file" id="exampleFormControlFile1">
+        <img height="80" width="80"  [src]="imageSource" style="position: relative; left: 392px; top: -36px; transition: none 0s ease 0s;" >
+        <button style="position: relative; left: 128px; top: 39px; transition: none 0s ease 0s;"  class="btn btn-primary" (click)="ChangeImage()">Save</button>
     </div>
 
 
 
-    <button class="btn btn-primary" type="submit">Save changes</button>
-    <div class="mssgEdit">
-        <label>{{mssgEdit}}</label>
-    </div>
+    <button style="position: relative; left: 170px; top: -145px; transition: none 0s ease 0s;" class="btn btn-primary" type="submit">Save changes</button>
+   
 
 </form>
 
@@ -141,7 +141,7 @@
 </script>
 
 <form [formGroup]="changePasswordForm" (ngSubmit)=" ChangePassword()" class="needs-validation" novalidate>
-    <div class="all">
+    <div style="position: relative; left: 526px; top: -542px;" class="all">
         <div class="password">
             <label for="validationCustom02">Old Password</label>
             <input type="password" formControlName="OldPassword" class="form-control" id="validationCustom02" required>
@@ -174,10 +174,8 @@
                 Paswords didn't match (or password didn't entered).
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">Save</button>
-        <div class="mssg">
-            <label>{{mssg}}</label>
-        </div>
+        <button style="position: relative; left: 233px; top: -1px;" class="btn btn-primary" type="submit">Save</button>
+       
 
     </div>
 </form>

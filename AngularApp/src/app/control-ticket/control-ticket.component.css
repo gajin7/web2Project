@@ -106,3 +106,16 @@ textarea {
 .id {
     margin-top: 5px;
 }
+
+#btn
+{
+    background-color: #4CAF50; /* Green */
+    color: white;
+    
+}
+
+#table
+{
+    background-color: white;
+}
+

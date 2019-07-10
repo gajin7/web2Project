@@ -6,9 +6,10 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <label class="navbar-brand">Public transportation</label>
-    <a class="nav-item nav-link active" (click)="Logout()" routerLinkActive="active">Log out</a>
+    <a class="nav-item nav-link active" style="position: relative; left: 1185px; top: -5px; transition: none 0s ease 0s;" id="btn" (click)="Logout()" routerLinkActive="active">Log out</a>
 </nav>
 
+<div  >
 <form [formGroup]="ticketForm" class="needs-validation"  (ngSubmit)="CheckIn()" novalidate>
     <div class="poruka">
         This is a place where you check your card.
@@ -26,7 +27,7 @@
                 </div>
             </div>
             <div class="col-md-4 mb-2 id">
-              <button class="btn btn-primary"  type="submit">Check in</button>
+              <button style="left: 14px; top: -7px; transition: none 0s ease 0s;" class="btn btn-primary"  type="submit">Check in</button>
             </div>
     
     
@@ -38,7 +39,7 @@
     
             </div>
             <div class="col-md-2 mb-2 input">
-                <textarea class="message" for=""> {{mssg}}</textarea>
+                <textarea style="left: 57px; top: 9px; transition: none 0s ease 0s;" class="message" for=""> {{mssg}}</textarea>
             </div>
         </div>
         <br/>
@@ -51,8 +52,11 @@
         <br/>
         
  
-</form>          
-        <table border="1" id="tabela">
+</form>      
+</div>  
+<div style="position: relative; left: -30px; top: 4px; transition: none 0s ease 0s; cursor: move;">
+    <label style="position: relative; left: 479px; top: 52px; transition: none 0s ease 0s;">Users  waiting for approval</label>
+        <table bgcolor="white" border="1" id="tabela">
              <tr >
                  <th>Email</th>
                  <th>FirstName</th>
@@ -85,16 +89,16 @@
                     <img height="80" width="80" id="image" [src]="users[i].ImageSrc" >
                  </td>
                  <td >
-                    <input type="submit" (click)="Approve(users[i].Email)" id="Approve"  value="Aprove"/>
+                    <input type="submit" (click)="Approve(users[i].Email)" id="smallBtn"  value="Aprove"/>
                 </td>
                 <td >
-                    <input type="button" (click)="Decline(users[i].Email)" value="Decline"/>
+                    <input type="button" (click)="Decline(users[i].Email)" id="smallBtn" value="Decline"/>
                 </td>
              </tr>
         </table>
             
     
-        
+    </div>
     
 
 

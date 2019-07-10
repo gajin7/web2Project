@@ -6,3 +6,13 @@
     right: 0%;
     position: absolute;
 }
+
+input.largerCheckbox { 
+    width: 80px; 
+    height: 80px; 
+} 
+
+#btn
+{
+    background-color: #4CAF50; /* Green */
+}

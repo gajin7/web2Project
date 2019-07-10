@@ -60,3 +60,7 @@ hr.new1 {
 .down {
     margin-top: 300px;
 }
+#btn
+{
+    background-color: #4CAF50; /* Green */
+}

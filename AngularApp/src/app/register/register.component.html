@@ -5,7 +5,20 @@
 <script src="C:\Users\Gajin\Downloads\datepicker"></script>
 
 
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <label class="navbar-brand" href="#">Public transportation</label>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" id="btn" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+        </div>
+    </div>
+</nav>
+
+<h1 style="position: relative; left: 507px; top: 18px; transition: none 0s ease 0s;">Registration</h1>
+<form style="position: relative; left: 500px; top: 48px; transition: none 0s ease 0s;" [formGroup]="registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
     <div class="all">
 
         <div class="first_name">
@@ -124,9 +137,9 @@
 
 
 
-    <button class="btn btn-primary" type="submit">Submit form</button>
+    <button class="btn btn-primary" type="submit">Register</button>
 </form>
-<label>{{mssg}}</label>
+
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

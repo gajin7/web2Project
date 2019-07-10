@@ -46,6 +46,8 @@ namespace WebApp.Models
 
         public string Status { get; set; }
 
+        public string Image { get; set; }
+
        // public bool HasRegistered { get; set; }
 
        // public string LoginProvider { get; set; }

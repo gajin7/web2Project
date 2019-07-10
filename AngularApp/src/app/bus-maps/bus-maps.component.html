@@ -11,7 +11,7 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" (click)="Navigate()">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" id="btn" (click)="Navigate()">Home <span class="sr-only">(current)</span></a>
         </div>
     </div>
 </nav>
@@ -55,7 +55,7 @@
     
     <form>
       <br/>
-      <input type="checkbox" name="showStations" (change)="ShowStationsSelectionChanged()" value="Bike"> Show stations<br>
+      <input type="checkbox" class="defaultCheckbox"  name="showStations" (change)="ShowStationsSelectionChanged()" > Show stations<br>
     </form>
   </div>
 

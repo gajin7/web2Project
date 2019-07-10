@@ -58,3 +58,8 @@
 .picture {
     width: 210px;
 }
+
+#btn
+{
+    background-color: #4CAF50; /* Green */
+}

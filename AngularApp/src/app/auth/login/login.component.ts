@@ -47,14 +47,15 @@ export class LoginComponent {
     }
     else
     {
-      if(data != "")
+      if(data == "Http failure response for http://localhost:52295/oauth/token: 0 Unknown Error")
       {
-        this.message = "[SERVER ERROR] Please check your connection";
+        this.message = "[CONNECTION ERROR] Please check your connection";
       }
       else
       {
-        this.message = "Username or password incorect";
+          this.message = "Username or password incorect";
       }
+      
     }
   });
     

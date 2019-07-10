@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   mssg :string = '';
+  checkMssg : string = '';
 
   registerForm = this.fb.group({
     FirstName: ['', Validators.required],
@@ -49,6 +50,8 @@ export class RegisterComponent implements OnInit {
       console.log(data);
 
       this.mssg = data;
+      this.checkMssg = data;
+    
    
 
     if (this.selectedImage != undefined){
@@ -57,9 +60,18 @@ export class RegisterComponent implements OnInit {
    });
 
     }
+
+  
     else if(this.selectedImage == undefined && this.registerForm.value.TypeOfPerson != "Regular" )
     {
       this.mssg += " You didn't added image of document. You can do it later, but you can't buy any ticket before you do that."
+    }
+
+    window.alert(this.mssg);
+
+    if(this.checkMssg == "Succesfully registrated! Please login to continue")
+    {
+      this.router.navigate(['login']);
     }
 });
   }

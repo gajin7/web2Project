@@ -11,7 +11,7 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" (click)="Navigate()">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" id="btn" (click)="Navigate()">Home <span class="sr-only">(current)</span></a>
         </div>
     </div>
 </nav>
@@ -54,7 +54,7 @@
 
 
 
-  <div id="lines">
+  <div style="position: relative; left: 1100px; top: -501px; transition: none 0s ease 0s;" id="lines">
     <label>Select line</label>
       <select class="custom-select" width="2" height="2" (change)="onSelectionChangeNumber($event)" required>
               <option></option>

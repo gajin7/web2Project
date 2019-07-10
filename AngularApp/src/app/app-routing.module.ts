@@ -46,6 +46,7 @@ const appRoutes: Routes = [
   { 
     path: 'register', 
     component: RegisterComponent, 
+    canActivate: [LoginGuard]
   },
   { 
     path: 'home', 

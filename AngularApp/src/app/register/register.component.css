@@ -59,3 +59,8 @@ Lozinka se unosi u dva polja da bi se otežalo pravljenje grešaka prilikom odab
 .date {
     margin-bottom: 20px;
 }
+
+#btn
+{
+    background-color: #4CAF50; /* Green */
+}

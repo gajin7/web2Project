@@ -31,6 +31,7 @@ export class ScheduleComponent implements OnInit {
   selected (event: any) {
     //update the ui
     this.lineType = event.target.value;
+   
     this.service.GetLines(this.lineType).subscribe((data) => { 
       this.lines = data; });
   }
@@ -38,6 +39,14 @@ export class ScheduleComponent implements OnInit {
  
   GetSchedules()
   {
+    if(this.lineType == "")
+    {
+      window.alert("Please select type");
+    }
+    if(this.LineForm.value.LineName == "")
+    {
+      window.alert("Please select line");
+    }
     this.service.GetSchedule("WorkDay",this.LineForm.value.LineName).subscribe((data) => { 
       this.workDay = data; });
     this.service.GetSchedule("Saturday",this.LineForm.value.LineName).subscribe((data) => { 

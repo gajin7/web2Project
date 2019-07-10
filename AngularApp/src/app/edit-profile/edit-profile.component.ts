@@ -33,6 +33,7 @@ export class EditProfileComponent implements OnInit {
   mssg : string;
   mssgEdit : string;
   status : string;
+  imageSource : any;
   constructor( private fb: FormBuilder,public Service: EditProfileService,public router: Router) { }
 
   
@@ -48,7 +49,8 @@ export class EditProfileComponent implements OnInit {
         Number : data.Number,
         TypeOfPerson : data.Type,
       });
-      this.status = data.Status
+      this.status = data.Status;
+      this.imageSource = 'data:image/jpeg;base64,' + data.Image;
 
       });
      
@@ -59,30 +61,52 @@ export class EditProfileComponent implements OnInit {
    
   }
 
+  ChangeImage()
+  {
+    if (this.selectedImage != undefined){
+      this.Service.EditImage(this.selectedImage, this.Form.value.Email).subscribe((data) =>{
+        this.Service.GetUserInfo().subscribe((data) => {
+          this.status = data.Status;
+          this.imageSource = 'data:image/jpeg;base64,' + data.Image;
+          this.Form.setValue({
+            FirstName: data.FirstName, 
+            LastName: data.LastName,
+            Email: data.Email,
+            Date: data.Date,
+            City: data.City,
+            Street : data.Street,
+            Number : data.Number,
+            TypeOfPerson : data.Type,
+          });
+           // window.alert(data);
+          });
+      //this.mssg += data;
+   });
+  }
+  }
 
   EditProfile()
   {
     this.Service.EditProfile(this.Form.value).subscribe((data) =>{
       this.mssgEdit = data;
-      if (this.selectedImage != undefined){
-        this.Service.EditImage(this.selectedImage, this.Form.value.Email).subscribe((data) =>{
-        this.mssg += data;
-     });
-    }
-      this.Service.GetUserInfo().subscribe((data) => {
-        this.Form.setValue({
-          FirstName: data.FirstName, 
-          LastName: data.LastName,
-          Email: data.Email,
-          Date: data.Date,
-          City: data.City,
-          Street : data.Street,
-          Number : data.Number,
-          TypeOfPerson : data.Type,
-        });
-        this.status = data.Status
-  
-        });
+      window.alert(data);
+      
+    this.Service.GetUserInfo().subscribe((data) => {
+      this.status = data.Status;
+      this.imageSource = 'data:image/jpeg;base64,' + data.Image;
+      this.Form.setValue({
+        FirstName: data.FirstName, 
+        LastName: data.LastName,
+        Email: data.Email,
+        Date: data.Date,
+        City: data.City,
+        Street : data.Street,
+        Number : data.Number,
+        TypeOfPerson : data.Type,
+      });
+     
+      });
+      
     });
   }
 
@@ -90,6 +114,7 @@ export class EditProfileComponent implements OnInit {
   {
     this.Service.ChangePassword(this.changePasswordForm.value).subscribe((data) =>{
         this.mssg = data;
+        window.alert(data);
       }); 
   }
 
